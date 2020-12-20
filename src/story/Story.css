@@ -1,0 +1,15 @@
+h2, h3 {
+    text-align: center;
+    padding: 20px;
+}
+
+ul {
+    padding: 0;
+}
+
+.summary {
+    border: solid 1px gray;
+    padding: 10px;
+    margin: 5px;
+    list-style: none;
+}

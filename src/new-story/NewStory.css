@@ -1,0 +1,13 @@
+section {
+    text-align: center;
+    padding: 20px;
+}
+
+.new-story-form {
+    padding: 10px;
+}
+
+.submit-btn {
+    background-color: lightgray;
+    margin: 10px;
+}
