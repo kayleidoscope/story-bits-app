@@ -6,6 +6,7 @@ import Footer from './footer/Footer';
 import Home from './home/Home';
 import Story from './story/Story';
 import NewStory from './new-story/NewStory';
+import NewSetting from './new-setting/NewSetting';
 import './App.css'
 
 class App extends Component {
@@ -28,6 +29,10 @@ class App extends Component {
         <Route 
           path="/new/story/"
           component={NewStory}
+        />
+        <Route 
+          path="/new/setting/"
+          component={NewSetting}
         />
         <Footer />
       </main>
