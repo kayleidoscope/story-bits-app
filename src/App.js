@@ -10,6 +10,7 @@ import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
 import Admin from './admin/Admin';
 import Compare from './compare/Compare';
+import Nav from './nav/Nav';
 import './App.css'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
     return (
       <main className='App'>
         <Header />
+        <Nav />
         <Route 
           exact path="/"
           component={Landing}

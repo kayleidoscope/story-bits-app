@@ -1,0 +1,9 @@
+ul {
+    display: flex;
+}
+
+li {
+    display: inline;
+    width: 100%;
+    text-align: center;
+}
