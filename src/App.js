@@ -9,6 +9,7 @@ import NewStory from './new-story/NewStory';
 import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
 import Admin from './admin/Admin';
+import Compare from './compare/Compare';
 import './App.css'
 
 class App extends Component {
@@ -39,6 +40,10 @@ class App extends Component {
         <Route 
           path="/new/character/"
           component={NewCharacter}
+        />
+        <Route 
+          path="/compare/"
+          component={Compare}
         />
         <Route 
           path="/admin/"
