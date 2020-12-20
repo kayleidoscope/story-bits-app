@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import Header from './header/Header'
-import Landing from './landing/Landing'
+import Header from './header/Header';
+import Landing from './landing/Landing';
+import Footer from './footer/Footer';
 import './App.css'
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
           path="/"
           component={Landing}
         />
+        <Footer />
       </main>
     );
   }
