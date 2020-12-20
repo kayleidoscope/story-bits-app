@@ -7,6 +7,7 @@ import Home from './home/Home';
 import Story from './story/Story';
 import NewStory from './new-story/NewStory';
 import NewSetting from './new-setting/NewSetting';
+import NewCharacter from './new-character/NewCharacter';
 import './App.css'
 
 class App extends Component {
@@ -33,6 +34,10 @@ class App extends Component {
         <Route 
           path="/new/setting/"
           component={NewSetting}
+        />
+        <Route 
+          path="/new/character/"
+          component={NewCharacter}
         />
         <Footer />
       </main>
