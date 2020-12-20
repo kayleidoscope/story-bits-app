@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import LogIn from '../log-in/LogIn';
+import SignUp from '../sign-up/SignUp';
 import './Landing.css'
 
 export default class Landing extends Component {
     state = {
         logIn: false,
+        signUp: false,
     }
 
     logInToggle = (e) => {
@@ -14,7 +16,15 @@ export default class Landing extends Component {
                 logIn: true,
             }
         )
-        console.log(this.state.logIn)
+    }
+
+    signUpToggle = (e) => {
+        console.log('signUpToggle ran');
+        this.setState(
+            {
+                signUp: true,
+            }
+        )
     }
 
     render() {
@@ -26,7 +36,15 @@ export default class Landing extends Component {
                 <LogIn />
             </section>
             )
-        } else {
+        } else if (this.state.signUp) {
+                return (
+                    <section>
+                        <h2>Welcome!</h2>
+                        <p>Here's some text welcoming you to this website.</p>
+                        <SignUp />
+                    </section>
+                )
+            } else {
             return (
                 <section>
                     <h2>Welcome!</h2>
@@ -36,7 +54,11 @@ export default class Landing extends Component {
                     >
                         Log in
                     </button>
-                    <button>Sign up</button>
+                    <button
+                        onClick={this.signUpToggle}
+                    >
+                        Sign up
+                    </button>
                 </section>
             )
         }

@@ -1,0 +1,18 @@
+.sign-up-form {
+    padding: 10px;
+}
+
+.submit-btn {
+    background-color: lightgray;
+    margin: 10px;
+}
+
+input {
+    margin: 1px;
+}
+
+.sign-up-section {
+    border: 1px solid;
+    width: 75%;
+    margin: auto;
+}
