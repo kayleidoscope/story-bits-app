@@ -9,8 +9,9 @@ export default class Landing extends Component {
         signUp: false,
     }
 
-    logInToggle = (e) => {
-        console.log('logInToggle ran');
+    logInTrue = (e) => {
+        e.preventDefault();
+        console.log('logInTrue ran');
         this.setState(
             {
                 logIn: true,
@@ -18,11 +19,33 @@ export default class Landing extends Component {
         )
     }
 
-    signUpToggle = (e) => {
+    logInToSignUp = (e) => {
+        e.preventDefault();
+        console.log('logInFalse ran');
+        this.setState(
+            {
+                logIn: false,
+                signUp: true,
+            }
+        )
+    }
+
+    signUpTrue = (e) => {
         console.log('signUpToggle ran');
         this.setState(
             {
                 signUp: true,
+            }
+        )
+    }
+
+    signUpToLogIn = (e) => {
+        e.preventDefault();
+        console.log('logInFalse ran');
+        this.setState(
+            {
+                logIn: true,
+                signUp: false,
             }
         )
     }
@@ -33,7 +56,9 @@ export default class Landing extends Component {
                 <section>
                 <h2>Welcome!</h2>
                 <p>Here's some text welcoming you to this website.</p>
-                <LogIn />
+                <LogIn
+                    handleLogInToSignUp={this.logInToSignUp}
+                />
             </section>
             )
         } else if (this.state.signUp) {
@@ -41,7 +66,9 @@ export default class Landing extends Component {
                     <section>
                         <h2>Welcome!</h2>
                         <p>Here's some text welcoming you to this website.</p>
-                        <SignUp />
+                        <SignUp 
+                            handleSignUpToLogIn={this.signUpToLogIn}
+                        />
                     </section>
                 )
             } else {
@@ -50,12 +77,12 @@ export default class Landing extends Component {
                     <h2>Welcome!</h2>
                     <p>Here's some text welcoming you to this website.</p>
                     <button
-                        onClick={this.logInToggle}
+                        onClick={this.logInTrue}
                     >
                         Log in
                     </button>
                     <button
-                        onClick={this.signUpToggle}
+                        onClick={this.signUpTrue}
                     >
                         Sign up
                     </button>
