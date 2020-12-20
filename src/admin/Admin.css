@@ -1,0 +1,15 @@
+h2 {
+    text-align: center;
+    padding: 20px;
+}
+
+article {
+    border: solid 1px gray;
+    padding: 10px;
+    margin: 5px;
+}
+
+button {
+    background-color: lightgray;
+    margin: 10px;
+}

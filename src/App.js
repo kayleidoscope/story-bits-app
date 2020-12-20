@@ -8,6 +8,7 @@ import Story from './story/Story';
 import NewStory from './new-story/NewStory';
 import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
+import Admin from './admin/Admin';
 import './App.css'
 
 class App extends Component {
@@ -38,6 +39,10 @@ class App extends Component {
         <Route 
           path="/new/character/"
           component={NewCharacter}
+        />
+        <Route 
+          path="/admin/"
+          component={Admin}
         />
         <Footer />
       </main>
