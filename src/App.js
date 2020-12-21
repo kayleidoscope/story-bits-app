@@ -5,6 +5,7 @@ import Landing from './landing/Landing';
 import Footer from './footer/Footer';
 import Home from './home/Home';
 import Story from './story/Story';
+import Character from './character/Character';
 import NewStory from './new-story/NewStory';
 import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
@@ -30,6 +31,10 @@ class App extends Component {
         <Route 
           path="/story/"
           component={Story}
+        />
+        <Route 
+          path="/character/"
+          component={Character}
         />
         <Route 
           path="/new/story/"
