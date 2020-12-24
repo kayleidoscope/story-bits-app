@@ -1,0 +1,21 @@
+.setting-desc {
+    text-align: center;
+    font-size: large;
+}
+
+.setting-traits {
+    margin-left: 15px;
+    list-style: none;
+}
+
+.setting-trait {
+    margin: 10px auto;
+}
+
+.setting-trait-title {
+    font-weight: bold;
+}
+
+.setting-occupant {
+    margin-left: 25px;
+}

@@ -14,14 +14,14 @@ export default class StoryItem extends Component {
         const charData = data.characters.filter(char => char.story.id == storyId)
         const charLIs = charData.map(char => {
             return (
-                <li key={char.id}><a href="#">{char.name}</a></li>
+                <li key={char.id} className="story-item-li"><a href="#">{char.name}</a></li>
             )
         })
 
         const settingData = data.settings.filter(setting => setting.story.id === storyId)
         const settingLIs = settingData.map(setting => {
             return (
-                <li key={setting.id}><a href="#">{setting.name}</a></li>
+                <li key={setting.id} className="story-item-li"><a href="#">{setting.name}</a></li>
             )
         })
 

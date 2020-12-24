@@ -1,28 +1,37 @@
 import React, {Component} from 'react';
 import './Setting.css';
-import '../dummyData';
 import dummyData from '../dummyData';
 
 export default class Setting extends Component {
     render() {
-        const occupantsLIs = dummyData.settings[0].occupants.map(person => {
-            return <li key={person.id}>{person.name}</li>
+        const data = dummyData;
+
+        const settingId = "0-0";
+
+        const settingData = data.settings.filter(setting => setting.id === settingId)
+        console.log(settingData)
+        const occupantsLIs = settingData[0].occupants.map(person => {
+            return <li key={person.id} className="setting-occupant">{person.name}</li>
         })
 
         return (
             <>
-                <h2>{dummyData.settings[0].name}</h2>
-                <p>{dummyData.stories[0].title}</p>
-                <ul>
-                    <li>
-                        <p>Story:</p>
-                        <p>{dummyData.settings[0].description}</p>
+                <h2>{settingData[0].name}</h2>
+                <p className="setting-desc">{settingData[0].description}</p>
+                <ul className="setting-traits">
+                    <li className="setting-trait">
+                        <p className="setting-trait-title">Story:</p>
+                        <p>{settingData[0].story.name}</p>
                     </li>
-                    <li>
-                        <p>Occupants:</p>
+                    <li className="setting-trait">
+                        <p className="setting-trait-title">Occupants:</p>
                         <ul>
                             {occupantsLIs}
                         </ul>
+                    </li>
+                    <li className="setting-trait">
+                        <p className="setting-trait-title">Decor:</p>
+                        <p>{settingData[0].decor}</p>
                     </li>
                 </ul>
             </>
