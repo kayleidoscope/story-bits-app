@@ -1,17 +1,44 @@
 import React, {Component} from 'react';
+import dummyData from '../dummyData';
 import './NewCharacter.css';
 
 export default class NewCharacter extends Component {
+    state = {
+        story: 0,
+    }
+
+    storyChange = (story) => {
+        this.setState({
+            story
+        })
+    }
+
     render() {
+        const data = dummyData;
+
+        const storyOptions = data.stories.map(story => {
+            return (
+                <option key={story.id} value={story.id}>{story.title}</option>
+            )
+        })
+
+        const settingsData = data.settings.filter(setting => setting.story.id === this.state.story)
+        console.log(settingsData)
+        const settingsOptions = settingsData.map(setting => {
+            return (
+                <option key={setting.id} value={setting.id}>{setting.name}</option>
+            )
+        })
+
         return (
             <section>
                 <h2>New character</h2>
                 <p>Enter the info below.</p>
                 <form className="new-character-form">
                     <label htmlFor="story">Story:</label>
-                    <select name="story" id="story">
-                        <option value="1">Anne of Green Gables</option>
-                        <option value="2">Vampire Diaries</option>
+                    <select name="story" id="story" onChange={e => this.storyChange(e.target.value)}>
+                    <option value="">Select a story</option>
+                        {storyOptions}
                     </select>
                     <br/>
                     <label htmlFor="title">Name:</label>
@@ -32,8 +59,7 @@ export default class NewCharacter extends Component {
                     <label htmlFor="home">Home:</label>
                     <select name="home" id="home">
                         <option value="0">Not important</option>
-                        <option value="1">Green Gables</option>
-                        <option value="2">Diana's house</option>
+                        {settingsOptions}
                     </select>
                     <br/>
                     <label htmlFor="housemates">Housemates:</label>
