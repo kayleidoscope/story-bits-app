@@ -37,7 +37,7 @@ export default class NewCharacter extends Component {
                 <form className="new-character-form">
                     <label htmlFor="story">Story:</label>
                     <select name="story" id="story" onChange={e => this.storyChange(e.target.value)}>
-                    <option value="">Select a story</option>
+                        <option value="">Select a story</option>
                         {storyOptions}
                     </select>
                     <br/>

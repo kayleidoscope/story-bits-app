@@ -4,7 +4,7 @@ import './NewStory.css';
 export default class NewStory extends Component {
     render() {
         return (
-            <section>
+            <section className="new-story">
                 <h2>New story</h2>
                 <p>Enter the info below.</p>
                 <form className="new-story-form">

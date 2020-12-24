@@ -1,8 +1,17 @@
 import React, {Component} from 'react';
+import dummyData from '../dummyData';
 import './NewSetting.css';
 
 export default class extends Component {
     render() {
+        const data = dummyData;
+
+        const storyOptions = data.stories.map(story => {
+            return (
+                <option key={story.id} value={story.id}>{story.title}</option>
+            )
+        })
+
         return (
             <section>
                 <h2>New setting</h2>
@@ -10,8 +19,8 @@ export default class extends Component {
                 <form className="new-setting-form">
                     <label htmlFor="story">Story:</label>
                     <select name="story" id="story">
-                        <option value="1">Anne of Green Gables</option>
-                        <option value="2">Vampire Diaries</option>
+                        <option value="">Select a story</option>
+                        {storyOptions}
                     </select>
                     <br/>
                     <label htmlFor="title">Name:</label>
