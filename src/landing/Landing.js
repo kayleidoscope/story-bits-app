@@ -73,7 +73,7 @@ export default class Landing extends Component {
                 )
             } else {
             return (
-                <section>
+                <section className="landing">
                     <h2>Welcome!</h2>
                     <p>Here's some text welcoming you to this website.</p>
                     <button

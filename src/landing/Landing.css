@@ -1,9 +1,9 @@
-section {
+.landing section {
     text-align: center;
     padding: 20px;
 }
 
-button {
+.landing button {
     background-color: lightgray;
     margin: 10px;
 }
