@@ -1,14 +1,14 @@
-h2 {
+.compare h2 {
     text-align: center;
     padding: 20px;
 }
 
-.container {
+.compare .container {
     display: flex;
     flex-direction: row;
 }
 
-article {
+.compare article {
     border: solid 1px gray;
     padding: 10px;
     margin: 5px;

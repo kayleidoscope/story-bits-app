@@ -4,9 +4,9 @@ import './Compare.css';
 export default class Compare extends Component {
     render() {
         return (
-            <>
+            <div className="compare">
                 <h2>Anne Shirley vs. Marilla Cuthbert</h2>
-                <div class="container">
+                <div className="container">
                     <article>
                         <h3>Anne Shirley</h3>
                         <p>A brief description goes here.</p>
@@ -54,7 +54,7 @@ export default class Compare extends Component {
                         <p>Simple</p>
                     </article>
                 </div>
-            </>
+            </div>
         )
     }
 }

@@ -1,31 +1,51 @@
 import React, {Component} from 'react';
+import Context from '../Context';
+import dummyData from '../dummyData';
 import './Character.css'
 
 export default class Character extends Component {
+    static contextType = Context;
+
     render() {
+        const currentChar = this.context.currentChar;
+
+        const charData = dummyData.characters.filter(char => char.id == currentChar)
+
+        const housematesLIs = charData[0].housemates.map(hm => {
+            return (
+                <li key={hm.id}>
+                    <a href="#">{hm.name}</a>
+                </li>
+            )
+        })
+
         return (
             <article className="character-deets">
                 <h3>Anne Shirley</h3>
-                <p>A brief description goes here.</p>
+                <p>{charData[0].description}</p>
+
                 <h4>Story:</h4>
-                <p><a href="#">Anne of Green Gables</a></p>
-                <h4>Short description:</h4>
-                <p>An orphan girl with a penchant for large words and mischief.</p>
+                <p><a href="#">{charData[0].story.name}</a></p>
+
                 <h4>Gender:</h4>
-                <p>Female</p>
+                <p>{charData[0].gender}</p>
+
                 <h4>Physical appearance:</h4>
-                <p>Red hair, freckles, a pretty nose</p>
+                <p>{charData[0].appearance}</p>
+
                 <h4>Fashion style</h4>
-                <p>Loves puff sleeves, but wears the plain clothes Marilla sews</p>
+                <p>{charData[0].fashion}</p>
+
                 <h4>Home</h4>
-                <p><a href="#">Green Gables</a></p>
+                <p><a href="#">{charData[0].home.name}</a></p>
+
                 <h4>Housemates</h4>
                 <ul>
-                    <li><a href="#">Marilla Cuthbert</a></li>
-                    <li><a href="#">Matthew Cuthbert</a></li>
+                    {housematesLIs}
                 </ul>
+
                 <h4>Decor</h4>
-                <p>Keeps flowers she finds in her room</p>
+                <p>{charData[0].decor}</p>
             </article>
         )
     }

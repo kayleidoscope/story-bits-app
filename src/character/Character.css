@@ -4,3 +4,7 @@
     /* padding: 0; */
     width: auto;
 }
+
+.character-deets ul {
+    margin-left: 20px;
+}

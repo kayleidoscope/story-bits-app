@@ -1,15 +1,15 @@
-h2 {
+.admin h2 {
     text-align: center;
     padding: 20px;
 }
 
-article {
+.admin li {
     border: solid 1px gray;
     padding: 10px;
     margin: 5px;
 }
 
-button {
+.admin button {
     background-color: lightgray;
     margin: 10px;
 }

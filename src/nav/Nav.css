@@ -1,8 +1,8 @@
-ul {
+.nav ul {
     display: flex;
 }
 
-li {
+.nav li {
     display: inline;
     width: 100%;
     text-align: center;

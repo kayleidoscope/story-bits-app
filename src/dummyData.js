@@ -1,4 +1,30 @@
 export default {
+    "users": [
+        {
+            "id": "0-0-0-0",
+            "name": "Tessa Testerson",
+            "acct_created": "10/19/2020",
+            "stories": 10,
+            "characters": 34,
+            "settings": 5
+        },
+        {
+            "id": "0-0-0-1",
+            "name": "Danny Dummy",
+            "acct_created": "7/19/2020",
+            "stories": 100,
+            "characters": 344,
+            "settings": 52
+        },
+        {
+            "id": "0-0-0-2",
+            "name": "Polly Pretend",
+            "acct_created": "10/19/2019",
+            "stories": 10434,
+            "characters": 3432453,
+            "settings": 554324
+        }
+    ],
     "stories": [
         {
             "id": "0",
@@ -25,7 +51,7 @@ export default {
             "fashion": "Loves puff sleeves, but wears the plain clothes Marilla sews",
             "home": {
                 "id": "0-0",
-                "hame": "Green Gables"
+                "name": "Green Gables"
             },
             "housemates": [
                 {
@@ -52,7 +78,7 @@ export default {
             "fashion": "Plain, practical clothes",
             "home": {
                 "id": "0-0",
-                "hame": "Green Gables"
+                "name": "Green Gables"
             },
             "housemates": [
                 {
@@ -72,7 +98,7 @@ export default {
             "id": "0-0",
             "name": "Green Gables",
             "description": "A small farm",
-            "Occupants": [
+            "occupants": [
                 {
                     "id": "0-0-0",
                     "name": "Anne Shirley"
@@ -80,7 +106,7 @@ export default {
                 {
                     "id": "0-0-1",
                     "name": "Marilla Cuthbert"
-                }
+                },
                 {
                     "id": "0-0-2",
                     "name": "Matthew Cuthbert"
