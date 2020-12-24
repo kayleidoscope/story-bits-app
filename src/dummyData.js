@@ -1,4 +1,4 @@
-export default {
+const dummyData = {
     "users": [
         {
             "id": "0-0-0-0",
@@ -57,10 +57,6 @@ export default {
                 {
                     "id": "0-0-1",
                     "name": "Marilla Cuthbert"
-                },
-                {
-                    "id": "0-0-2",
-                    "name": "Matthew Cuthbert"
                 }
             ],
             "decor": "Keeps flowers she finds and decorates her room with them"
@@ -84,10 +80,6 @@ export default {
                 {
                     "id": "0-0-0",
                     "name": "Anne Shirley"
-                },
-                {
-                    "id": "0-0-2",
-                    "name": "Matthew Cuthbert"
                 }
             ],
             "decor": "Simple"
@@ -116,7 +108,7 @@ export default {
             "decor": "?"
         },
         {
-            "id": "0-0-0",
+            "id": "0-1-1",
             "name": "Lissa",
             "story": {
                 "id": "1",
@@ -186,3 +178,5 @@ export default {
         }
     ]
 }
+
+export default dummyData;

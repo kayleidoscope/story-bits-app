@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Context from '../Context';
 import dummyData from '../dummyData';
+import {Link} from 'react-router-dom';
 import './Character.css'
 
 export default class Character extends Component {
@@ -8,25 +9,31 @@ export default class Character extends Component {
 
     render() {
         
-        const currentChar = this.context.currentChar;
+        const currentChar = this.props.match.params.charId;
 
-        const charData = dummyData.characters.filter(char => char.id == currentChar)
+        const charData = dummyData.characters.filter(char => char.id === currentChar)
+
 
         const housematesLIs = charData[0].housemates.map(hm => {
             return (
-                <li key={hm.id}>
-                    <a href="#">{hm.name}</a>
-                </li>
+                <Link to={`/character/${hm.id}`} key={hm.id}>
+                    <li>
+                        {hm.name}
+                    </li>
+                </Link>
+                
             )
         })
 
         return (
             <article className="character-deets">
-                <h3>Anne Shirley</h3>
+                <h3>{charData[0].name}</h3>
                 <p>{charData[0].description}</p>
 
                 <h4>Story:</h4>
-                <p><a href="#">{charData[0].story.name}</a></p>
+                <Link to={`/story/${charData[0].story.id}`}>
+                    <p>{charData[0].story.name}</p>
+                </Link>
 
                 <h4>Gender:</h4>
                 <p>{charData[0].gender}</p>
@@ -38,8 +45,10 @@ export default class Character extends Component {
                 <p>{charData[0].fashion}</p>
 
                 <h4>Home</h4>
-                <p><a href="#">{charData[0].home.name}</a></p>
-
+                <Link to={`/setting/${charData[0].home.id}`}>
+                    <p>{charData[0].home.name}</p>
+                </Link>
+                
                 <h4>Housemates</h4>
                 <ul>
                     {housematesLIs}

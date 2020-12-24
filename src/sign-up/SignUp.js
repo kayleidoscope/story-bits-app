@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import './SignUp.css';
 
 export default class SignUp extends Component {
@@ -14,7 +15,9 @@ export default class SignUp extends Component {
                  <label htmlFor="admin">Administrator</label>
                  <input type="checkbox" id="admin" name="admin" />
                  <br/>
-                 <input type="submit" value="Submit" className="submit-btn"/>
+                 <Link to="/home/">
+                    <input type="submit" value="Submit" className="submit-btn"/>
+                 </Link>
                  <button
                     onClick={this.props.handleSignUpToLogIn}
                  >

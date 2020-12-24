@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import './NewStory.css';
 
 export default class NewStory extends Component {
@@ -14,7 +15,9 @@ export default class NewStory extends Component {
                     <label htmlFor="description">Description:</label>
                     <textarea id="description" name="description" required />
                     <br/>
-                    <input type="submit" value="Submit" className="submit-btn"/>
+                    <Link to='/home/'>
+                        <input type="submit" value="Submit" className="submit-btn"/>
+                    </Link>
                 </form>
             </section>
         )

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import dummyData from '../dummyData';
 import './StoryItem.css';
 
@@ -11,23 +12,29 @@ export default class StoryItem extends Component {
         const storyName = storyData[0].title;
         const storyDescription = storyData[0].description;
         
-        const charData = data.characters.filter(char => char.story.id == storyId)
+        const charData = data.characters.filter(char => char.story.id === storyId)
         const charLIs = charData.map(char => {
             return (
-                <li key={char.id} className="story-item-li"><a href="#">{char.name}</a></li>
+                <Link to={`/character/${char.id}`} key={char.id}>
+                    <li className="story-item-li">{char.name}</li>
+                </Link>
             )
         })
 
         const settingData = data.settings.filter(setting => setting.story.id === storyId)
         const settingLIs = settingData.map(setting => {
             return (
-                <li key={setting.id} className="story-item-li"><a href="#">{setting.name}</a></li>
+                <Link to={`/setting/${setting.id}`}  key={setting.id}>
+                    <li className="story-item-li">{setting.name}</li>
+                </Link>
             )
         })
 
         return (
             <article>
-            <h3>{storyName}</h3>
+                <Link to={`/story/${storyId}`}>
+                    <h3>{storyName}</h3>
+                </Link>
             <p>{storyDescription}</p>
             <section>
                 <h4>Characters</h4>

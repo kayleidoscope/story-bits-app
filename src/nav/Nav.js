@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import './Nav.css';
 
 export default class Nav extends Component {
@@ -6,8 +7,12 @@ export default class Nav extends Component {
         return (
             <nav className="nav">
                 <ul>
-                    <li><a href="#">Account</a></li>
-                    <li><a href="#">My stories</a></li>
+                    <Link to="/user/" className="nav-li">
+                        <li>Account</li>
+                    </Link>
+                    <Link to="/home/"  className="nav-li">
+                        <li>My stories</li>
+                    </Link>
                 </ul>
             </nav>
         )

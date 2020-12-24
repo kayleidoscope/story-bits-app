@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import dummyData from '../dummyData';
+import {Link} from 'react-router-dom';
 import './NewCharacter.css';
 
 export default class NewCharacter extends Component {
@@ -23,7 +24,6 @@ export default class NewCharacter extends Component {
         })
 
         const settingsData = data.settings.filter(setting => setting.story.id === this.state.story)
-        console.log(settingsData)
         const settingsOptions = settingsData.map(setting => {
             return (
                 <option key={setting.id} value={setting.id}>{setting.name}</option>
@@ -68,7 +68,9 @@ export default class NewCharacter extends Component {
                     <label htmlFor="decor">Decor:</label>
                     <textarea id="decor" name="decor" />
                     <br/>
-                    <input type="submit" value="Submit" className="submit-btn"/>
+                    <Link to="/home/">
+                        <input type="submit" value="Submit" className="submit-btn"/>
+                    </Link>
                 </form>
      
         </section>

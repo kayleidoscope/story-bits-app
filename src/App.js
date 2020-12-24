@@ -11,6 +11,7 @@ import NewStory from './new-story/NewStory';
 import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
 import Admin from './admin/Admin';
+import User from './user/User';
 // import Compare from './compare/Compare';
 import Nav from './nav/Nav';
 import Context from './Context'
@@ -39,19 +40,23 @@ class App extends Component {
             component={Landing}
           />
           <Route 
-            path="/user/"
+            path="/home/"
             component={Home}
           />
           <Route 
-            path="/story/"
+            path="/user/"
+            component={User}
+          />
+          <Route 
+            path="/story/:storyId"
             component={Story}
           />
           <Route 
-            path="/character/"
+            path="/character/:charId"
             component={Character}
           />
           <Route 
-            path="/setting/"
+            path="/setting/:settingId"
             component={Setting}
           />
           <Route 

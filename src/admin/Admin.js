@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import './Admin.css';
 import dummyData from '../dummyData';
 
@@ -8,14 +9,16 @@ export default class Admin extends Component {
 
         const usersLIs = users.map(user => {
             return (
-                <li key={user.id}>
-                    <h3><a href="#">{user.name}</a></h3>
-                    <p>Account created: {user.acct_created}</p>
-                    <p><a href="#">Stories created: {user.stories}</a></p>
-                    <p><a href="#">Characters created: {user.characters}</a></p>
-                    <p><a href="#">Settings created: {user.settings}</a></p>
-                    <button>Delete User</button>
-                </li>
+                <Link to={`/user/${user.id}`} key={user.id}>
+                    <li>
+                        <h3>{user.name}</h3>
+                        <p>Account created: {user.acct_created}</p>
+                        <p>Stories created: {user.stories}</p>
+                        <p>Characters created: {user.characters}</p>
+                        <p>Settings created: {user.settings}</p>
+                        <button>Delete User</button>
+                    </li>
+                </Link>
             )
         })
 

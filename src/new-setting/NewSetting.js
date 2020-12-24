@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import dummyData from '../dummyData';
+import {Link} from 'react-router-dom';
 import './NewSetting.css';
 
-export default class extends Component {
+export default class NewSetting extends Component {
     render() {
         const data = dummyData;
 
@@ -35,7 +36,9 @@ export default class extends Component {
                     <label htmlFor="decor">Decor:</label>
                     <textarea id="decor" name="decor" />
                     <br/>
-                    <input type="submit" value="Submit" className="submit-btn"/>
+                    <Link to='/home/'>
+                        <input type="submit" value="Submit" className="submit-btn"/>
+                    </Link>
                 </form>
             </section>
         )

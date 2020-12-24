@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import dummyData from '../dummyData';
 import './Story.css';
 
@@ -6,27 +7,31 @@ export default class Story extends Component {
     render() {
         const data = dummyData;
 
-        const storyId = "0";
+        const storyId = this.props.match.params.storyId;
 
         const storyData = data.stories.filter(story => story.id === storyId);
 
         const charData = data.characters.filter(char => char.story.id === storyId);
         const charLIs = charData.map(char => {
             return (
-                <li className="summary" key={char.id}>
-                    <a href="#">{char.name}</a>
-                    <p>{char.description}</p>
-                </li>
+                <Link to={`/character/${char.id}`} key={char.id}>
+                    <li className="summary">
+                        <p>{char.name}</p>
+                        <p>{char.description}</p>
+                    </li>
+                </Link>
             )
         })
 
         const settingData = data.settings.filter(setting => setting.story.id === storyId);
         const settingLIs = settingData.map(setting => {
             return (
-                <li className="summary" key={setting.id}>
-                    <a href="#">{setting.name}</a>
-                    <p>{setting.description}</p>
-                </li>
+                <Link to={`/setting/${setting.id}`} key={setting.id}>
+                    <li className="summary">
+                        <p>{setting.name}</p>
+                        <p>{setting.description}</p>
+                    </li>
+                </Link>
             )
         })
 
@@ -40,12 +45,22 @@ export default class Story extends Component {
                             <ul>
                                 {charLIs}
                             </ul>
+                        <Link to="/new/character/">
+                            <button>
+                                New Character
+                            </button>
+                        </Link>
                     </section>
                     <section>
                         <h3>Settings</h3>
                             <ul>
                                 {settingLIs}
                             </ul>
+                        <Link to="/new/setting/">
+                            <button>
+                                New Setting
+                            </button>
+                        </Link>
                     </section>
                 </article>
             </div>

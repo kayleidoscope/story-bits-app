@@ -11,7 +11,6 @@ export default class Landing extends Component {
 
     logInTrue = (e) => {
         e.preventDefault();
-        console.log('logInTrue ran');
         this.setState(
             {
                 logIn: true,
@@ -21,7 +20,6 @@ export default class Landing extends Component {
 
     logInToSignUp = (e) => {
         e.preventDefault();
-        console.log('logInFalse ran');
         this.setState(
             {
                 logIn: false,
@@ -31,7 +29,6 @@ export default class Landing extends Component {
     }
 
     signUpTrue = (e) => {
-        console.log('signUpToggle ran');
         this.setState(
             {
                 signUp: true,
@@ -41,7 +38,6 @@ export default class Landing extends Component {
 
     signUpToLogIn = (e) => {
         e.preventDefault();
-        console.log('logInFalse ran');
         this.setState(
             {
                 logIn: true,
