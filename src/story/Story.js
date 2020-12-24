@@ -1,47 +1,50 @@
 import React, {Component} from 'react';
+import dummyData from '../dummyData';
 import './Story.css';
-
-/* This should be broken up into more components. */
 
 export default class Story extends Component {
     render() {
+        const data = dummyData;
+
+        const storyId = "0";
+
+        const storyData = data.stories.filter(story => story.id === storyId);
+
+        const charData = data.characters.filter(char => char.story.id === storyId);
+        const charLIs = charData.map(char => {
+            return (
+                <li className="summary" key={char.id}>
+                    <a href="#">{char.name}</a>
+                    <p>{char.description}</p>
+                </li>
+            )
+        })
+
+        const settingData = data.settings.filter(setting => setting.story.id === storyId);
+        const settingLIs = settingData.map(setting => {
+            return (
+                <li className="summary" key={setting.id}>
+                    <a href="#">{setting.name}</a>
+                    <p>{setting.description}</p>
+                </li>
+            )
+        })
+
         return (
             <>
-                <h2>Anne of Green Gables</h2>
-                <p>A brief description goes here.</p>
+                <h2>{storyData[0].title}</h2>
+                <p>{storyData[0].description}</p>
                 <article>
                     <section>
                         <h3>Characters</h3>
                             <ul>
-                                <li className="summary">
-                                    <a href="#">Anne Shirley</a>
-                                    <p>Short character description</p>
-                                </li>
-                                <li className="summary">
-                                    <a href="#">Marilla Cuthbert</a>
-                                    <p>Short character description</p>
-                                </li>
-                                <li className="summary">
-                                    <a href="#">Matthew Cuthbert</a>
-                                    <p>Short character description</p>
-                                </li>
+                                {charLIs}
                             </ul>
                     </section>
                     <section>
                         <h3>Settings</h3>
                             <ul>
-                                <li className="summary">
-                                    <a href="#">Green Gables</a>
-                                    <p>Short setting description</p>
-                                </li>
-                                <li className="summary">
-                                    <a href="#">The schoolhouse</a>
-                                    <p>Short setting description</p>
-                                </li>
-                                <li className="summary">
-                                    <a href="#">Diana's house</a>
-                                    <p>Short setting description</p>
-                                </li>
+                                {settingLIs}
                             </ul>
                     </section>
                 </article>
