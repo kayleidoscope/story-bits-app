@@ -31,7 +31,7 @@ export default class Story extends Component {
         })
 
         return (
-            <>
+            <div className="story">
                 <h2>{storyData[0].title}</h2>
                 <p>{storyData[0].description}</p>
                 <article>
@@ -48,7 +48,7 @@ export default class Story extends Component {
                             </ul>
                     </section>
                 </article>
-            </>
+            </div>
         )
     }
 }

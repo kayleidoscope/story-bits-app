@@ -1,9 +1,9 @@
-h2, h3 {
+.story h2, h3 {
     text-align: center;
     padding: 20px;
 }
 
-ul {
+.story ul {
     padding: 0;
 }
 
