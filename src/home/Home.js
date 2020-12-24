@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import StoryList from '../story-list/StoryList';
 import './Home.css';
 
 /* Somewhere down this line, this should probably be broken up into more components. */
@@ -6,9 +7,10 @@ import './Home.css';
 export default class Home extends Component {
     render () {
         return (
-            <>
+            <div className="home">
                 <h2>My Stories</h2>
-                <article>
+                <StoryList />
+                {/* <article>
                     <h3>Anne of Green Gables</h3>
                     <p>A brief description goes here.</p>
                     <section>
@@ -47,8 +49,8 @@ export default class Home extends Component {
                             <li><a href="#">The dungeon</a></li>
                         </ul>
                     </section>
-                </article>
-            </>
+                </article> */}
+            </div>
         )
     }
 }

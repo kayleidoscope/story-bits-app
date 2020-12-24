@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
+import Character from '../character/Character'
 import './Compare.css';
+
+/* Backlogged */
+
+/* Refactor to use character component if there's time*/
 
 export default class Compare extends Component {
     render() {

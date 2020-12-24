@@ -7,6 +7,7 @@ export default class Character extends Component {
     static contextType = Context;
 
     render() {
+        
         const currentChar = this.context.currentChar;
 
         const charData = dummyData.characters.filter(char => char.id == currentChar)

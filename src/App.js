@@ -11,7 +11,7 @@ import NewStory from './new-story/NewStory';
 import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
 import Admin from './admin/Admin';
-import Compare from './compare/Compare';
+// import Compare from './compare/Compare';
 import Nav from './nav/Nav';
 import Context from './Context'
 import './App.css'
@@ -66,10 +66,10 @@ class App extends Component {
             path="/new/character/"
             component={NewCharacter}
           />
-          <Route 
+          {/* <Route 
             path="/compare/"
             component={Compare}
-          />
+          /> */}
           <Route 
             path="/admin/"
             component={Admin}
