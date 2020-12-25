@@ -15,7 +15,10 @@ export default class User extends Component {
                 <p>Stories created: {users[i].stories}</p>
                 <p>Characters created: {users[i].characters}</p>
                 <p>Settings created: {users[i].settings}</p>
-                <button>Delete Account</button>
+                <button className="submit-btn">Delete Account</button>
+                <button type='button' onClick={() => this.props.history.goBack()} className="submit-btn">
+                    Go Back
+                </button>
             </div>
         )
     }

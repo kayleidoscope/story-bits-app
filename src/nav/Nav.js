@@ -11,7 +11,10 @@ export default class Nav extends Component {
                         <li>Account</li>
                     </Link>
                     <Link to="/home/"  className="nav-li">
-                        <li>My stories</li>
+                        <li>Home</li>
+                    </Link>
+                    <Link to="/"  className="nav-li">
+                        <li>Log Out</li>
                     </Link>
                 </ul>
             </nav>

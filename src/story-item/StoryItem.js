@@ -31,7 +31,7 @@ export default class StoryItem extends Component {
         })
 
         return (
-            <article>
+            <article className="story-item">
                 <Link to={`/story/${storyId}`}>
                     <h3>{storyName}</h3>
                 </Link>

@@ -51,7 +51,9 @@ export default class Landing extends Component {
             return (
                 <section>
                 <h2>Welcome!</h2>
-                <p>Here's some text welcoming you to this website.</p>
+                <p>Do your characters need to be more fully developed?</p>
+                <p>Are you having trouble remembering what settings you've established?</p>
+                <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                 <LogIn
                     handleLogInToSignUp={this.logInToSignUp}
                 />
@@ -61,7 +63,9 @@ export default class Landing extends Component {
                 return (
                     <section>
                         <h2>Welcome!</h2>
-                        <p>Here's some text welcoming you to this website.</p>
+                        <p>Do your characters need to be more fully developed?</p>
+                        <p>Are you having trouble remembering what settings you've established?</p>
+                        <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                         <SignUp 
                             handleSignUpToLogIn={this.signUpToLogIn}
                         />
@@ -71,7 +75,9 @@ export default class Landing extends Component {
             return (
                 <section className="landing">
                     <h2>Welcome!</h2>
-                    <p>Here's some text welcoming you to this website.</p>
+                    <p>Do your characters need to be more fully developed?</p>
+                    <p>Are you having trouble remembering what settings you've established?</p>
+                    <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                     <button
                         onClick={this.logInTrue}
                     >

@@ -1,0 +1,8 @@
+.edit-character textarea {
+    margin: auto;
+    width: 80%;
+}
+
+.edit-character label {
+    font-weight: bold;
+}

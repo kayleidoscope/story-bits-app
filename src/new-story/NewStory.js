@@ -3,6 +3,10 @@ import {Link} from 'react-router-dom';
 import './NewStory.css';
 
 export default class NewStory extends Component {
+    handleClickCancel = () => {
+        this.props.history.push('/home/')
+    }
+
     render() {
         return (
             <section className="new-story">
@@ -18,6 +22,9 @@ export default class NewStory extends Component {
                     <Link to='/home/'>
                         <input type="submit" value="Submit" className="submit-btn"/>
                     </Link>
+                    <button type='button' onClick={this.handleClickCancel}  className="submit-btn">
+                        Cancel
+                    </button>
                 </form>
             </section>
         )

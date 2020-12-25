@@ -71,6 +71,9 @@ export default class NewCharacter extends Component {
                     <Link to="/home/">
                         <input type="submit" value="Submit" className="submit-btn"/>
                     </Link>
+                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                        Cancel
+                    </button>
                 </form>
      
         </section>

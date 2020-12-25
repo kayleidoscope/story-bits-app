@@ -20,6 +20,7 @@ export default class SignUp extends Component {
                  </Link>
                  <button
                     onClick={this.props.handleSignUpToLogIn}
+                    className="submit-btn"
                  >
                     Log in instead
                 </button>

@@ -2,6 +2,11 @@
     padding: 10px;
 }
 
+.new-setting-form ul {
+    list-style-type: none;
+    padding: 10px;
+}
+
 .submit-btn {
     background-color: lightgray;
     margin: 10px;

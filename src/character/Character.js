@@ -28,6 +28,10 @@ export default class Character extends Component {
         return (
             <article className="character-deets">
                 <h3>{charData[0].name}</h3>
+
+                <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                    Go Back
+                </button>
                 <p>{charData[0].description}</p>
 
                 <h4>Story:</h4>

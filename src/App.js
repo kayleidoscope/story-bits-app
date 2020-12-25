@@ -12,6 +12,8 @@ import NewSetting from './new-setting/NewSetting';
 import NewCharacter from './new-character/NewCharacter';
 import Admin from './admin/Admin';
 import User from './user/User';
+import Stories from './stories/Stories';
+import EditCharacter from './edit-character/EditCharacter';
 // import Compare from './compare/Compare';
 import Nav from './nav/Nav';
 import Context from './Context'
@@ -48,12 +50,20 @@ class App extends Component {
             component={User}
           />
           <Route 
+            path="/stories/"
+            component={Stories}
+          />
+          <Route 
             path="/story/:storyId"
             component={Story}
           />
           <Route 
             path="/character/:charId"
             component={Character}
+          />
+          <Route 
+            path="/edit/character/:charId"
+            component={EditCharacter}
           />
           <Route 
             path="/setting/:settingId"
