@@ -7,7 +7,7 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <MemoryRouter>
-      <NewSetting match={{params: {settingId: "0-0"}}}/>
+      <NewSetting match = {{ params: {settingId: "0-0"} }}/>
       </MemoryRouter>,
       div
     );

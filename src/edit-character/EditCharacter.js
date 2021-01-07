@@ -17,7 +17,6 @@ export default class EditCharacter extends Component {
         this.setState({
             description
         })
-        console.log(this.state.description)
     }
 
     storyChanged = (story) => {

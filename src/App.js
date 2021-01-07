@@ -18,35 +18,83 @@ import EditCharacter from './edit-character/EditCharacter';
 import Nav from './nav/Nav';
 import Context from './Context'
 import './App.css'
+import config from './config'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentChar: "0-0-0",
+      users: [],
+      currentUser: 0
     }
+  }
+
+  apiUsersSet = (responseJson) => {
+    const usersObject = responseJson
+    this.setState({
+      users: usersObject
+    })
+  }
+
+  addUser = (user) => {
+    console.log('addUser ran')
+    this.setState({
+      users: [...this.state.users, user]
+    })
+  }
+
+  userSelect = user => {
+    console.log('userSelect ran', user)
+    this.setState({
+      currentUser: user,
+    })
+  }
+
+  userDeselect = () => {
+    this.setState({
+      currentUser: null
+    })
+  }
+
+  componentDidMount() {
+    fetch(`${config.API_ENDPOINT}api/users`, {
+      method: 'GET'
+    })
+      .then(res => {
+        if(!res.ok) {
+          throw new Error(res.status)
+        }
+        return res.json()
+      })
+      .then(responseJson => this.apiUsersSet(responseJson))
   }
 
   render() {
     const contextValue = {
       currentChar: this.state.currentChar,
+      users: this.state.users,
+      currentUser: this.state.currentUser,
+      addUserFx: this.addUser,
+      userSelectFx: this.userSelect,
+      userDeselectFx: this.userDeselect
     }
 
     return (
       <main className='App'>
         <Header />
-        <Nav />
         <Context.Provider value={contextValue}>
+        <Nav />
           <Route 
             exact path="/"
             component={Landing}
           />
           <Route 
-            path="/home/"
+            path="/home/:userId"
             component={Home}
           />
           <Route 
-            path="/user/"
+            path="/user/:userId"
             component={User}
           />
           <Route 
