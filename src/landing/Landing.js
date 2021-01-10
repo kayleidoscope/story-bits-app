@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import LogIn from '../log-in/LogIn';
 import SignUp from '../sign-up/SignUp';
 import './Landing.css'
@@ -47,6 +48,8 @@ export default class Landing extends Component {
     }
 
     render() {
+        if(localStorage.getItem('currentUser')) return <Redirect to='/home' />
+
         if (this.state.logIn) {
             return (
                 <section>
@@ -56,6 +59,7 @@ export default class Landing extends Component {
                 <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                 <LogIn
                     handleLogInToSignUp={this.logInToSignUp}
+                    history={this.props.history}
                 />
             </section>
             )
@@ -68,6 +72,7 @@ export default class Landing extends Component {
                         <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                         <SignUp 
                             handleSignUpToLogIn={this.signUpToLogIn}
+                            history={this.props.history}
                         />
                     </section>
                 )

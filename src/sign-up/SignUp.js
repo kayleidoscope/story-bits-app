@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import config from '../config'
 import Context from '../Context'
 import './SignUp.css';
@@ -29,6 +28,7 @@ export default class SignUp extends Component {
     }
 
     handleSubmit = e => {
+        e.preventDefault()
         const username = this.state.usernameInput
         const newUser = {username}
         fetch(`${config.API_ENDPOINT}api/users`, {
@@ -45,9 +45,13 @@ export default class SignUp extends Component {
                 return res.json()
             })
             .then(responseJson => {
-                this.setUserId(responseJson.id)
+                // this.setUserId(responseJson.id)
                 this.context.addUserFx(responseJson)
                 this.context.userSelectFx(responseJson.id)
+                localStorage.setItem(
+                    `currentUser`, JSON.stringify(responseJson)
+                )
+                this.props.history.push("/home")
             })
             .catch(error => {
                 console.error(error)
@@ -62,19 +66,14 @@ export default class SignUp extends Component {
             <section className="sign-up-section">
             <h2>Sign up</h2>
             <p>Create an account below.</p>
-            <form className="sign-up-form">
+            <form className="sign-up-form"  onSubmit={this.handleSubmit}>
                  <label htmlFor="username">Username:</label>
                  <input type="text" id="username" name="username" onChange = {e => this.usernameChanged(e.target.value)} />
                  <br/>
                  {/* <label htmlFor="admin">Administrator</label>
                  <input type="checkbox" id="admin" name="admin" /> */}
                  <br/>
-                 <Link 
-                    to={`/home/${this.state.userId}`}
-                    onClick={() => {this.handleSubmit()}}
-                >
-                    <input type="submit" value="Submit" className="submit-btn"/>
-                 </Link>
+                <input type="submit" value="Submit" className="submit-btn"/>
                  <button
                     onClick={this.props.handleSignUpToLogIn}
                     className="submit-btn"

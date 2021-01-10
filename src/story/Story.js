@@ -1,17 +1,70 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import dummyData from '../dummyData';
+import config from '../config';
 import './Story.css';
 
 export default class Story extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          storyData: [],
+          charactersData: [],
+          settingsData: []
+        }
+      }
+
+    componentDidMount() {
+        fetch(`${config.API_ENDPOINT}api/stories/${this.props.match.params.storyId}`, {
+          method: 'GET'
+        })
+          .then(res => {
+            if(!res.ok) {
+              throw new Error(res.status)
+            }
+            return res.json()
+          })
+          .then(responseJson => {
+              console.log(responseJson)
+                this.setState({
+                    storyData: responseJson
+          })}
+          )
+          fetch(`${config.API_ENDPOINT}api/characters/?story_id=${this.props.match.params.storyId}`, {
+            method: 'GET'
+          })
+            .then(res => {
+              if(!res.ok) {
+                throw new Error(res.status)
+              }
+              return res.json()
+            })
+            .then(responseJson => {
+                console.log(responseJson)
+                  this.setState({
+                      charactersData: responseJson
+            })}
+            )
+            fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.match.params.storyId}`, {
+                method: 'GET'
+              })
+                .then(res => {
+                  if(!res.ok) {
+                    throw new Error(res.status)
+                  }
+                  return res.json()
+                })
+                .then(responseJson => {
+                    console.log(responseJson)
+                      this.setState({
+                          settingsData: responseJson
+                })}
+                )
+      }
+
     render() {
-        const data = dummyData;
+        const storyData = this.state.storyData;
 
-        const storyId = this.props.match.params.storyId;
-
-        const storyData = data.stories.filter(story => story.id === storyId);
-
-        const charData = data.characters.filter(char => char.story.id === storyId);
+        const charData = this.state.charactersData;
         const charLIs = charData.map(char => {
             return (
                 <Link to={`/character/${char.id}`} key={char.id}>
@@ -23,13 +76,13 @@ export default class Story extends Component {
             )
         })
 
-        const settingData = data.settings.filter(setting => setting.story.id === storyId);
+        const settingData = this.state.settingsData;
         const settingLIs = settingData.map(setting => {
             return (
                 <Link to={`/setting/${setting.id}`} key={setting.id}>
                     <li className="summary">
                         <p>{setting.name}</p>
-                        <p>{setting.description}</p>
+                        <p>{setting.decor}</p>
                     </li>
                 </Link>
             )
@@ -37,8 +90,8 @@ export default class Story extends Component {
 
         return (
             <div className="story">
-                <h2>{storyData[0].title}</h2>
-                <p>{storyData[0].description}</p>
+                <h2>{storyData.title}</h2>
+                <p>{storyData.description}</p>
                 <article>
                     <section>
                         <h3>Characters</h3>

@@ -26,7 +26,13 @@ class App extends Component {
     this.state = {
       currentChar: "0-0-0",
       users: [],
-      currentUser: 0
+      currentUser: null,
+      stories: [],
+      currentStory: null,
+      characters: [],
+      currentCharacter: null,
+      settings: [],
+      currentSettings: []
     }
   }
 
@@ -52,8 +58,23 @@ class App extends Component {
   }
 
   userDeselect = () => {
+    localStorage.removeItem('currentUser')
     this.setState({
       currentUser: null
+    })
+  }
+
+  apiStoriesSet = (responseJson) => {
+    const storiesObject = responseJson
+    this.setState({
+      stories: storiesObject
+    })
+  }
+
+  addStory = (story) => {
+    console.log('addStory ran')
+    this.setState({
+      stories: [...this.state.stories, story]
     })
   }
 
@@ -71,13 +92,18 @@ class App extends Component {
   }
 
   render() {
+    const userFromStorage = localStorage.getItem(`currentUser`)
+    
     const contextValue = {
       currentChar: this.state.currentChar,
       users: this.state.users,
-      currentUser: this.state.currentUser,
+      stories: this.state.stories,
+      currentUser: this.state.currentUser || (userFromStorage && JSON.parse(userFromStorage).id),
       addUserFx: this.addUser,
       userSelectFx: this.userSelect,
-      userDeselectFx: this.userDeselect
+      userDeselectFx: this.userDeselect,
+      apiStoriesSetFx: this.apiStoriesSet,
+      addStoryFx: this.addStory,
     }
 
     return (
@@ -90,7 +116,7 @@ class App extends Component {
             component={Landing}
           />
           <Route 
-            path="/home/:userId"
+            path="/home"
             component={Home}
           />
           <Route 

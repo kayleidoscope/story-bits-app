@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import Context from '../Context';
 import './LogIn.css';
 import ValidationError from '../validation-error/ValidationError'
@@ -12,7 +11,8 @@ export default class LogIn extends Component {
         this.state = {
           usernameInput: "",
           userId: 0,
-          inputTouched: false
+          inputTouched: false,
+          error: false
         }
       }
 
@@ -39,12 +39,23 @@ export default class LogIn extends Component {
     }
 
     handleSubmit = (e) => {
+        console.log('handleSubmit - login ran')
         e.preventDefault()
         // this.validateUsername(this.state.usernameInput)
         const users = this.context.users
         const currentUser = users.find(user => user.username === this.state.usernameInput)
+        if(!currentUser) {
+            this.setState({
+                error: true
+            })
+            return
+        }
         const currentUserId = currentUser.id
         this.context.userSelectFx(currentUserId)
+        localStorage.setItem(
+            `currentUser`, JSON.stringify(currentUser)
+        )
+        this.props.history.push("/home")
     }
 
     render() {
@@ -52,19 +63,14 @@ export default class LogIn extends Component {
             <section className="log-in-section">
             <h2>Log in</h2>
             <p>Log in with your credentials below.</p>
-            <form className="log-in-form">
+            <form className="log-in-form" onSubmit={this.handleSubmit}>
                  <label htmlFor="username">Username:</label>
                  <input type="text" id="username" name="username" onChange={e => this.usernameChange(e.target.value)}/>
                  <br/>
-                 <Link 
-                    to={`/home/${this.state.userId}`}
-                    onClick={() => {this.context.userSelectFx(this.state.userId)}}
-                >
-                    <input type="submit" value="Submit" className="submit-btn" />
-                 </Link>
-                 {/* {this.state.inputTouched && (
-                     <ValidationError message={this.validateUsername()}/>
-                 )} */}
+                <input type="submit" value="Submit" className="submit-btn" />
+                 {this.state.error && (
+                     <ValidationError message={"No user found"}/>
+                 )}
                  <button
                     onClick={this.props.handleLogInToSignUp}
                     className="submit-btn"

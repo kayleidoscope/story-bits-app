@@ -1,18 +1,86 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import dummyData from '../dummyData';
+import config from '../config'
 import './StoryItem.css';
 
 export default class StoryItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          storyData: [],
+          charactersData: [],
+          settingsData: []
+        }
+      }
+
+    componentDidMount() {
+        fetch(`${config.API_ENDPOINT}api/stories/${this.props.story}`, {
+            method: 'GET'
+        })
+        .then(res => {
+            if (!res.ok) {
+            throw new Error(res.status)
+            }
+            return res.json()
+        })
+            .then(responseJson => {
+                this.setState({
+                    storyData: responseJson
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+        
+        fetch(`${config.API_ENDPOINT}api/characters/?story_id=${this.props.story}`, {
+            method: 'GET'
+        })
+        .then(res => {
+            if (!res.ok) {
+            throw new Error(res.status)
+            }
+            return res.json()
+        })
+            .then(responseJson => {
+                this.setState({
+                    charactersData: responseJson
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+            fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.story}`, {
+                method: 'GET'
+            })
+            .then(res => {
+                if (!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
+                .then(responseJson => {
+                    this.setState({
+                        settingsData: responseJson
+                    })
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+    }
+
+
+
     render() {
-        const data = dummyData
+        console.log(this.state.settingsData)
+
         const storyId = this.props.story;
 
-        const storyData = data.stories.filter(story => story.id === storyId)
-        const storyName = storyData[0].title;
-        const storyDescription = storyData[0].description;
+        const storyData = this.state.storyData
+        const storyName = storyData.title;
+        const storyDescription = storyData.decor;
         
-        const charData = data.characters.filter(char => char.story.id === storyId)
+        const charData = this.state.charactersData
         const charLIs = charData.map(char => {
             return (
                 <Link to={`/character/${char.id}`} key={char.id}>
@@ -21,7 +89,7 @@ export default class StoryItem extends Component {
             )
         })
 
-        const settingData = data.settings.filter(setting => setting.story.id === storyId)
+        const settingData = this.state.settingsData
         const settingLIs = settingData.map(setting => {
             return (
                 <Link to={`/setting/${setting.id}`}  key={setting.id}>
