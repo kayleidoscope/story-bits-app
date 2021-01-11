@@ -72,8 +72,6 @@ export default class StoryItem extends Component {
 
 
     render() {
-        console.log(this.state.settingsData)
-
         const storyId = this.props.story;
 
         const storyData = this.state.storyData

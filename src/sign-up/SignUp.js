@@ -21,7 +21,7 @@ export default class SignUp extends Component {
     }
 
     setUserId = userId => {
-        console.log('setUserId ran', userId, this.state.userId)
+        console.log('setUserId ran')
         this.setState({
             userId: userId,
         })

@@ -24,7 +24,6 @@ export default class Story extends Component {
             return res.json()
           })
           .then(responseJson => {
-              console.log(responseJson)
                 this.setState({
                     storyData: responseJson
           })}
@@ -39,7 +38,6 @@ export default class Story extends Component {
               return res.json()
             })
             .then(responseJson => {
-                console.log(responseJson)
                   this.setState({
                       charactersData: responseJson
             })}
@@ -54,7 +52,6 @@ export default class Story extends Component {
                   return res.json()
                 })
                 .then(responseJson => {
-                    console.log(responseJson)
                       this.setState({
                           settingsData: responseJson
                 })}
