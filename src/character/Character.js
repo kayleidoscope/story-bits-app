@@ -14,8 +14,10 @@ export default class Character extends Component {
             charData: [],
             storyName: "",
             storyId: null,
+            hasHomeData: false,
             homeName: "",
             homeId: null,
+            hasRmData: false,
             roommateData: []
         }
       }
@@ -62,54 +64,60 @@ export default class Character extends Component {
                 return res.json()
             })
             .then(responseJson => {
-                this.setState({
-                    homeId: responseJson[0].id
-                })
-                fetch(`${config.API_ENDPOINT}api/settings/${responseJson[0].setting_id}`, {
-                    method: 'GET'
-                })
-                .then(res => {
-                    if (!res.ok) {
-                        throw new Error(res.status)
-                    }
-                    return res.json()
-                })
-                .then(responseJson => this.setState({
-                    homeName: responseJson.name
-                })
-                )
-                fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${responseJson[0].setting_id}`, {
-                    method: 'GET'
-                })
+                if (responseJson.length > 0) {
+                    this.setState({
+                        homeId: responseJson[0].id,
+                        hasHomeData: true
+                    })
+                    fetch(`${config.API_ENDPOINT}api/settings/${responseJson[0].setting_id}`, {
+                        method: 'GET'
+                    })
                     .then(res => {
                         if (!res.ok) {
                             throw new Error(res.status)
                         }
                         return res.json()
                     })
-                    .then(responseJson => {
-                        const roommateArray = responseJson.map(item => {
-                            return item.character_id
-                        })
-                        const roommateDataArray = roommateArray.map((roommateId) => 
-                            fetch(`${config.API_ENDPOINT}api/characters/${roommateId}`, {
-                                method: 'GET'
-                            })
-                                .then(res => {
-                                    if (!res.ok) {
-                                        throw new Error(res.status)
-                                    }
-                                    return res.json()
-                                })
-                                .then(responseJson => responseJson)
-                        )
-
-                        Promise.all(roommateDataArray).then(values => {
-                            this.setState({
-                                roommateData: values
-                            })
-                        })
+                    .then(responseJson => this.setState({
+                        homeName: responseJson.name
                     })
+                    )
+                    fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${responseJson[0].setting_id}`, {
+                        method: 'GET'
+                    })
+                        .then(res => {
+                            if (!res.ok) {
+                                throw new Error(res.status)
+                            }
+                            return res.json()
+                        })
+                        .then(responseJson => {
+                            const roommateArray = responseJson.map(item => {
+                                return item.character_id
+                            })
+                            const roommateDataArray = roommateArray.map((roommateId) => 
+                                fetch(`${config.API_ENDPOINT}api/characters/${roommateId}`, {
+                                    method: 'GET'
+                                })
+                                    .then(res => {
+                                        if (!res.ok) {
+                                            throw new Error(res.status)
+                                        }
+                                        return res.json()
+                                    })
+                                    .then(responseJson => responseJson)
+                            )
+
+                            Promise.all(roommateDataArray).then(values => {
+                                if (values.length > 1) {
+                                    this.setState({
+                                        hasRmData: true,
+                                        roommateData: values
+                                    })
+                                }
+                            })
+                        })
+                }
             })
             
     }
@@ -157,15 +165,23 @@ export default class Character extends Component {
                 <h4>Fashion style</h4>
                 <p>{charData.fashion}</p>
 
-                <h4>Home</h4>
-                <Link to={`/setting/${this.state.homeId}`}>
-                    <p>{this.state.homeName}</p>
-                </Link>
+                {this.state.hasHomeData &&
+                    (<div>
+                        <h4>Home</h4>
+                        <Link to={`/setting/${this.state.homeId}`}>
+                            <p>{this.state.homeName}</p>
+                        </Link>
+                    </div>)
+                }
                 
-                <h4>Housemates</h4>
-                <ul>
-                    {housematesLIs}
-                </ul>
+                {this.state.hasRmData && 
+                    <div>
+                        <h4>Housemates</h4>
+                        <ul>
+                            {housematesLIs}
+                        </ul>
+                    </div>
+                }
 
                 <h4>Room decor</h4>
                 <p>{charData.room_decor}</p>

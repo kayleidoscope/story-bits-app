@@ -145,9 +145,6 @@ export default class NewCharacter extends Component {
                             }
                             return res.json()
                         })
-                        .then(responseJson => {
-                            console.log(responseJson)
-                        })
                         .catch(error => {
                             console.error(error)
                         })
