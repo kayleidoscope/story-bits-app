@@ -10,13 +10,15 @@ export default class EditCharacter extends Component {
             currentChar: this.props.match.params.charId,
             storiesData: [],
             storyName: "",
-            storyId: 0,
             hasHomeData: false,
             homeName: "",
             homeId: 0,
+            homeIdTouched: false,
             hasRmData: false,
             roommateData: [],
             settingsForThisStory: [],
+            storyId: null,
+            name: "",
             description: "",
             gender: "",
             appearance: "",
@@ -54,7 +56,14 @@ export default class EditCharacter extends Component {
             })
             .then(responseJson => {
                 this.setState({
-                    charData: responseJson
+                    charData: responseJson,
+                    name: responseJson.name,
+                    description: responseJson.description,
+                    storyId: responseJson.story_id,
+                    gender: responseJson.gender,
+                    appearance: responseJson.appearance,
+                    fashion: responseJson.fashion,
+                    room_decor: responseJson.room_decor,
                 })
                 
                 //API call to get the name of this character's story
@@ -69,26 +78,8 @@ export default class EditCharacter extends Component {
                   })
                 .then(responseJson => 
                     this.setState({
-                        storyName: responseJson.title,
-                        storyId: responseJson.id
-                    })
+                        storyName: responseJson.title                    })
                 )
-
-                //API call to get other settings in this character's story
-                fetch(`${config.API_ENDPOINT}api/settings/?story_id=${responseJson.story_id}`, {
-                    method: 'GET'
-                  })
-                    .then(res => {
-                      if(!res.ok) {
-                        throw new Error(res.status)
-                      }
-                      return res.json()
-                    })
-                    .then(responseJson => {
-                        this.setState({
-                            settingsForThisStory: responseJson
-                        })
-                    })
             }
             )
         
@@ -166,6 +157,14 @@ export default class EditCharacter extends Component {
             
     }
 
+    nameChanged = (name) => {
+        console.log('nameChanged ran')
+        this.setState({
+            name
+        })
+    }
+
+
     descriptionChanged = (description) => {
         console.log('descriptionChanged ran')
         this.setState({
@@ -177,6 +176,24 @@ export default class EditCharacter extends Component {
         this.setState({
             storyId
         })
+
+        //API call to get other settings in this character's story
+        fetch(`${config.API_ENDPOINT}api/settings/?story_id=${storyId}`, {
+            method: 'GET'
+            })
+            .then(res => {
+                if(!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(responseJson => {
+                console.log(this.state.settingsForThisStory)
+                this.setState({
+                    settingsForThisStory: responseJson
+                })
+                console.log(this.state.settingsForThisStory)
+            })
     }
 
     genderChanged = (gender) => {
@@ -197,9 +214,9 @@ export default class EditCharacter extends Component {
         })
     }
 
-    homeChanged = (home) => {
+    homeIdChanged = (homeId) => {
         this.setState({
-            home
+            homeId
         })
     }
 
@@ -212,29 +229,79 @@ export default class EditCharacter extends Component {
 
     handleSubmit = (e) =>{
         e.preventDefault()
-        const story_id = this.state.storyId
+        const storyId = this.state.storyId
         const name = this.state.name
         const description = this.state.description
         const gender = this.state.gender
         const appearance = this.state.appearance
         const fashion = this.state.fashion
-        const housemates = this.state.housemates
-        const room_decor = this.state.decor
+        const room_decor = this.state.room_decor
+
         const editedCharacter = {
-            story_id, 
+            storyId, 
             name, 
             description, 
             gender, 
             appearance, 
             fashion, 
-            housemates,
             room_decor
         }
+
+        //for PUT request to /residences
+        const setting_id = this.state.homeId
+
+        fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(editedCharacter)
+        })
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error(res.status)
+                }
+            })
+            .then(responseJson => {
+                const editedResidence = {setting_id}
+                console.log(editedResidence)
+
+                fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
+                    method: 'GET'
+                })
+                .then(res => {
+                    if(!res.ok) {
+                        throw new Error(res.status)
+                    }
+                    return res.json()
+                })
+                .then(responseJson => {
+                        console.log('we have made it here')
+                        fetch(`${config.API_ENDPOINT}api/residences/${responseJson[0].id}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(editedResidence)
+                        })
+                            .then(res => {
+                                if(!res.ok) {
+                                    throw new Error(res.status)
+                                }
+                            })
+                            .then(noData => this.props.history.push(`/character/${this.state.currentChar}`))
+                    })
+                    .catch(error => {
+                        console.error(error)
+                    })
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
 
     render() {
-
         const charData = this.state.charData
         const charChecks = this.state.roommateData.map(char => {
             return (
@@ -260,49 +327,54 @@ export default class EditCharacter extends Component {
         return (
             <article className="edit-character">
                 <h3>{charData.name}</h3>
-                <div>
-                    <label htmlFor="description">Description: </label>
-                    <textarea 
-                        type="text" 
-                        value={charData.description} 
-                        onChange={(e) => this.descriptionChanged(e.target.value)}
-                        id="description"
-                    />
-                </div>
+                <form onSubmit={this.handleSubmit}>
 
-                <label htmlFor="story">Story: </label>
-                <select name="story" id="story" onChange={e => this.storyChanged(e.target.value)}>
-                        <option value="">Select a story</option>
-                        {storyOptions}
-                    </select>
-                <br/>
-                <label htmlFor="gender">Gender: </label>
-                <input type="text" value={charData.gender} id="gender"  onChange={e => this.genderChanged(e.target.value)}/>
-                <br />
-                <label htmlFor="appearance">Physical appearance:</label>
-                <textarea value={charData.appearance} id="appearance"  onChange={e => this.appearanceChanged(e.target.value)}/>
-                <br />
-                <label htmlFor="fashion">Fashion style: </label>
-                <textarea value={charData.fashion} id="fashion"  onChange={e => this.fashionChanged(e.target.value)}/>
-                <br />
-                <label htmlFor="home">Home: </label>
-                    <select name="home" id="home" onChange={e => this.homeChanged(e.target.value)}>
-                        {settingsOptions}
-                    </select>
-                <br />
-                    <label htmlFor="housemates">Housemates: </label>
-                    <p>To change {charData.name}'s housemates, edit their Home selection on their own Edit Character page.</p>
-                    <ul>
-                        {charChecks}
-                    </ul>
+                    <label htmlFor="name">Name: </label>
+                    <input type="text" value={this.state.name} onChange={(e) => this.nameChanged(e.target.value)} />
+                    <div>
+                        <label htmlFor="description">Description: </label>
+                        <textarea 
+                            type="text" 
+                            value={this.state.description} 
+                            onChange={(e) => this.descriptionChanged(e.target.value)}
+                            id="description"
+                        />
+                    </div>
 
-                <h4>Decor</h4>
-                <p>{charData.decor}</p>
-                <textarea type="text" value={charData.room_decor} id="decor"  onChange={e => this.roomDecorChanged(e.target.value)}/>
-                <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                    Go Back
-                </button>
-                <input type='submit' className="submit-btn" />
+                    <label htmlFor="story">Story: </label>
+                    <select name="story" id="story" onChange={e => this.storyChanged(e.target.value)}>
+                            <option value="">Select a story</option>
+                            {storyOptions}
+                        </select>
+                    <br/>
+                    <label htmlFor="gender">Gender: </label>
+                    <input type="text" value={this.state.gender} id="gender"  onChange={e => this.genderChanged(e.target.value)}/>
+                    <br />
+                    <label htmlFor="appearance">Physical appearance:</label>
+                    <textarea value={this.state.appearance} id="appearance"  onChange={e => this.appearanceChanged(e.target.value)}/>
+                    <br />
+                    <label htmlFor="fashion">Fashion style: </label>
+                    <textarea value={this.state.fashion} id="fashion"  onChange={e => this.fashionChanged(e.target.value)}/>
+                    <br />
+                    <label htmlFor="home">Home: </label>
+                        <select name="home" id="home" onChange={e => this.homeIdChanged(e.target.value)}>
+                            <option value="0">Not important</option>
+                            {settingsOptions}
+                        </select>
+                    <br />
+                        <label htmlFor="housemates">Housemates: </label>
+                        <p>To change {charData.name}'s housemates, edit their Home selection on their own Edit Character page.</p>
+                        <ul>
+                            {charChecks}
+                        </ul>
+
+                    <h4>Decor</h4>
+                    <textarea type="text" value={this.state.room_decor} id="decor"  onChange={e => this.roomDecorChanged(e.target.value)}/>
+                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                        Go Back
+                    </button>
+                    <input type='submit' className="submit-btn" />
+                </form>
             </article>
         )
     }

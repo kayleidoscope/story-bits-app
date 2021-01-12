@@ -112,7 +112,6 @@ export default class NewCharacter extends Component {
 
         //for PUT request to /residences
         const setting_id = this.state.home
-        console.log(setting_id)
 
         fetch(`${config.API_ENDPOINT}api/characters`, {
             method: 'POST',

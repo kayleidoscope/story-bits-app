@@ -83,6 +83,7 @@ export default class Setting extends Component {
     }
 
     render() {
+        const setId = this.props.match.params.settingId
         const settingData = this.state.settingData
         const isResidence = settingData.is_residence
         const occupantsLIs = this.state.roommateData.map(person => {
@@ -99,6 +100,9 @@ export default class Setting extends Component {
         return (
             <>
                 <h2>{settingData.name}</h2>
+                <button onClick={() => this.props.history.push(`/edit/setting/${setId}`)}>
+                    Edit Setting
+                </button>
                 <p className="setting-desc">setting description</p>
                 <ul className="setting-traits">
                     <li className="setting-trait">
