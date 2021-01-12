@@ -23,7 +23,8 @@ export default class EditCharacter extends Component {
             gender: "",
             appearance: "",
             fashion: "",
-            room_decor: ""
+            room_decor: "",
+            hasDeleteForm: false
         }
       }
 
@@ -166,7 +167,7 @@ export default class EditCharacter extends Component {
 
 
     descriptionChanged = (description) => {
-        console.log('descriptionChanged ran')
+        ('descriptionChanged ran')
         this.setState({
             description
         })
@@ -188,11 +189,9 @@ export default class EditCharacter extends Component {
                 return res.json()
             })
             .then(responseJson => {
-                console.log(this.state.settingsForThisStory)
                 this.setState({
                     settingsForThisStory: responseJson
                 })
-                console.log(this.state.settingsForThisStory)
             })
     }
 
@@ -226,6 +225,38 @@ export default class EditCharacter extends Component {
         })
     }
 
+    deleteToggled = e => {
+        if(!this.state.hasDeleteForm) {
+            this.setState({
+                hasDeleteForm: true
+            })
+        } else if (this.state.hasDeleteForm) {
+            this.setState({
+                hasDeleteForm: false
+            })
+        }
+    }
+
+    handleDelete = e => {
+        e.preventDefault()
+        console.log('handleDelete ran')
+
+        fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error (res.status)
+                }
+                this.props.history.push(`/story/${this.state.charData.story_id}`)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
     handleSubmit = (e) =>{
         e.preventDefault()
@@ -264,7 +295,6 @@ export default class EditCharacter extends Component {
             })
             .then(responseJson => {
                 const editedResidence = {setting_id}
-                console.log(editedResidence)
 
                 fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
                     method: 'GET'
@@ -276,7 +306,6 @@ export default class EditCharacter extends Component {
                     return res.json()
                 })
                 .then(responseJson => {
-                        console.log('we have made it here')
                         fetch(`${config.API_ENDPOINT}api/residences/${responseJson[0].id}`, {
                             method: 'PATCH',
                             headers: {
@@ -348,13 +377,13 @@ export default class EditCharacter extends Component {
                         </select>
                     <br/>
                     <label htmlFor="gender">Gender: </label>
-                    <input type="text" value={this.state.gender} id="gender"  onChange={e => this.genderChanged(e.target.value)}/>
+                    <input type="text" value={this.state.gender} id="gender" onChange={e => this.genderChanged(e.target.value)}/>
                     <br />
                     <label htmlFor="appearance">Physical appearance:</label>
-                    <textarea value={this.state.appearance} id="appearance"  onChange={e => this.appearanceChanged(e.target.value)}/>
+                    <textarea value={this.state.appearance} id="appearance" onChange={e => this.appearanceChanged(e.target.value)}/>
                     <br />
                     <label htmlFor="fashion">Fashion style: </label>
-                    <textarea value={this.state.fashion} id="fashion"  onChange={e => this.fashionChanged(e.target.value)}/>
+                    <textarea value={this.state.fashion} id="fashion" onChange={e => this.fashionChanged(e.target.value)}/>
                     <br />
                     <label htmlFor="home">Home: </label>
                         <select name="home" id="home" onChange={e => this.homeIdChanged(e.target.value)}>
@@ -370,10 +399,24 @@ export default class EditCharacter extends Component {
 
                     <h4>Decor</h4>
                     <textarea type="text" value={this.state.room_decor} id="decor"  onChange={e => this.roomDecorChanged(e.target.value)}/>
+                    <input type='submit' className="submit-btn" />
+{!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
+                        Delete Character
+                    </button>}
                     <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
                         Go Back
                     </button>
-                    <input type='submit' className="submit-btn" />
+                    {this.state.hasDeleteForm && (
+                        <div>
+                            <p>Are you sure you want to delete this character? This action cannot be undone.</p>
+                            <button type='button' onClick={this.handleDelete}>
+                                Yes, delete {charData.name}
+                            </button>
+                            <button type='button' onClick={this.deleteToggled}>
+                                No, do not delete {charData.name}
+                            </button>
+                        </div>
+                    )}
                 </form>
             </article>
         )

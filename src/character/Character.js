@@ -11,7 +11,7 @@ export default class Character extends Component {
         super(props);
         this.state = {
             currentChar: this.props.match.params.charId,
-            charData: [],
+            charData: null,
             storyName: "",
             storyId: null,
             hasHomeData: false,
@@ -66,7 +66,7 @@ export default class Character extends Component {
             .then(responseJson => {
                 if (responseJson.length > 0) {
                     this.setState({
-                        homeId: responseJson[0].id,
+                        homeId: responseJson[0].setting_id,
                         hasHomeData: true
                     })
                     fetch(`${config.API_ENDPOINT}api/settings/${responseJson[0].setting_id}`, {
@@ -125,7 +125,7 @@ export default class Character extends Component {
     render() {
         const charData = this.state.charData
         const roommateData = this.state.roommateData
-
+        console.log('homeId', this.state.homeId)
         const housematesLIs = roommateData.map(rm => {
             const selectedCharId = parseInt(this.state.currentChar)
             if (rm.id === selectedCharId) {
@@ -141,6 +141,10 @@ export default class Character extends Component {
                 )
             }
         })
+
+        if (!charData || !this.state.storyName || !this.state.storyId) {
+            return null
+        }
 
         return (
             <article className="character-deets">

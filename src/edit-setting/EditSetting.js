@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './EditSetting.css';
 import config from '../config'
 
-export default class Setting extends Component {
+export default class EditSetting extends Component {
     constructor(props) {
         super(props)
         this.state = {
