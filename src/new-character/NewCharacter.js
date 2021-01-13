@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import config from '../config'
+import Context from '../Context'
 import './NewCharacter.css';
 
 export default class NewCharacter extends Component {
+    static contextType = Context
+
     state = {
         story: null,
         name: "",
@@ -34,9 +37,14 @@ export default class NewCharacter extends Component {
               return res.json()
             })
             .then(responseJson => {
+                        
+                const liveablePlaces = responseJson.filter(place => place.is_residence)
+                console.log(liveablePlaces)
+
                 this.setState({
-                    settingsForThisStory: responseJson
-            })}
+                    settingsForThisStory: liveablePlaces
+                })
+            }
             )
     }
 
@@ -158,7 +166,7 @@ export default class NewCharacter extends Component {
     }
 
     componentDidMount() {
-        fetch(`${config.API_ENDPOINT}api/stories/`, {
+        fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
           method: 'GET'
         })
           .then(res => {

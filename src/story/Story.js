@@ -79,7 +79,7 @@ export default class Story extends Component {
                 <Link to={`/setting/${setting.id}`} key={setting.id}>
                     <li className="summary">
                         <p>{setting.name}</p>
-                        <p>{setting.decor}</p>
+                        <p>{setting.description}</p>
                     </li>
                 </Link>
             )

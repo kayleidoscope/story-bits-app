@@ -86,7 +86,7 @@ export default class User extends Component {
     }
 
     render() {
-        const user = JSON.parse(localStorage.getItem('currentUser'))
+        const user = JSON.parse(localStorage.getItem('currentUser')) || this.context.currentUser
         const date = new Date((user.acct_created)).toLocaleDateString('en-US')
 
         return (

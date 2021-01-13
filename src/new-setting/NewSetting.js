@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
 import config from '../config'
+import Context from '../Context'
 import './NewSetting.css';
 
 export default class NewSetting extends Component {
+    static contextType = Context
+
     state = {
         story: null,
         storiesData: [],
         name: "",
         description: "",
-        decor: ""
+        decor: "",
+        isResidence: false
     }
 
     componentDidMount() {
-        fetch(`${config.API_ENDPOINT}api/stories/`, {
+        fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
           method: 'GET'
         })
           .then(res => {
@@ -49,6 +53,12 @@ export default class NewSetting extends Component {
     decorChange = (decor) => {
         this.setState({
             decor
+        })
+    }
+
+    handleResChange = changeEvent => {
+        this.setState({
+            isResidence: changeEvent.target.value
         })
     }
 
@@ -117,7 +127,27 @@ export default class NewSetting extends Component {
                     <ul>
                         {charChecks}
                     </ul> */}
-                    <br/>
+                    <br />
+                    <fieldset>
+                        <legend htmlFor="isResidence">Can people live here?</legend>
+                        <input 
+                            type="radio" 
+                            id="true" 
+                            name="isResidence" 
+                            value={true}
+                            onChange={this.handleResChange}
+                        />
+                        <label htmlFor="true">Yes</label>
+                        <br />
+                        <input 
+                            type="radio" 
+                            id="false" 
+                            name="isResidence" 
+                            value={false} 
+                            onChange={this.handleResChange}
+                        />
+                        <label htmlFor="false">No</label>
+                    </fieldset>
                     <label htmlFor="decor">Decor:</label>
                     <textarea id="decor" name="decor"   onChange={e => this.decorChange(e.target.value)}/>
                     <br/>

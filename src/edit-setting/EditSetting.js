@@ -133,6 +133,8 @@ export default class EditSetting extends Component {
 
         const editedSetting = {name, description, story_id, is_residence, decor}
 
+        console.log(is_residence)
+
         fetch(`${config.API_ENDPOINT}api/settings/${this.props.match.params.settingId}`, {
             method: 'PATCH',
             headers: {

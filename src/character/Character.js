@@ -122,29 +122,36 @@ export default class Character extends Component {
             
     }
 
+
+    roommateSwitch() {
+        console.log("woohoo!")
+    }
+
     render() {
+
         const charData = this.state.charData
         const roommateData = this.state.roommateData
-        console.log('homeId', this.state.homeId)
         const housematesLIs = roommateData.map(rm => {
             const selectedCharId = parseInt(this.state.currentChar)
             if (rm.id === selectedCharId) {
                 return null
             } else {
                 return (
-                    <Link to={`/character/${rm.id}`} key={rm.id}>
-                        <li>
+                    // <Link to={`/character/${rm.id}`} key={rm.id}>
+                        <li key={rm.id}>
                             {rm.name}
                         </li>
-                    </Link>
+                    // </Link>
                     
                 )
             }
         })
 
+        
         if (!charData || !this.state.storyName || !this.state.storyId) {
             return null
         }
+        
 
         return (
             <article className="character-deets">

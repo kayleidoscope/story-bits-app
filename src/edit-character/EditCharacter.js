@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import config from '../config'
+import Context from '../Context'
 import './EditCharacter.css';
 
 export default class EditCharacter extends Component {
+    static contextType = Context
+
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +20,7 @@ export default class EditCharacter extends Component {
             hasRmData: false,
             roommateData: [],
             settingsForThisStory: [],
-            storyId: null,
+            storyId: 0,
             name: "",
             description: "",
             gender: "",
@@ -29,8 +32,8 @@ export default class EditCharacter extends Component {
       }
 
     componentDidMount() {
-        //API call to get this character's data and autofill the input values
-        fetch(`${config.API_ENDPOINT}api/stories/`, {
+        //API call to get data on this user's stories
+        fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
             method: 'GET'
           })
             .then(res => {
@@ -81,6 +84,25 @@ export default class EditCharacter extends Component {
                     this.setState({
                         storyName: responseJson.title                    })
                 )
+
+                //API call to fill in settings for this story
+                fetch(`${config.API_ENDPOINT}api/settings/?story_id=${responseJson.story_id}`, {
+                    method: 'GET'
+                    })
+                    .then(res => {
+                        if(!res.ok) {
+                        throw new Error(res.status)
+                        }
+                        return res.json()
+                    })
+                    .then(responseJson => {
+                        
+                        const liveablePlaces = responseJson.filter(place => place.is_residence)
+
+                        this.setState({
+                            settingsForThisStory: liveablePlaces
+                        })
+                    })
             }
             )
         
@@ -189,8 +211,11 @@ export default class EditCharacter extends Component {
                 return res.json()
             })
             .then(responseJson => {
+                
+                const liveablePlaces = responseJson.filter(place => place.is_residence)
+
                 this.setState({
-                    settingsForThisStory: responseJson
+                    settingsForThisStory: liveablePlaces
                 })
             })
     }
@@ -296,6 +321,8 @@ export default class EditCharacter extends Component {
             .then(responseJson => {
                 const editedResidence = {setting_id}
 
+                console.log(editedResidence)
+
                 fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
                     method: 'GET'
                 })
@@ -306,6 +333,31 @@ export default class EditCharacter extends Component {
                     return res.json()
                 })
                 .then(responseJson => {
+                        if(!responseJson.length) {
+                            if(setting_id > 0) {
+
+                                editedResidence.character_id = this.state.currentChar
+
+                                fetch(`${config.API_ENDPOINT}api/residences/`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'content-type': 'application/json'
+                                    },
+                                    body: JSON.stringify(editedResidence)
+                                })
+                                    .then(res => {
+                                        if(!res.ok) {
+                                            throw new Error(res.status)
+                                        }
+                                    })
+                                    .then(noData => this.props.history.push(`/character/${this.state.currentChar}`))
+                                    .catch(error => {
+                                        console.error(error)
+                                    })
+                            }
+                            this.props.history.push(`/character/${this.state.currentChar}`)
+                            return responseJson
+                        }
                         fetch(`${config.API_ENDPOINT}api/residences/${responseJson[0].id}`, {
                             method: 'PATCH',
                             headers: {
@@ -371,7 +423,7 @@ export default class EditCharacter extends Component {
                     </div>
 
                     <label htmlFor="story">Story: </label>
-                    <select name="story" id="story" onChange={e => this.storyChanged(e.target.value)}>
+                    <select name="story" id="story" value={this.state.storyId} onChange={e => this.storyChanged(e.target.value)}>
                             <option value="">Select a story</option>
                             {storyOptions}
                         </select>

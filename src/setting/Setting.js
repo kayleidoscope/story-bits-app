@@ -97,6 +97,14 @@ export default class Setting extends Component {
             )
         })
 
+        const isRes = settingData.is_residence
+        let isResYesNo
+        if (isRes) {
+            isResYesNo = "Yes."
+        } else {
+            isResYesNo = "No."
+        }
+
         return (
             <>
                 <h2>{settingData.name}</h2>
@@ -110,6 +118,10 @@ export default class Setting extends Component {
                         <Link to={`/story/${this.state.storyId}`}>
                             <p>{this.state.storyName}</p>
                         </Link>
+                    </li>
+                    <li>
+                        <p className="setting-trait-title">Can people live here?</p>
+                        <p>{isResYesNo}</p>
                     </li>
                     {isResidence &&
                         (<li className="setting-trait">
