@@ -13,7 +13,8 @@ export default class EditSetting extends Component {
             storiesData: [],
             storyId: null,
             name: "",
-            isResidence: null
+            isResidence: null,
+            hasDeleteForm: false
         }
     }
 
@@ -85,6 +86,39 @@ export default class EditSetting extends Component {
           isResidence: changeEvent.target.value
         });
     };  
+
+    deleteToggled = e => {
+        if(!this.state.hasDeleteForm) {
+            this.setState({
+                hasDeleteForm: true
+            })
+        } else if (this.state.hasDeleteForm) {
+            this.setState({
+                hasDeleteForm: false
+            })
+        }
+    }
+
+    handleDelete = e => {
+        e.preventDefault()
+        console.log('handleDelete ran')
+
+        fetch(`${config.API_ENDPOINT}api/settings/${this.props.match.params.settingId}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error (res.status)
+                }
+                this.props.history.push(`/story/${this.state.storyId}`)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
     handleSubmit = e => {
         e.preventDefault()
