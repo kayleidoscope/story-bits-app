@@ -14,6 +14,7 @@ import Admin from './admin/Admin';
 import User from './user/User';
 import Stories from './stories/Stories';
 import EditCharacter from './edit-character/EditCharacter';
+import EditStory from './edit-story/EditStory'
 import EditSetting from './edit-setting/EditSetting';
 // import Compare from './compare/Compare';
 import Nav from './nav/Nav';
@@ -131,6 +132,10 @@ class App extends Component {
           <Route 
             path="/story/:storyId"
             component={Story}
+          />
+          <Route 
+            path="/edit/story/:storyId"
+            component={EditStory}
           />
           <Route 
             path="/character/:charId"

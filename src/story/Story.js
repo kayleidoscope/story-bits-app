@@ -89,6 +89,9 @@ export default class Story extends Component {
             <div className="story">
                 <h2>{storyData.title}</h2>
                 <p>{storyData.description}</p>
+                <button onClick={() => this.props.history.push(`/edit/story/${this.state.storyData.id}`)}>
+                    Edit Story Details
+                </button>
                 <article>
                     <section>
                         <h3>Characters</h3>

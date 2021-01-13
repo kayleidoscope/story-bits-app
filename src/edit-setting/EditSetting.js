@@ -14,7 +14,9 @@ export default class EditSetting extends Component {
             storyId: null,
             name: "",
             isResidence: null,
-            hasDeleteForm: false
+            hasDeleteForm: false,
+            decor: "",
+            description: ""
         }
     }
 
@@ -81,9 +83,9 @@ export default class EditSetting extends Component {
         })
     }
 
-    handleResChange = changeEvent => {
+    handleResChange = (changeEvent) => {
         this.setState({
-          isResidence: changeEvent.target.value
+          isResidence: changeEvent.target.value === "true" ? true : false
         });
     };  
 
@@ -181,7 +183,7 @@ export default class EditSetting extends Component {
                             id="true" 
                             name="isResidence" 
                             value={true}
-                            checked={this.state.isResidence === "true"}
+                            checked={this.state.isResidence === null ? false : this.state.isResidence}
                             onChange={this.handleResChange}
                         />
                         <label htmlFor="true">Yes</label>
@@ -191,10 +193,10 @@ export default class EditSetting extends Component {
                             id="false" 
                             name="isResidence" 
                             value={false} 
-                            checked={this.state.isResidence === "false"}
+                            checked={this.state.isResidence === null ? false : !this.state.isResidence}
                             onChange={this.handleResChange}
                         />
-                        <label htmlFor="true">No</label>
+                        <label htmlFor="false">No</label>
                     </fieldset>
                     <input type='submit' className="submit-btn" />
 {!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
