@@ -103,7 +103,7 @@ export default class Setting extends Component {
                 <button onClick={() => this.props.history.push(`/edit/setting/${setId}`)}>
                     Edit Setting
                 </button>
-                <p className="setting-desc">setting description</p>
+                <p className="setting-desc">{settingData.description}</p>
                 <ul className="setting-traits">
                     <li className="setting-trait">
                         <p className="setting-trait-title">Story:</p>
