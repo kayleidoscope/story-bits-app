@@ -85,7 +85,7 @@ export default class EditCharacter extends Component {
                 .then(responseJson => 
                     this.setState({
                         storyName: responseJson.title,
-                        storysUser: responseJson.userId
+                        storysUser: responseJson.user_id
                     })
                 )
 
@@ -390,6 +390,7 @@ export default class EditCharacter extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
+        console.log(storysUser, currentUser)
         if (currentUser !== storysUser) {
             return (
                 <CannotAccess item="character"/>
