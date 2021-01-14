@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import LogIn from '../log-in/LogIn';
 import SignUp from '../sign-up/SignUp';
+import DemoLogIn from '../demo-log-in/DemoLogIn'
 import './Landing.css'
 
 export default class Landing extends Component {
@@ -93,6 +94,8 @@ export default class Landing extends Component {
                     >
                         Sign up
                     </button>
+
+                    <DemoLogIn history={this.props.history} />
                 </section>
             )
         }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import config from '../config'
 import Context from '../Context'
+import CannotAccess from '../cannot-access/CannotAccess'
 import './EditCharacter.css';
 
 export default class EditCharacter extends Component {
@@ -13,6 +14,7 @@ export default class EditCharacter extends Component {
             currentChar: this.props.match.params.charId,
             storiesData: [],
             storyName: "",
+            storysUser: null,
             hasHomeData: false,
             homeName: "",
             homeId: 0,
@@ -82,7 +84,9 @@ export default class EditCharacter extends Component {
                   })
                 .then(responseJson => 
                     this.setState({
-                        storyName: responseJson.title                    })
+                        storyName: responseJson.title,
+                        storysUser: responseJson.userId
+                    })
                 )
 
                 //API call to fill in settings for this story
@@ -383,6 +387,15 @@ export default class EditCharacter extends Component {
 
 
     render() {
+        //to prevent users from accessing stories that do not belong to them
+        const currentUser = this.context.currentUser
+        const storysUser = this.state.storysUser
+        if (currentUser !== storysUser) {
+            return (
+                <CannotAccess item="character"/>
+            )
+        }
+
         const charData = this.state.charData
         const charChecks = this.state.roommateData.map(char => {
             return (

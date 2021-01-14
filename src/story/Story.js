@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Context from '../Context';
+import CannotAccess from '../cannot-access/CannotAccess'
 import config from '../config';
 import './Story.css';
 
 export default class Story extends Component {
+    static contextType = Context;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -59,6 +63,16 @@ export default class Story extends Component {
       }
 
     render() {
+
+        //to prevent users from accessing stories that do not belong to them
+        const currentUser = this.context.currentUser
+        const storysUser = this.state.storyData.user_id
+        if (currentUser !== storysUser) {
+            return (
+                <CannotAccess item="story"/>
+            )
+        }
+
         const storyData = this.state.storyData;
 
         const charData = this.state.charactersData;

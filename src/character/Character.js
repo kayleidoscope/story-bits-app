@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Context from '../Context';
 import config from '../config'
+import CannotAccess from '../cannot-access/CannotAccess'
 import {Link} from 'react-router-dom';
 import './Character.css'
 
@@ -13,6 +14,7 @@ export default class Character extends Component {
             currentChar: this.props.match.params.charId,
             charData: null,
             storyName: "",
+            storysUser: null,
             storyId: null,
             hasHomeData: false,
             homeName: "",
@@ -46,12 +48,13 @@ export default class Character extends Component {
                     }
                     return res.json()
                   })
-                .then(responseJson => 
+                .then(responseJson => {
                     this.setState({
                         storyName: responseJson.title,
-                        storyId: responseJson.id
+                        storyId: responseJson.id,
+                        storysUser: responseJson.user_id
                     })
-                )
+                })
             }
             )
         fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
@@ -128,6 +131,15 @@ export default class Character extends Component {
     }
 
     render() {
+
+        //to prevent users from accessing stories that do not belong to them
+        const currentUser = this.context.currentUser
+        const storysUser = this.state.storysUser
+        if (currentUser !== storysUser) {
+            return (
+                <CannotAccess item="character"/>
+            )
+        }
 
         const charData = this.state.charData
         const roommateData = this.state.roommateData
