@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './EditSetting.css';
 import Context from '../Context'
+import CannotAccess from '../cannot-access/CannotAccess'
 import config from '../config'
 
 export default class EditSetting extends Component {
@@ -12,6 +13,7 @@ export default class EditSetting extends Component {
             settingData: [],
             storiesData: [],
             storyId: null,
+            storysUser: null,
             name: "",
             isResidence: null,
             hasDeleteForm: false,
@@ -41,6 +43,21 @@ export default class EditSetting extends Component {
                     isResidence: responseJson.is_residence,
                     decor: responseJson.decor
                 })
+
+                fetch(`${config.API_ENDPOINT}api/stories/${responseJson.story_id}`, {
+                    method: 'GET'
+                })
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error(res.status)
+                        }
+                        return res.json()
+                    })
+                    .then(responseJson => {
+                        this.setState({
+                            storysUser: responseJson.user_id
+                        })
+                    })
 
             })
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
@@ -151,6 +168,15 @@ export default class EditSetting extends Component {
     }
 
     render() {
+        //to prevent users from accessing stories that do not belong to them
+        const currentUser = this.context.currentUser
+        const storysUser = this.state.storysUser
+        if (currentUser !== storysUser) {
+            return (
+                <CannotAccess item="setting"/>
+            )
+        }
+
         const settingData = this.state.settingData
         const storyOptions = this.state.storiesData.map(story => {
             return (

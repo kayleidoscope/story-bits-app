@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './EditStory.css';
 import Context from '../Context'
+import CannotAccess from '../cannot-access/CannotAccess'
 import config from '../config'
 
 export default class EditStory extends Component {
@@ -82,6 +83,15 @@ export default class EditStory extends Component {
     }
 
     render() {
+        //to prevent users from accessing stories that do not belong to them
+        const currentUser = this.context.currentUser
+        const storysUser = this.state.storyData.user_id
+        if (currentUser !== storysUser) {
+            return (
+                <CannotAccess item="story"/>
+            )
+        }
+
         return (
             <div>
                 <h2>Edit {this.state.storyData.title}</h2>

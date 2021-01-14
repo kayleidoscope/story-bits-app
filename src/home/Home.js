@@ -73,7 +73,7 @@ export default class Home extends Component {
         return (
             <div className="home">
                 <h2>Welcome, {username}!</h2>
-                <p>A random quote generator will put a quote here.</p>
+                {/* <p>A random quote generator will put a quote here.</p> */}
                 <Link to='/stories/'>
                     <h3>My stories</h3>
                 </Link>

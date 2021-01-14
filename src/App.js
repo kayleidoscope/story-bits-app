@@ -1,26 +1,14 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
+import {withRouter} from 'react-router'
 import Header from './header/Header';
 import Landing from './landing/Landing';
 import Footer from './footer/Footer';
-import Home from './home/Home';
-import Story from './story/Story';
-import Character from './character/Character';
-import Setting from './setting/Setting';
-import NewStory from './new-story/NewStory';
-import NewSetting from './new-setting/NewSetting';
-import NewCharacter from './new-character/NewCharacter';
-import Admin from './admin/Admin';
-import User from './user/User';
-import Stories from './stories/Stories';
-import EditCharacter from './edit-character/EditCharacter';
-import EditStory from './edit-story/EditStory'
-import EditSetting from './edit-setting/EditSetting';
-// import Compare from './compare/Compare';
 import Nav from './nav/Nav';
 import Context from './Context'
 import './App.css'
 import config from './config'
+import AppWrapper from './app-wrapper/AppWrapper';
 
 class App extends Component {
   constructor(props) {
@@ -106,6 +94,7 @@ class App extends Component {
       userDeselectFx: this.userDeselect,
       apiStoriesSetFx: this.apiStoriesSet,
       addStoryFx: this.addStory,
+      validateUsernameFx: this.validateUsername
     }
 
     return (
@@ -118,60 +107,8 @@ class App extends Component {
             component={Landing}
           />
           <Route 
-            path="/home"
-            component={Home}
-          />
-          <Route 
-            path="/user/:userId"
-            component={User}
-          />
-          <Route 
-            path="/stories/"
-            component={Stories}
-          />
-          <Route 
-            path="/story/:storyId"
-            component={Story}
-          />
-          <Route 
-            path="/edit/story/:storyId"
-            component={EditStory}
-          />
-          <Route 
-            path="/character/:charId"
-            component={Character}
-          />
-          <Route 
-            path="/edit/character/:charId"
-            component={EditCharacter}
-          />
-          <Route 
-            path="/setting/:settingId"
-            component={Setting}
-          />
-          <Route
-            path="/edit/setting/:settingId"
-            component={EditSetting}
-          />
-          <Route 
-            path="/new/story/"
-            component={NewStory}
-          />
-          <Route 
-            path="/new/setting/"
-            component={NewSetting}
-          />
-          <Route 
-            path="/new/character/"
-            component={NewCharacter}
-          />
-          {/* <Route 
-            path="/compare/"
-            component={Compare}
-          /> */}
-          <Route 
-            path="/admin/"
-            component={Admin}
+            path="/"
+            component={AppWrapper}
           />
         </Context.Provider>
         <Footer />
@@ -180,4 +117,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

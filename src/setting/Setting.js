@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import CannotAccess from '../cannot-access/CannotAccess'
 import './Setting.css';
 import config from '../config'
 
@@ -10,6 +11,7 @@ export default class Setting extends Component {
           settingData: [],
           storyName: "",
           storyId: null,
+          storysUser: null,
           roommateData: []
         }
       }
@@ -43,7 +45,8 @@ export default class Setting extends Component {
                     .then(responseJson => {
                         this.setState({
                             storyName: responseJson.title,
-                            storyId: responseJson.id
+                            storyId: responseJson.id,
+                            storysUser: responseJson.user_id
                         })
                     })
             })
@@ -83,6 +86,15 @@ export default class Setting extends Component {
     }
 
     render() {
+        //to prevent users from accessing stories that do not belong to them
+        const currentUser = this.context.currentUser
+        const storysUser = this.state.storysUser
+        if (currentUser !== storysUser) {
+            return (
+                <CannotAccess item="setting"/>
+            )
+        }
+
         const setId = this.props.match.params.settingId
         const settingData = this.state.settingData
         const isResidence = settingData.is_residence
