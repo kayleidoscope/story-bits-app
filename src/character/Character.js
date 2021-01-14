@@ -135,11 +135,14 @@ export default class Character extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
-        if (currentUser !== storysUser) {
+        if (!this.state.charData || !this.state.storyName || !this.state.storyId) {
+            return null
+        } else if (currentUser !== storysUser) {
             return (
                 <CannotAccess item="character"/>
             )
         }
+
 
         const charData = this.state.charData
         const roommateData = this.state.roommateData
@@ -159,10 +162,6 @@ export default class Character extends Component {
             }
         })
 
-        
-        if (!charData || !this.state.storyName || !this.state.storyId) {
-            return null
-        }
         
 
         return (

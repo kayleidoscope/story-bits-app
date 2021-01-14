@@ -86,7 +86,9 @@ export default class EditStory extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storyData.user_id
-        if (currentUser !== storysUser) {
+        if (!storysUser) {
+            return null
+        } else if (currentUser !== storysUser) {
             return (
                 <CannotAccess item="story"/>
             )

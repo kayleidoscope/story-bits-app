@@ -10,7 +10,7 @@ export default class EditCharacter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            charData: [],
+            charData: {},
             currentChar: this.props.match.params.charId,
             storiesData: [],
             storyName: "",
@@ -390,8 +390,9 @@ export default class EditCharacter extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
-        console.log(storysUser, currentUser)
-        if (currentUser !== storysUser) {
+        if (!this.state.charData || !this.state.storysUser) {
+            return null
+        } else if (currentUser !== storysUser) {
             return (
                 <CannotAccess item="character"/>
             )

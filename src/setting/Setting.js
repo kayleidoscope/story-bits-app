@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import CannotAccess from '../cannot-access/CannotAccess'
+import Context from '../Context'
 import './Setting.css';
 import config from '../config'
 
 export default class Setting extends Component {
+    static contextType = Context
+
     constructor(props) {
         super(props);
         this.state = {
@@ -89,7 +92,9 @@ export default class Setting extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
-        if (currentUser !== storysUser) {
+        if(!this.state.storysUser) {
+            return null
+        } else if (currentUser !== storysUser) {
             return (
                 <CannotAccess item="setting"/>
             )
