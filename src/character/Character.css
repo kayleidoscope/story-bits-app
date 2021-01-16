@@ -29,6 +29,11 @@
     width: 100%;
 }
 
+.character-deets a {
+    color: #561643;
+    text-decoration: none;
+}
+
 .character-deets .conditional .key {
     font-weight: bold;
     text-align: right;

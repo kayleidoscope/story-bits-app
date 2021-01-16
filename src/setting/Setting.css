@@ -8,6 +8,11 @@
     text-align: center;
 }
 
+.setting a {
+    color: #561643;
+    text-decoration: none;
+}
+
 .setting-btn {
     text-align: center;
     display: block;
