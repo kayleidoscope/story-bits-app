@@ -407,13 +407,6 @@ export default class EditCharacter extends Component {
         }
 
         const charData = this.state.charData
-        const charChecks = this.state.roommateData.map(char => {
-            return (
-                <li key={char.id}>
-                    <p className="edit-checkbox" htmlFor={char.id}> {char.name}</p>
-                </li>
-            )
-        })
 
         const settingsData = this.state.settingsForThisStory
         const settingsOptions = settingsData.map(setting => {
