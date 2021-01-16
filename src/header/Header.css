@@ -1,5 +1,14 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 3px solid #561643;
+    border-bottom: 3px solid #561643;
+    background-color: #EBF5DF;
+}
+
 h1 {
-    text-align: center;
-    background-color: skyblue;
-    padding: 50px;
+    padding: 10px;
+    font-family: 'Londrina Outline', cursive;
+    letter-spacing: 2.5px;
 }

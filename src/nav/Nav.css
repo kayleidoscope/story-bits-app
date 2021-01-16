@@ -8,5 +8,11 @@
     width: 100%;
     text-align: center;
     list-style: none;
+    text-decoration: none;
+    padding: 4px;
+}
 
+.nav-li li {
+    background-color: #EBF5DF;
+    color: #561643
 }

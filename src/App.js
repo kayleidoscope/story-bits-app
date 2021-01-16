@@ -98,8 +98,8 @@ class App extends Component {
 
     return (
       <main className='App'>
-        <Header />
         <Context.Provider value={contextValue}>
+        <Header />
           <Route 
             exact path="/"
             component={Landing}

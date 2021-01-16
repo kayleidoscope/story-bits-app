@@ -1,14 +1,30 @@
-.story h2, h3 {
+.story h2 {
     text-align: center;
-    padding: 20px;
+    padding: 20px 0 5px;
+}
+
+.story h3 {
+    text-align: center;
+    padding: 20px 0 5px;
 }
 
 .story ul {
     padding: 0;
 }
 
+.story-edit-btn {
+    margin: auto;
+    display: block;
+}
+
+.story-description {
+    padding-top: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
 .summary {
-    border: solid 1px gray;
+    border: solid 1px #EBF5DF;
     padding: 10px;
     margin: 5px;
     list-style: none;

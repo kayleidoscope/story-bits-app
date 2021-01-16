@@ -4,7 +4,6 @@ import {Route} from 'react-router-dom';
 import Context from '../Context';
 import Home from '../home/Home';
 import Story from '../story/Story';
-import Nav from '../nav/Nav';
 import Character from '../character/Character';
 import Setting from '../setting/Setting';
 import NewStory from '../new-story/NewStory';
@@ -31,7 +30,6 @@ export default class AppWrapper extends Component{
    return(
    
      <div>
-       <Nav />
         <Route 
             path="/home"
             component={Home}
