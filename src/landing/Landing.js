@@ -60,7 +60,7 @@ export default class Landing extends Component {
 
         if (this.state.logIn) {
             return (
-                <section>
+                <section className="landing">
                 <h2>Welcome!</h2>
                 <p>Do your characters need to be more fully developed?</p>
                 <p>Are you having trouble remembering what settings you've established?</p>
@@ -74,7 +74,7 @@ export default class Landing extends Component {
             )
         } else if (this.state.signUp) {
                 return (
-                    <section>
+                    <section className="landing">
                         <h2>Welcome!</h2>
                         <p>Do your characters need to be more fully developed?</p>
                         <p>Are you having trouble remembering what settings you've established?</p>
@@ -93,16 +93,19 @@ export default class Landing extends Component {
                     <p>Do your characters need to be more fully developed?</p>
                     <p>Are you having trouble remembering what settings you've established?</p>
                     <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
-                    <button
-                        onClick={this.logInTrue}
-                    >
-                        Log in
-                    </button>
-                    <button
-                        onClick={this.signUpTrue}
-                    >
-                        Sign up
-                    </button>
+                    <div className="landing-container">
+                
+                        <button
+                            onClick={this.logInTrue}
+                        >
+                            Log in
+                        </button>
+                        <button
+                            onClick={this.signUpTrue}
+                        >
+                            Sign up
+                        </button>
+                    </div>
 
                     <DemoLogIn history={this.props.history} />
                 </section>

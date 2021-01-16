@@ -24,8 +24,26 @@ export default class Character extends Component {
         }
       }
 
+    componentWillReceiveProps(newProps) {
+        console.log('componentDidUpdate ran')
+        if (newProps.match.params.charId === this.props.match.params.charId) {
+            console.log(this.state)
+            return
+        }
+        this.fetchCharacter(newProps.match.params.charId)
+            
+    }
+
     componentDidMount() {
-        fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
+        this.fetchCharacter(this.state.currentChar)
+    }
+
+    fetchCharacter(charId) {
+        console.log('fetchCharacter ran')
+        this.setState({
+            currentChar: charId
+        })
+        fetch(`${config.API_ENDPOINT}api/characters/${charId}`, {
             method: 'GET'
           })
             .then(res => {
@@ -35,6 +53,7 @@ export default class Character extends Component {
               return res.json()
             })
             .then(responseJson => {
+                console.log('charData state set')
                 this.setState({
                     charData: responseJson
                 })
@@ -122,9 +141,7 @@ export default class Character extends Component {
                         })
                 }
             })
-            
     }
-
 
     roommateSwitch() {
         console.log("woohoo!")
@@ -151,11 +168,11 @@ export default class Character extends Component {
                 return null
             } else {
                 return (
-                    // <Link to={`/character/${rm.id}`} key={rm.id}>
+                    <Link to={`/character/${rm.id}`} key={rm.id}>
                         <li key={rm.id}>
                             {rm.name}
                         </li>
-                    // </Link>
+                    </Link>
                     
                 )
             }

@@ -1,3 +1,23 @@
+.landing {
+    margin: 0 25px;
+}
+
+.landing h2 {
+    text-align: center;
+    padding: 15px;
+}
+
+.landing p {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.landing-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .landing section {
     text-align: center;
     padding: 20px;
