@@ -81,6 +81,9 @@ export default class SignUp extends Component {
                     Log in instead
                 </button>
             </form>
+            <button className="submit-btn" onClick={this.props.handleBackToLanding}>
+                    Cancel
+                </button>
      
         </section>
         )

@@ -48,6 +48,13 @@ export default class Landing extends Component {
         )
     }
 
+    backToLanding = e => {
+        this.setState({
+            logIn: false,
+            signUp: false
+        })
+    }
+
     render() {
         if(localStorage.getItem('currentUser')) return <Redirect to='/home' />
 
@@ -60,6 +67,7 @@ export default class Landing extends Component {
                 <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                 <LogIn
                     handleLogInToSignUp={this.logInToSignUp}
+                    handleBackToLanding={this.backToLanding}
                     history={this.props.history}
                 />
             </section>
@@ -73,6 +81,7 @@ export default class Landing extends Component {
                         <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
                         <SignUp 
                             handleSignUpToLogIn={this.signUpToLogIn}
+                            handleBackToLanding={this.backToLanding}
                             history={this.props.history}
                         />
                     </section>

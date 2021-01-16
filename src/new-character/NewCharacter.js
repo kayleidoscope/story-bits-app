@@ -11,6 +11,7 @@ export default class NewCharacter extends Component {
         name: "",
         description: "",
         gender: "",
+        age: "",
         appearance: "",
         fashion: "",
         home: 0,
@@ -37,9 +38,7 @@ export default class NewCharacter extends Component {
               return res.json()
             })
             .then(responseJson => {
-                        
                 const liveablePlaces = responseJson.filter(place => place.is_residence)
-                console.log(liveablePlaces)
 
                 this.setState({
                     settingsForThisStory: liveablePlaces
@@ -63,6 +62,12 @@ export default class NewCharacter extends Component {
     genderChange = (gender) => {
         this.setState({
             gender
+        })
+    }
+
+    ageChanged = (age) => {
+        this.setState({
+            age
         })
     }
 
@@ -103,6 +108,7 @@ export default class NewCharacter extends Component {
         const name = this.state.name
         const description = this.state.description
         const gender = this.state.gender
+        const age = this.state.age
         const appearance = this.state.appearance
         const fashion = this.state.fashion
         const housemates = this.state.housemates
@@ -112,6 +118,7 @@ export default class NewCharacter extends Component {
             name, 
             description, 
             gender, 
+            age,
             appearance, 
             fashion, 
             housemates,
@@ -199,22 +206,26 @@ export default class NewCharacter extends Component {
             <section>
                 <h2>New character</h2>
                 <p>Enter the info below.</p>
+                <p>Fields denoted with an asterisk (*) are required.</p>
                 <form className="new-character-form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="story">Story:</label>
+                    <label htmlFor="story">*Story:</label>
                     <select name="story" id="story" onChange={e => this.storyChange(e.target.value)}>
                         <option value="">Select a story</option>
                         {storyOptions}
                     </select>
                     <br/>
-                    <label htmlFor="title">Name:</label>
+                    <label htmlFor="title">*Name:</label>
                     <input type="text" id="name" name="name" required  onChange={e => this.nameChange(e.target.value)}/>
                     <br/>
-                    <label htmlFor="description">Short description:</label>
+                    <label htmlFor="description">*Short description:</label>
                     <textarea id="description" name="description" required  onChange={e => this.descriptionChange(e.target.value)}/>
                     <br/>
                     <label htmlFor="gender">Gender:</label>
                     <input type="text" id="gender" name="gender"  onChange={e => this.genderChange(e.target.value)}/>
                     <br/>
+                    <label htmlFor="age">Age: </label>
+                    <input type="text" value={this.state.age} id="age" onChange={e => this.ageChanged(e.target.value)}/>
+                    <br />
                     <label htmlFor="appearance">Physical appearance:</label>
                     <textarea id="appearance" name="appearance"  onChange={e => this.appearanceChange(e.target.value)}/>
                     <br/>
@@ -226,6 +237,7 @@ export default class NewCharacter extends Component {
                         <option value="0">Not important</option>
                         {settingsOptions}
                     </select>
+                    <p>If you have created settings that people can live in, they will appear in the drop-down menu above.</p>
                     <br/>
                     <label htmlFor="housemates">Housemates:</label>
                     <textarea id="housemates" name="housemates"  onChange={e => this.housematesChange(e.target.value)}/>

@@ -13,7 +13,7 @@ export default class Nav extends Component {
         return (
             <nav className="nav">
                 <ul>
-                    <Link to={`/user/${this.context.currentUser}`} className="nav-li">
+                    <Link to={`/user`} className="nav-li">
                         <li>Account</li>
                     </Link>
                     <Link to="/home/"  className="nav-li">

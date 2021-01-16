@@ -92,7 +92,7 @@ export default class Setting extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
-        if(!this.state.storysUser) {
+        if(!this.state.storysUser || !this.state.roommateData) {
             return null
         } else if (currentUser !== storysUser) {
             return (
@@ -103,16 +103,21 @@ export default class Setting extends Component {
         const setId = this.props.match.params.settingId
         const settingData = this.state.settingData
         const isResidence = settingData.is_residence
-        const occupantsLIs = this.state.roommateData.map(person => {
-            return (
-                <Link to={`/character/${person.id}`} key={person.id}>
-                <li className="setting-occupant">
-                    {person.name}
-                </li>
-                </Link>
-
-            )
-        })
+        let occupantsLIs
+        if (this.state.roommateData.length === 0) {
+            occupantsLIs = <li>No occupants listed. To add occupants, edit a character's Home to {settingData.name}.</li>
+        } else {
+            occupantsLIs = this.state.roommateData.map(person => {
+                return (
+                    <Link to={`/character/${person.id}`} key={person.id}>
+                    <li className="setting-occupant">
+                        {person.name}
+                    </li>
+                    </Link>
+    
+                )
+            })
+        }
 
         const isRes = settingData.is_residence
         let isResYesNo
@@ -149,7 +154,7 @@ export default class Setting extends Component {
                         </li>)
                     }
                     <li className="setting-trait">
-                        <p className="setting-trait-title">Decor:</p>
+                        <p className="setting-trait-title">What it looks like:</p>
                         <p>{settingData.decor}</p>
                     </li>
                 </ul>

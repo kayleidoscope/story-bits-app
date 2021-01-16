@@ -131,7 +131,6 @@ export default class Character extends Component {
     }
 
     render() {
-
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
@@ -185,6 +184,9 @@ export default class Character extends Component {
 
                 <h4>Gender:</h4>
                 <p>{charData.gender}</p>
+
+                <h4>Age:</h4>
+                <p>{charData.age}</p>
 
                 <h4>Physical appearance:</h4>
                 <p>{charData.appearance}</p>

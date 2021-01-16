@@ -86,9 +86,13 @@ export default class User extends Component {
     }
 
     render() {
+        
         const user = JSON.parse(localStorage.getItem('currentUser')) || this.context.currentUser
         const date = new Date((user.acct_created)).toLocaleDateString('en-US')
-
+        
+        if (!this.state.numOfStories || !this.state.numOfSettings) {
+            return null
+        }
         return (
             <div>
                 <h2>{user.username}'s account</h2>
@@ -96,7 +100,7 @@ export default class User extends Component {
                 <p>Stories created: {this.state.numOfStories}</p>
                 <p>Characters created: {this.state.numOfCharacters}</p>
                 <p>Settings created: {this.state.numOfSettings}</p>
-                <button className="submit-btn">Delete Account</button>
+                {/* <button className="submit-btn">Delete Account</button> */}
                 <button type='button' onClick={() => this.props.history.goBack()} className="submit-btn">
                     Go Back
                 </button>

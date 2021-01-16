@@ -4,7 +4,6 @@ import {withRouter} from 'react-router'
 import Header from './header/Header';
 import Landing from './landing/Landing';
 import Footer from './footer/Footer';
-import Nav from './nav/Nav';
 import Context from './Context'
 import './App.css'
 import config from './config'
@@ -101,7 +100,6 @@ class App extends Component {
       <main className='App'>
         <Header />
         <Context.Provider value={contextValue}>
-        <Nav />
           <Route 
             exact path="/"
             component={Landing}

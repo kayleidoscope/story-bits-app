@@ -26,6 +26,7 @@ export default class EditCharacter extends Component {
             name: "",
             description: "",
             gender: "",
+            age: "",
             appearance: "",
             fashion: "",
             room_decor: "",
@@ -67,6 +68,7 @@ export default class EditCharacter extends Component {
                     description: responseJson.description,
                     storyId: responseJson.story_id,
                     gender: responseJson.gender,
+                    age: responseJson.age,
                     appearance: responseJson.appearance,
                     fashion: responseJson.fashion,
                     room_decor: responseJson.room_decor,
@@ -100,7 +102,6 @@ export default class EditCharacter extends Component {
                         return res.json()
                     })
                     .then(responseJson => {
-                        
                         const liveablePlaces = responseJson.filter(place => place.is_residence)
 
                         this.setState({
@@ -230,6 +231,12 @@ export default class EditCharacter extends Component {
         })
     }
 
+    ageChanged = (age) => {
+        this.setState({
+            age
+        })
+    }
+
     appearanceChanged = (appearance) => {
         this.setState({
             appearance
@@ -293,6 +300,7 @@ export default class EditCharacter extends Component {
         const name = this.state.name
         const description = this.state.description
         const gender = this.state.gender
+        const age = this.state.age
         const appearance = this.state.appearance
         const fashion = this.state.fashion
         const room_decor = this.state.room_decor
@@ -302,6 +310,7 @@ export default class EditCharacter extends Component {
             name, 
             description, 
             gender, 
+            age,
             appearance, 
             fashion, 
             room_decor
@@ -325,7 +334,6 @@ export default class EditCharacter extends Component {
             .then(responseJson => {
                 const editedResidence = {setting_id}
 
-                console.log(editedResidence)
 
                 fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
                     method: 'GET'
@@ -422,7 +430,7 @@ export default class EditCharacter extends Component {
 
         return (
             <article className="edit-character">
-                <h3>{charData.name}</h3>
+                <h3>Editing {charData.name}</h3>
                 <form onSubmit={this.handleSubmit}>
 
                     <label htmlFor="name">Name: </label>
@@ -446,6 +454,9 @@ export default class EditCharacter extends Component {
                     <label htmlFor="gender">Gender: </label>
                     <input type="text" value={this.state.gender} id="gender" onChange={e => this.genderChanged(e.target.value)}/>
                     <br />
+                    <label htmlFor="age">Age: </label>
+                    <input type="text" value={this.state.age} id="age" onChange={e => this.ageChanged(e.target.value)}/>
+                    <br />
                     <label htmlFor="appearance">Physical appearance:</label>
                     <textarea value={this.state.appearance} id="appearance" onChange={e => this.appearanceChanged(e.target.value)}/>
                     <br />
@@ -453,10 +464,12 @@ export default class EditCharacter extends Component {
                     <textarea value={this.state.fashion} id="fashion" onChange={e => this.fashionChanged(e.target.value)}/>
                     <br />
                     <label htmlFor="home">Home: </label>
-                        <select name="home" id="home" onChange={e => this.homeIdChanged(e.target.value)}>
+                        <select name="home" id="home" value={this.state.homeId} onChange={e => this.homeIdChanged(e.target.value)}>
                             <option value="0">Not important</option>
                             {settingsOptions}
                         </select>
+                        <p>If you have created settings that people can live in, they will appear in the drop-down menu above.</p>
+
                     <br />
                         <label htmlFor="housemates">Housemates: </label>
                         <p>To change {charData.name}'s housemates, edit their Home selection on their own Edit Character page.</p>

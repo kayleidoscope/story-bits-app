@@ -58,7 +58,7 @@ export default class NewSetting extends Component {
 
     handleResChange = changeEvent => {
         this.setState({
-            isResidence: changeEvent.target.value
+            isResidence: changeEvent.target.value === "true" ? true : false
         })
     }
 
@@ -68,7 +68,8 @@ export default class NewSetting extends Component {
         const name = this.state.name
         const description = this.state.description
         const decor = this.state.decor
-        const newSetting = {story_id, name, description, decor}
+        const is_residence = this.state.isResidence
+        const newSetting = {story_id, name, description, decor, is_residence}
 
         fetch(`${config.API_ENDPOINT}api/settings`, {
             method: 'POST',
@@ -105,22 +106,23 @@ export default class NewSetting extends Component {
         //         </li>
         //     )
         // })
-
         return (
             <section>
                 <h2>New setting</h2>
                 <p>Enter the info below.</p>
+                <p>Fields denoted with an asterisk (*) are required.</p>
+
                 <form className="new-setting-form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="story">Story:</label>
-                    <select name="story" id="story"  onChange={e => this.storyChange(e.target.value)}>
+                    <label htmlFor="story">*Story:</label>
+                    <select name="story" id="story" required onChange={e => this.storyChange(e.target.value)}>
                         <option value="">Select a story</option>
                         {storyOptions}
                     </select>
                     <br/>
-                    <label htmlFor="name">Name:</label>
+                    <label htmlFor="name">*Name:</label>
                     <input type="text" id="name" name="name" required   onChange={e => this.nameChange(e.target.value)}/>
                     <br/>
-                    <label htmlFor="description">Short description:</label>
+                    <label htmlFor="description">*Short description:</label>
                     <textarea id="description" name="description" required   onChange={e => this.descriptionChange(e.target.value)}/>
                     <br/>
                     {/* <label htmlFor="occupants">Occupants:</label>
@@ -148,7 +150,7 @@ export default class NewSetting extends Component {
                         />
                         <label htmlFor="false">No</label>
                     </fieldset>
-                    <label htmlFor="decor">Decor:</label>
+                    <label htmlFor="decor">What it looks like:</label>
                     <textarea id="decor" name="decor"   onChange={e => this.decorChange(e.target.value)}/>
                     <br/>
                     <input type="submit" value="Submit" className="submit-btn"/>

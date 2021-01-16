@@ -150,7 +150,6 @@ export default class EditSetting extends Component {
 
         const editedSetting = {name, description, story_id, is_residence, decor}
 
-        console.log(is_residence)
 
         fetch(`${config.API_ENDPOINT}api/settings/${this.props.match.params.settingId}`, {
             method: 'PATCH',
@@ -202,7 +201,7 @@ export default class EditSetting extends Component {
                         {storyOptions}
                     </select>
                     <br />
-                    <label htmlFor="decor">Setting decor:</label>
+                    <label htmlFor="decor">What it looks like:</label>
                     <br />
                     <textarea id="decor" value={this.state.decor} onChange={e => this.decorChange(e.target.value)}/>
                     <br />
@@ -230,7 +229,7 @@ export default class EditSetting extends Component {
                     </fieldset>
                     <input type='submit' className="submit-btn" />
 {!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
-                        Delete Character
+                        Delete Setting
                     </button>}
                     <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
                         Go Back
