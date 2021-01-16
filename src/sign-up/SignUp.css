@@ -1,18 +1,22 @@
 .sign-up-form {
-    padding: 10px;
-}
+text-align: center;}
 
-.submit-btn {
-    background-color: lightgray;
+.sign-up-section .submit-btn {
+    background-color: #561643;
+    border: 0;
+    font-weight: bolder;
+    color: #BAD4AA;
     margin: 10px;
+    border-radius: 200px;
+    padding: 7px;
 }
 
-input {
+.sign-up-section input {
     margin: 1px;
 }
 
 .sign-up-section {
-    border: 1px solid;
+    border: 1px solid  #EBF5DF;
     width: 75%;
-    margin: auto;
+    margin: 15px auto;
 }

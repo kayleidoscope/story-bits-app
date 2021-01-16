@@ -1,10 +1,15 @@
 .log-in-form {
-    padding: 10px;
+    text-align: center;
 }
 
-.submit-btn {
-    background-color: lightgray;
+.log-in-section .submit-btn {
+    background-color: #561643;
+    border: 0;
+    font-weight: bolder;
+    color: #BAD4AA;
     margin: 10px;
+    border-radius: 200px;
+    padding: 7px;
 }
 
 .log-in-section input {
@@ -12,7 +17,7 @@
 }
 
 .log-in-section {
-    border: 1px solid;
+    border: 1px solid  #EBF5DF;
     width: 75%;
-    margin: auto;
+    margin: 15px auto;
 }

@@ -72,18 +72,11 @@ export default class SignUp extends Component {
                  <br/>
                  {/* <label htmlFor="admin">Administrator</label>
                  <input type="checkbox" id="admin" name="admin" /> */}
-                 <br/>
                 <input type="submit" value="Submit" className="submit-btn"/>
-                 <button
-                    onClick={this.props.handleSignUpToLogIn}
-                    className="submit-btn"
-                 >
-                    Log in instead
-                </button>
-            </form>
-            <button className="submit-btn" onClick={this.props.handleBackToLanding}>
+                <button className="submit-btn" onClick={this.props.handleBackToLanding}>
                     Cancel
                 </button>
+            </form>
      
         </section>
         )

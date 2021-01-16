@@ -62,7 +62,7 @@ export default class LogIn extends Component {
         return (
             <section className="log-in-section">
             <h2>Log in</h2>
-            <p>Log in with your credentials below.</p>
+            <p>Enter your credentials below.</p>
             <form className="log-in-form" onSubmit={this.handleSubmit}>
                  <label htmlFor="username">Username:</label>
                  <input type="text" id="username" name="username" onChange={e => this.usernameChange(e.target.value)}/>
@@ -71,16 +71,16 @@ export default class LogIn extends Component {
                  {this.state.error && (
                      <ValidationError message={"No user found"}/>
                  )}
-                 <button
+                 {/* <button
                     onClick={this.props.handleLogInToSignUp}
                     className="submit-btn"
                  >
                     Sign up instead
-                </button>
-            </form>
+                </button> */}
                 <button className="submit-btn" onClick={this.props.handleBackToLanding}>
                     Cancel
                 </button>
+            </form>
      
         </section>
         )
