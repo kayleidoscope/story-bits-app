@@ -1,3 +1,18 @@
-#description {
+.edit-story .input {
     width: 100%
+}
+
+.edit-story {
+    text-align: center;
+    margin: auto 25px;
+}
+
+.edit-story .grid {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    row-gap: 10px;
+}
+
+.edit-story h2 {
+    margin: 15px;
 }

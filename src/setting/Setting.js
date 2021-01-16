@@ -128,37 +128,31 @@ export default class Setting extends Component {
         }
 
         return (
-            <>
+            <div className="setting">
                 <h2>{settingData.name}</h2>
-                <button onClick={() => this.props.history.push(`/edit/setting/${setId}`)}>
-                    Edit Setting
-                </button>
                 <p className="setting-desc">{settingData.description}</p>
-                <ul className="setting-traits">
-                    <li className="setting-trait">
-                        <p className="setting-trait-title">Story:</p>
-                        <Link to={`/story/${this.state.storyId}`}>
-                            <p>{this.state.storyName}</p>
-                        </Link>
-                    </li>
-                    <li>
-                        <p className="setting-trait-title">Can people live here?</p>
-                        <p>{isResYesNo}</p>
-                    </li>
+                <div className="setting-traits">
+                    <p className="setting-trait-title">Story:</p>
+                    <Link to={`/story/${this.state.storyId}`}>
+                        <p>{this.state.storyName}</p>
+                    </Link>
+                    <p className="setting-trait-title">Can people live here?</p>
+                    <p>{isResYesNo}</p>
                     {isResidence &&
-                        (<li className="setting-trait">
+                        (<div className="conditional">
                             <p className="setting-trait-title">Occupants:</p>
-                            <ul>
+                            <ul className="conditional-value">
                                 {occupantsLIs}
                             </ul>
-                        </li>)
+                        </div>)
                     }
-                    <li className="setting-trait">
-                        <p className="setting-trait-title">What it looks like:</p>
-                        <p>{settingData.decor}</p>
-                    </li>
-                </ul>
-            </>
+                    <p className="setting-trait-title">What it looks like:</p>
+                    <p>{settingData.decor}</p>
+                </div>
+                <button className="setting-btn" onClick={() => this.props.history.push(`/edit/setting/${setId}`)}>
+                    Edit Setting
+                </button>
+            </div>
         )
     }
 }

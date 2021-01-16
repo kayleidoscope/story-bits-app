@@ -94,7 +94,7 @@ export default class User extends Component {
             return null
         }
         return (
-            <div>
+            <div className="user">
                 <h2>{user.username}'s account</h2>
                 <p>Account created: {date}</p>
                 <p>Stories created: {this.state.numOfStories}</p>

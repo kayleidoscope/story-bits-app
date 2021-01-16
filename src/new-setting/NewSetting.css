@@ -1,3 +1,27 @@
+.new-setting {
+    text-align: center;
+    margin: auto 25px;
+}
+
+.new-setting h2 {
+    margin: 15px;
+}
+
+.new-setting .grid {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    row-gap: 10px;
+}
+
+.new-setting fieldset {
+    grid-column: span 2;
+}
+
+.new-setting fieldset .container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .new-setting-form {
     padding: 10px;
 }

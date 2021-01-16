@@ -186,47 +186,49 @@ export default class EditSetting extends Component {
         })
 
         return (
-            <>
+            <div className="edit-setting">
                 <h2>{settingData.name}</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="name">Setting name:</label>
-                    <input id="name" type="text" value={this.state.name}  onChange={e => this.nameChange(e.target.value)}/>
-                    <br />
-                    <label htmlFor="description">Setting description:</label>
-                    <input id="description" type="text" value={this.state.description}  onChange={e => this.descriptionChange(e.target.value)}/>
-                    <br />
-                    <label htmlFor="story">Story:</label>
-                    <select name="story" id="story"  onChange={e => this.storyIdChange(e.target.value)}>
-                        <option value="">Select a story</option>
-                        {storyOptions}
-                    </select>
-                    <br />
-                    <label htmlFor="decor">What it looks like:</label>
-                    <br />
-                    <textarea id="decor" value={this.state.decor} onChange={e => this.decorChange(e.target.value)}/>
-                    <br />
-                    <fieldset>
-                        <legend htmlFor="isResidence">Can people live here?</legend>
-                        <input 
-                            type="radio" 
-                            id="true" 
-                            name="isResidence" 
-                            value={true}
-                            checked={this.state.isResidence === null ? false : this.state.isResidence}
-                            onChange={this.handleResChange}
-                        />
-                        <label htmlFor="true">Yes</label>
-                        <br />
-                        <input 
-                            type="radio" 
-                            id="false" 
-                            name="isResidence" 
-                            value={false} 
-                            checked={this.state.isResidence === null ? false : !this.state.isResidence}
-                            onChange={this.handleResChange}
-                        />
-                        <label htmlFor="false">No</label>
-                    </fieldset>
+                    <div className="grid">
+                        <label htmlFor="name">Setting name:</label>
+                        <input id="name" type="text" value={this.state.name}  onChange={e => this.nameChange(e.target.value)}/>
+                        <label htmlFor="description">Setting description:</label>
+                        <textarea id="description" value={this.state.description}  onChange={e => this.descriptionChange(e.target.value)}/>
+                        <label htmlFor="story">Story:</label>
+                        <select name="story" id="story"  onChange={e => this.storyIdChange(e.target.value)}>
+                            <option value="">Select a story</option>
+                            {storyOptions}
+                        </select>
+                        <label htmlFor="decor">What it looks like:</label>
+                        <textarea id="decor" value={this.state.decor} onChange={e => this.decorChange(e.target.value)}/>
+                        <fieldset>
+                            <legend htmlFor="isResidence">Can people live here?</legend>
+                            <div className="container">
+                                <div>
+                                    <input 
+                                        type="radio" 
+                                        id="true" 
+                                        name="isResidence" 
+                                        value={true}
+                                        checked={this.state.isResidence === null ? false : this.state.isResidence}
+                                        onChange={this.handleResChange}
+                                    />
+                                    <label htmlFor="true">Yes</label>
+                                </div>
+                                <div>
+                                    <input 
+                                        type="radio" 
+                                        id="false" 
+                                        name="isResidence" 
+                                        value={false} 
+                                        checked={this.state.isResidence === null ? false : !this.state.isResidence}
+                                        onChange={this.handleResChange}
+                                    />
+                                    <label htmlFor="false">No</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
                     <input type='submit' className="submit-btn" />
 {!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
                         Delete Setting
@@ -246,7 +248,7 @@ export default class EditSetting extends Component {
                         </div>
                     )}
                 </form>
-            </>
+            </div>
         )
     }
 }

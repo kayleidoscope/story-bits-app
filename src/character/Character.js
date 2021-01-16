@@ -178,59 +178,59 @@ export default class Character extends Component {
             }
         })
 
-        
 
         return (
             <article className="character-deets">
-                <h3>{charData.name}</h3>
+                <h2>{charData.name}</h2>
+                <p className="description">{charData.description}</p>
+                <div className="grid">                    
+                    <p className="key">Story:</p>
+                    <Link to={`/story/${this.state.storyId}`}>
+                        <p>{this.state.storyName}</p>
+                    </Link>
 
-                <button type='button' onClick={() => this.props.history.push(`/edit/character/${this.state.currentChar}`)} className="submit-btn">
-                    Edit Character
-                </button>
+                    <p className="key">Gender:</p>
+                    <p>{charData.gender}</p>
 
-                <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                    Go Back
-                </button>
+                    <p className="key">Age:</p>
+                    <p>{charData.age}</p>
 
-                <p>{charData.description}</p>
+                    <p className="key">Physical appearance:</p>
+                    <p>{charData.appearance}</p>
 
-                <h4>Story:</h4>
-                <Link to={`/story/${this.state.storyId}`}>
-                    <p>{this.state.storyName}</p>
-                </Link>
+                    <p className="key">Fashion style:</p>
+                    <p>{charData.fashion}</p>
 
-                <h4>Gender:</h4>
-                <p>{charData.gender}</p>
+                    {this.state.hasHomeData &&
+                        (<div className="conditional">
+                            <p className="key">Home:</p>
+                            <Link to={`/setting/${this.state.homeId}`}>
+                                <p>{this.state.homeName}</p>
+                            </Link>
+                        </div>)
+                    }
+                    
+                    {this.state.hasRmData && 
+                        <div className="conditional">
+                            <p div  className="key">Housemates:</p>
+                            <ul className="housemates-value">
+                                {housematesLIs}
+                            </ul>
+                        </div>
+                    }
 
-                <h4>Age:</h4>
-                <p>{charData.age}</p>
+                    <p className="key">Room decor:</p>
+                    <p>{charData.room_decor}</p>
+                </div>
+                <div className="buttons">
+                    <button type='button' onClick={() => this.props.history.push(`/edit/character/${this.state.currentChar}`)} className="submit-btn">
+                        Edit Character
+                    </button>
 
-                <h4>Physical appearance:</h4>
-                <p>{charData.appearance}</p>
-
-                <h4>Fashion style</h4>
-                <p>{charData.fashion}</p>
-
-                {this.state.hasHomeData &&
-                    (<div>
-                        <h4>Home</h4>
-                        <Link to={`/setting/${this.state.homeId}`}>
-                            <p>{this.state.homeName}</p>
-                        </Link>
-                    </div>)
-                }
-                
-                {this.state.hasRmData && 
-                    <div>
-                        <h4>Housemates</h4>
-                        <ul>
-                            {housematesLIs}
-                        </ul>
-                    </div>
-                }
-
-                <h4>Room decor</h4>
-                <p>{charData.room_decor}</p>
+                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                        Go Back
+                    </button>
+                </div>
             </article>
         )
     }

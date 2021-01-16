@@ -107,52 +107,54 @@ export default class NewSetting extends Component {
         //     )
         // })
         return (
-            <section>
+            <section className="new-setting">
                 <h2>New setting</h2>
-                <p>Enter the info below.</p>
-                <p>Fields denoted with an asterisk (*) are required.</p>
+                <p>Enter the info below. Fields denoted with an asterisk (*) are required.</p>
 
                 <form className="new-setting-form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="story">*Story:</label>
-                    <select name="story" id="story" required onChange={e => this.storyChange(e.target.value)}>
-                        <option value="">Select a story</option>
-                        {storyOptions}
-                    </select>
-                    <br/>
-                    <label htmlFor="name">*Name:</label>
-                    <input type="text" id="name" name="name" required   onChange={e => this.nameChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="description">*Short description:</label>
-                    <textarea id="description" name="description" required   onChange={e => this.descriptionChange(e.target.value)}/>
-                    <br/>
-                    {/* <label htmlFor="occupants">Occupants:</label>
-                    <ul>
-                        {charChecks}
-                    </ul> */}
-                    <br />
-                    <fieldset>
-                        <legend htmlFor="isResidence">Can people live here?</legend>
-                        <input 
-                            type="radio" 
-                            id="true" 
-                            name="isResidence" 
-                            value={true}
-                            onChange={this.handleResChange}
-                        />
-                        <label htmlFor="true">Yes</label>
-                        <br />
-                        <input 
-                            type="radio" 
-                            id="false" 
-                            name="isResidence" 
-                            value={false} 
-                            onChange={this.handleResChange}
-                        />
-                        <label htmlFor="false">No</label>
-                    </fieldset>
-                    <label htmlFor="decor">What it looks like:</label>
-                    <textarea id="decor" name="decor"  onChange={e => this.decorChange(e.target.value)}/>
-                    <br/>
+                    <div className="grid">
+                        <label htmlFor="story">*Story:</label>
+                        <select name="story" id="story" required onChange={e => this.storyChange(e.target.value)}>
+                            <option value="">Select a story</option>
+                            {storyOptions}
+                        </select>
+                        <label htmlFor="name">*Name:</label>
+                        <input type="text" id="name" name="name" required   onChange={e => this.nameChange(e.target.value)}/>
+                        <label htmlFor="description">*Short description:</label>
+                        <textarea id="description" name="description" required   onChange={e => this.descriptionChange(e.target.value)}/>
+                        {/* <label htmlFor="occupants">Occupants:</label>
+                        <ul>
+                            {charChecks}
+                        </ul> */}
+                        <fieldset>
+                            <legend htmlFor="isResidence">Can people live here?</legend>
+                            <div className="container">
+                                <div>
+                                    <input 
+                                        type="radio" 
+                                        id="true" 
+                                        name="isResidence" 
+                                        value={true}
+                                        onChange={this.handleResChange}
+                                    />
+                                    <label htmlFor="true">Yes</label>
+                                </div>
+                                <div>
+                                    <input 
+                                        type="radio" 
+                                        id="false" 
+                                        name="isResidence" 
+                                        value={false} 
+                                        onChange={this.handleResChange}
+                                    />
+                                    <label htmlFor="false">No</label>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                        <label htmlFor="decor">What it looks like:</label>
+                        <textarea id="decor" name="decor"  onChange={e => this.decorChange(e.target.value)}/>
+                    </div>
                     <input type="submit" value="Submit" className="submit-btn"/>
                     <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
                         Cancel

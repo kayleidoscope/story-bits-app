@@ -1,4 +1,28 @@
+.edit-setting {
+    text-align: center;
+    margin: auto 25px;
+}
+
+.edit-setting h2 {
+    margin: 15px;
+}
+
+.edit-setting fieldset {
+    grid-column: span 2;
+}
+
+.edit-setting fieldset .container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #decor {
     width: 100%;
     height: 100px;
+}
+
+.edit-setting .grid {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    row-gap: 10px;
 }

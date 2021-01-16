@@ -5,6 +5,8 @@
 
 .new-story .grid {
     display: grid;
+    grid-template-columns: 40% 50%;
+    row-gap: 10px;
 }
 
 .new-story-form {

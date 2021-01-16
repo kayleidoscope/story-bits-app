@@ -1,3 +1,28 @@
+.edit-character {
+    margin: auto 25px;
+    text-align: center;
+}
+
+.edit-character h2 {
+    margin: 15px;
+}
+
+.edit-character .grid {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    row-gap: 10px;
+}
+
+.edit-character .input {
+    width: 100%;
+}
+
+.housemates-aside {
+    font-style: italic;
+    font-size: small;
+    grid-column: span 2;
+}
+
 .edit-character textarea {
     margin: auto;
     width: 80%;

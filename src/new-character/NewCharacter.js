@@ -203,48 +203,39 @@ export default class NewCharacter extends Component {
         })
 
         return (
-            <section>
+            <section className="new-character">
                 <h2>New character</h2>
-                <p>Enter the info below.</p>
-                <p>Fields denoted with an asterisk (*) are required.</p>
+                <p>Enter the info below. Fields denoted with an asterisk (*) are required.</p>
                 <form className="new-character-form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="story">*Story:</label>
-                    <select name="story" id="story" onChange={e => this.storyChange(e.target.value)}>
-                        <option value="">Select a story</option>
-                        {storyOptions}
-                    </select>
-                    <br/>
-                    <label htmlFor="title">*Name:</label>
-                    <input type="text" id="name" name="name" required  onChange={e => this.nameChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="description">*Short description:</label>
-                    <textarea id="description" name="description" required  onChange={e => this.descriptionChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="gender">Gender:</label>
-                    <input type="text" id="gender" name="gender"  onChange={e => this.genderChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="age">Age: </label>
-                    <input type="text" value={this.state.age} id="age" onChange={e => this.ageChanged(e.target.value)}/>
-                    <br />
-                    <label htmlFor="appearance">Physical appearance:</label>
-                    <textarea id="appearance" name="appearance"  onChange={e => this.appearanceChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="style">Fashion style:</label>
-                    <textarea id="style" name="style"  onChange={e => this.fashionChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="home">Home:</label>
-                    <select name="home" id="home" onChange={e => this.homeChange(e.target.value)}>
-                        <option value="0">Not important</option>
-                        {settingsOptions}
-                    </select>
-                    <p>If you have created settings that people can live in, they will appear in the drop-down menu above.</p>
-                    <br/>
-                    <label htmlFor="housemates">Housemates:</label>
-                    <textarea id="housemates" name="housemates"  onChange={e => this.housematesChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="decor">Decor:</label>
-                    <textarea id="decor" name="decor"  onChange={e => this.decorChange(e.target.value)}/>
-                    <br/>
+                    <div className="grid">
+                        <label htmlFor="story">*Story:</label>
+                        <select name="story" id="story" onChange={e => this.storyChange(e.target.value)}>
+                            <option value="">Select a story</option>
+                            {storyOptions}
+                        </select>
+                        <label htmlFor="title">*Name:</label>
+                        <input type="text" id="name" name="name" required className="input" onChange={e => this.nameChange(e.target.value)}/>
+                        <label htmlFor="description">*Short description:</label>
+                        <textarea id="description" name="description" required  className="input" onChange={e => this.descriptionChange(e.target.value)}/>
+                        <label htmlFor="gender">Gender:</label>
+                        <input type="text" id="gender" name="gender"  className="input" onChange={e => this.genderChange(e.target.value)}/>
+                        <label htmlFor="age">Age: </label>
+                        <input type="text" value={this.state.age} id="age"  className="input" onChange={e => this.ageChanged(e.target.value)}/>
+                        <label htmlFor="appearance">Physical appearance:</label>
+                        <textarea id="appearance" name="appearance"  className="input" onChange={e => this.appearanceChange(e.target.value)}/>
+                        <label htmlFor="style">Fashion style:</label>
+                        <textarea id="style" name="style"  className="input" onChange={e => this.fashionChange(e.target.value)}/>
+                        <label htmlFor="home">Home:</label>
+                        <select name="home" id="home" onChange={e => this.homeChange(e.target.value)}>
+                            <option value="0">Not important</option>
+                            {settingsOptions}
+                        </select>
+                        <p className="housemates-aside">If you have created settings that people can live in, they will appear in the drop-down menu above.</p>
+                        <label htmlFor="housemates">Housemates:</label>
+                        <textarea id="housemates" name="housemates"  className="input" onChange={e => this.housematesChange(e.target.value)}/>
+                        <label htmlFor="decor">Decor:</label>
+                        <textarea id="decor" name="decor"  className="input" onChange={e => this.decorChange(e.target.value)}/>
+                    </div>
                     <input type="submit" value="Submit" className="submit-btn"/>
                     <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
                         Cancel

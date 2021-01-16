@@ -95,15 +95,19 @@ export default class EditStory extends Component {
         }
 
         return (
-            <div>
+            <div className="edit-story">
                 <h2>Edit {this.state.storyData.title}</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="title">Story title: </label>
-                    <input id="title" type="text" value={this.state.title} onChange={e => this.titleChange(e.target.value)}/>
-                    <br />
-                    <label htmlFor="description">Story description: </label>
-                    <br />
-                    <textarea id="description" value={this.state.description} onChange={e => this.descriptionChange(e.target.value)}/>
+                    <div className="grid">
+                        <label htmlFor="title">Story title: </label>
+                        <div className="input">
+                            <input id="title" type="text" value={this.state.title} onChange={e => this.titleChange(e.target.value)}/>
+                        </div>
+                        <label htmlFor="description">Synopsis: </label>
+                        <div className="input">
+                            <textarea id="description" value={this.state.description} onChange={e => this.descriptionChange(e.target.value)}/>
+                        </div>
+                    </div>
                     <input type='submit' className="submit-btn" />
                     <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
                         Go Back

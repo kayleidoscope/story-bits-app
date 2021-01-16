@@ -1,0 +1,14 @@
+.user {
+    margin: auto 25px;
+}
+
+.user button {
+
+    margin: 15px auto;
+    display: block;
+}
+
+.user h2 {
+    text-align: center;
+    padding: 20px 0 15px;
+}

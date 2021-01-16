@@ -1,10 +1,47 @@
 .character-deets {
-    margin: 10px;
-    /* border: none; */
-    /* padding: 0; */
+    margin: auto 25px;
     width: auto;
 }
 
+.character-deets h2 {
+    margin: 15px;
+    text-align: center;
+}
+
+.character-deets .description {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.character-deets .buttons {
+    text-align: center;
+}
+
+.character-deets .grid {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    row-gap: 10px;
+}
+
+.character-deets .conditional {
+    grid-column: span 2;
+    display: flex;
+    width: 100%;
+}
+
+.character-deets .conditional .key {
+    font-weight: bold;
+    text-align: right;
+    width: 40%;
+}
+
+.character-deets .grid .key {
+    text-align: right;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
 .character-deets ul {
-    margin-left: 20px;
+    padding-left: 20px;
+    list-style: circle;
 }

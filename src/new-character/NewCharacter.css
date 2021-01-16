@@ -1,8 +1,28 @@
+.new-character {
+    margin: auto 25px;
+    text-align: center;
+}
+
+.new-character h2 {
+    margin: 15px;
+}
+
+.new-character .grid {
+    display: grid;
+    grid-template-columns: 40% 50%;
+    row-gap: 10px;
+}
+
+.new-character .input {
+    width: 100%;
+}
+
+.housemates-aside {
+    font-style: italic;
+    font-size: small;
+    grid-column: span 2;
+}
+
 .new-character-form {
     padding: 10px;
 }
-
-/* .submit-btn {
-    background-color:  #EBF5DF;
-    margin: 10px;
-} */

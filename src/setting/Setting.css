@@ -1,21 +1,50 @@
+.setting {
+    margin: auto 25px;
+    width: auto;
+}
+
+.setting h2 {
+    margin: 15px;
+    text-align: center;
+}
+
+.setting-btn {
+    text-align: center;
+    display: block;
+    margin: 15px auto;
+}
+
 .setting-desc {
     text-align: center;
-    font-size: large;
+    margin-bottom: 15px;
+
 }
 
 .setting-traits {
-    margin-left: 15px;
-    list-style: none;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    row-gap: 10px;
 }
 
-.setting-trait {
-    margin: 10px auto;
+.setting-traits .conditional {
+    grid-column: span 2;
+    display: flex;
+    width: 100%;
+}
+
+.setting-traits .conditional .setting-trait-title {
+    width: 40%;
+    padding-right: 10px;
+
+}
+
+.setting-traits .conditional-value {
+    padding-left: 20px;
+    list-style: circle;
 }
 
 .setting-trait-title {
     font-weight: bold;
-}
-
-.setting-occupant {
-    margin-left: 25px;
+    text-align: right;
+    margin-right: 10px;
 }
