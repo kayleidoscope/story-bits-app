@@ -82,8 +82,8 @@ export default class Story extends Component {
             return (
                 <Link to={`/character/${char.id}`} key={char.id}>
                     <li className="summary">
-                        <p>{char.name}</p>
-                        <p>{char.description}</p>
+                        <p className="title">{char.name}</p>
+                        <p className="description">{char.description}</p>
                     </li>
                 </Link>
             )
@@ -94,8 +94,8 @@ export default class Story extends Component {
             return (
                 <Link to={`/setting/${setting.id}`} key={setting.id}>
                     <li className="summary">
-                        <p>{setting.name}</p>
-                        <p>{setting.description}</p>
+                        <p className="title">{setting.name}</p>
+                        <p className="description">{setting.description}</p>
                     </li>
                 </Link>
             )
@@ -115,7 +115,7 @@ export default class Story extends Component {
                                 {charLIs}
                             </ul>
                         <Link to="/new/character/">
-                            <button>
+                            <button  className="new-something">
                                 New Character
                             </button>
                         </Link>
@@ -126,7 +126,7 @@ export default class Story extends Component {
                                 {settingLIs}
                             </ul>
                         <Link to="/new/setting/">
-                            <button>
+                            <button  className="new-something">
                                 New Setting
                             </button>
                         </Link>

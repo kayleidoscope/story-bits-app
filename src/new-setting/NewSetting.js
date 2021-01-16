@@ -151,7 +151,7 @@ export default class NewSetting extends Component {
                         <label htmlFor="false">No</label>
                     </fieldset>
                     <label htmlFor="decor">What it looks like:</label>
-                    <textarea id="decor" name="decor"   onChange={e => this.decorChange(e.target.value)}/>
+                    <textarea id="decor" name="decor"  onChange={e => this.decorChange(e.target.value)}/>
                     <br/>
                     <input type="submit" value="Submit" className="submit-btn"/>
                     <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">

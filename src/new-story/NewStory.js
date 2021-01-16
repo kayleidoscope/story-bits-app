@@ -66,12 +66,12 @@ export default class NewStory extends Component {
                 <h2>New story</h2>
                 <p>Enter the info below.</p>
                 <form className="new-story-form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="title">Title:</label>
-                    <input type="text" id="title" name="title" required onChange={e => this.titleChange(e.target.value)}/>
-                    <br/>
-                    <label htmlFor="description">Description:</label>
-                    <textarea id="description" name="description" required onChange={e => this.descriptionChange(e.target.value)}/>
-                    <br/>
+                    <div className="grid">
+                        <label htmlFor="title">Title:</label>
+                        <input type="text" id="title" name="title" required onChange={e => this.titleChange(e.target.value)}/>
+                        <label htmlFor="description">Description:</label>
+                        <textarea id="description" name="description" required onChange={e => this.descriptionChange(e.target.value)}/>
+                    </div>
                     <input type="submit" value="Submit" className="submit-btn"/>
                     <button type='button' onClick={this.handleClickCancel}  className="submit-btn">
                         Cancel

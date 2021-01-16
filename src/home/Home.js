@@ -77,14 +77,14 @@ export default class Home extends Component {
                 <Link to='/stories/'>
                     <h3>My stories</h3>
                 </Link>
+                <ul>
+                    {simpleStoryLIs}
+                </ul>
                 <Link to="/new/story">
                     <button>
                         New story
                     </button>
                 </Link>
-                <ul>
-                    {simpleStoryLIs}
-                </ul>
             </div>
         )
     }

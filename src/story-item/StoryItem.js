@@ -102,13 +102,13 @@ export default class StoryItem extends Component {
                     <h3>{storyName}</h3>
                 </Link>
             <p>{storyDescription}</p>
-            <section>
+            <section className="mini">
                 <h4>Characters</h4>
                     <ul>
                         {charLIs}
                     </ul>
             </section>
-            <section>
+            <section className="mini">
                 <h4>Settings</h4>
                     <ul>
                         {settingLIs}

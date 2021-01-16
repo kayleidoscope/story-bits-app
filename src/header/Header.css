@@ -1,7 +1,7 @@
 header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     border-top: 3px solid #561643;
     border-bottom: 3px solid #561643;
     background-color: #EBF5DF;

@@ -1,3 +1,7 @@
+.story {
+    margin: auto 25px;
+}
+
 .story h2 {
     text-align: center;
     padding: 20px 0 5px;
@@ -17,15 +21,37 @@
     display: block;
 }
 
+.new-something {
+    margin: 15px auto;
+    display: block;
+}
+
 .story-description {
     padding-top: 20px;
     text-align: center;
     font-size: 18px;
 }
 
+.story a {
+    text-decoration: none;
+}
+
 .summary {
-    border: solid 1px #EBF5DF;
-    padding: 10px;
-    margin: 5px;
     list-style: none;
+    width: 100%;
+    display: flex;
+    color: black;
+    word-wrap: break-word;
+}
+
+.summary .description {
+    padding: 10px;
+    border: solid 1px #EBF5DF;
+    width: 80%;
+}
+
+.summary .title {
+    border: solid 1px #EBF5DF;
+    width: 40%;
+    padding: 10px;
 }

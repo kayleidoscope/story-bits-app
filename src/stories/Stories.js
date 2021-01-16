@@ -8,12 +8,12 @@ export default class Home extends Component {
         return (
             <div className="stories">
                 <h2>My Stories</h2>
+                <StoryList />
                 <Link to="/new/story">
                     <button>
                         New story
                     </button>
                 </Link>
-                <StoryList />
             </div>
         )
     }

@@ -1,13 +1,22 @@
-.new-story section {
+.new-story {
     text-align: center;
     padding: 20px;
+}
+
+.new-story .grid {
+    display: grid;
 }
 
 .new-story-form {
     padding: 10px;
 }
 
-/* .submit-btn {
-    background-color:  #EBF5DF;
+.submit-btn {
+    background-color: #561643;
+    border: 0;
+    font-weight: bolder;
+    color: #BAD4AA;
     margin: 10px;
-} */
+    border-radius: 200px;
+    padding: 7px;
+}
