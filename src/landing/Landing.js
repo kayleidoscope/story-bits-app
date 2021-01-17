@@ -100,7 +100,7 @@ export default class Landing extends Component {
                         >
                             Log in
                         </button>
-                        <button
+                        <button className="landing-right-btn"
                             onClick={this.signUpTrue}
                         >
                             Sign up

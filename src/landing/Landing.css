@@ -19,11 +19,15 @@
 }
 
 .landing button {
+    font-size: 15px;
     background-color: #561643;
     border: 0;
     font-weight: bolder;
     color: #BAD4AA;
-    margin: 10px;
     border-radius: 200px;
     padding: 7px;
+}
+
+.landing-right-btn {
+    margin-left: 10px;
 }

@@ -23,7 +23,7 @@ export default class DemoLogIn extends Component {
             <section>
             <h2>Want to see a demo?</h2>
             <form onSubmit={this.handleSubmit}>
-                <button>Check out the app before making an account</button>
+                <button className="demo-btn">Check out the app before making an account</button>
             </form>
         </section>
         )
