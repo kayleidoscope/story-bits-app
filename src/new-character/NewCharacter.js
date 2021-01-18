@@ -236,10 +236,12 @@ export default class NewCharacter extends Component {
                         <label htmlFor="decor">Decor:</label>
                         <textarea id="decor" name="decor"  className="input" onChange={e => this.decorChange(e.target.value)}/>
                     </div>
-                    <input type="submit" value="Submit" className="submit-btn"/>
-                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                        Cancel
-                    </button>
+                    <div className="buttons">
+                        <input type="submit" value="Submit" className="submit-btn"/>
+                        <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                            Cancel
+                        </button>
+                    </div>
                 </form>
      
         </section>

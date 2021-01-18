@@ -17,3 +17,10 @@
     background-color: #EBF5DF;
     color: #561643
 }
+
+@media all and (min-width: 600px) {
+    nav {
+        width: 40%;
+        max-width: 500px;
+    }
+}

@@ -1,0 +1,9 @@
+
+
+@media all and (min-width: 800px) {
+    .story-list.grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 10px;
+    }
+}

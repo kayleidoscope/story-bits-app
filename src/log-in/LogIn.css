@@ -6,7 +6,7 @@
     background-color: #561643;
     border: 0;
     font-weight: bolder;
-    color: #BAD4AA;
+    color:  #CFDECE;
     font-size: 15px;
     margin: 10px;
     border-radius: 200px;
@@ -18,7 +18,7 @@
 }
 
 .log-in-section {
-    border: 1px solid  #EBF5DF;
+    border: 1px solid   #561643;
     width: 75%;
     margin: 15px auto;
 }

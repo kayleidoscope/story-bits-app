@@ -105,13 +105,15 @@ export default class StoryItem extends Component {
             <section className="mini">
                 <h4>Characters</h4>
                     <ul>
-                        {charLIs}
+                    {charLIs.length > 0 && charLIs}
+                    {charLIs.length === 0 && <li className="no-data">No characters created.</li>}
                     </ul>
             </section>
             <section className="mini">
                 <h4>Settings</h4>
                     <ul>
-                        {settingLIs}
+                        {settingLIs.length > 0 && settingLIs}
+                        {settingLIs.length === 0 && <li className="no-data">No settings created.</li>}
                     </ul>
             </section>
         </article>

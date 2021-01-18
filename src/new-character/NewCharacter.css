@@ -7,6 +7,25 @@
     margin: 15px;
 }
 
+.new-character .submit-btn {
+    background-color: #561643;
+    border: 0;
+    font-weight: bolder;
+    font-size: 15px;
+    color:  #CFDECE;
+    margin: 15px 2px;
+    border-radius: 200px;
+    padding: 7px;
+    width: 85px;
+}
+
+.new-character .buttons {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 500px;
+    margin: auto;
+}
+
 .new-character .grid {
     display: grid;
     grid-template-columns: 40% 50%;
@@ -25,4 +44,10 @@
 
 .new-character-form {
     padding: 10px;
+}
+
+@media all and (min-width: 600px) {
+    .new-character .grid {
+        grid-template-columns: 20% 80%;
+    }
 }

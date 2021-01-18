@@ -229,20 +229,22 @@ export default class EditSetting extends Component {
                             </div>
                         </fieldset>
                     </div>
-                    <input type='submit' className="submit-btn" />
-{!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
-                        Delete Setting
-                    </button>}
-                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                        Go Back
-                    </button>
+                    <div className="buttons">
+                        <input type='submit' className="submit-btn" value="Submit"/>
+    {!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
+                            Delete Setting
+                        </button>}
+                        <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                            Go Back
+                        </button>
+                    </div>
                     {this.state.hasDeleteForm && (
-                        <div>
+                        <div  className="delete-form">
                             <p>Are you sure you want to delete this setting? This action cannot be undone.</p>
-                            <button type='button' onClick={this.handleDelete}>
+                            <button type='button' className="delete-btn" onClick={this.handleDelete}>
                                 Yes, delete {settingData.name}
                             </button>
-                            <button type='button' onClick={this.deleteToggled}>
+                            <button type='button' className="delete-btn" onClick={this.deleteToggled}>
                                 No, do not delete {settingData.name}
                             </button>
                         </div>

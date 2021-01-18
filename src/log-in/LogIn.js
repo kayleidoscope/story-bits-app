@@ -64,22 +64,22 @@ export default class LogIn extends Component {
             <h2>Log in</h2>
             <p>Enter your credentials below.</p>
             <form className="log-in-form" onSubmit={this.handleSubmit}>
-                 <label htmlFor="username">Username:</label>
+                 <label htmlFor="username">Username: </label>
                  <input type="text" id="username" name="username" onChange={e => this.usernameChange(e.target.value)}/>
                  <br/>
                 <input type="submit" value="Submit" className="submit-btn" />
-                 {this.state.error && (
-                     <ValidationError message={"No user found"}/>
-                 )}
                  {/* <button
                     onClick={this.props.handleLogInToSignUp}
                     className="submit-btn"
-                 >
+                    >
                     Sign up instead
                 </button> */}
                 <button className="submit-btn" onClick={this.props.handleBackToLanding}>
                     Cancel
                 </button>
+                {this.state.error && (
+                    <ValidationError message={"No user found"}/>
+                )}
             </form>
      
         </section>

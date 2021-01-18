@@ -9,16 +9,28 @@
     row-gap: 10px;
 }
 
+.new-story label {
+    text-align: right;
+    margin-right: 15px;
+}
+
 .new-story-form {
     padding: 10px;
 }
 
-.submit-btn {
+.new-story .submit-btn {
     background-color: #561643;
     border: 0;
     font-weight: bolder;
-    color: #BAD4AA;
-    margin: 10px;
+    font-size: 15px;
+    color:  #CFDECE;
+    margin: 15px;
     border-radius: 200px;
     padding: 7px;
+}
+
+@media all and (min-width: 600px) {
+    .new-story .grid {
+        grid-template-columns: 20% 80%;
+    }
 }

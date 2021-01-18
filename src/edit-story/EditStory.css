@@ -7,12 +7,52 @@
     margin: auto 25px;
 }
 
+.edit-story .input {
+    width: 100%;
+}
+
+.edit-story label {
+    font-weight: bold;
+    text-align: center;
+    margin: auto 15px;
+}
+
 .edit-story .grid {
     display: grid;
     grid-template-columns: 40% 50%;
     row-gap: 10px;
 }
 
+.edit-story .submit-btn {
+    background-color: #561643;
+    border: 0;
+    font-weight: bolder;
+    font-size: 15px;
+    color:  #CFDECE;
+    margin: 15px 2px;
+    border-radius: 200px;
+    padding: 7px;
+    width: 85px;
+}
+
+
 .edit-story h2 {
     margin: 15px;
+}
+
+.edit-story .buttons {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 500px;
+    margin: auto;
+}
+
+@media all and (min-width: 550px) {
+    .edit-story .grid {
+        grid-template-columns: 20% 80%;
+    }
+
+    .edit-story label {
+        text-align: right;
+    }
 }

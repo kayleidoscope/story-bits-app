@@ -456,23 +456,25 @@ export default class EditCharacter extends Component {
                                 {settingsOptions}
                             </select>
                             <p className="housemates-aside">If you have created settings that people can live in, they will appear in the drop-down menu above.</p>
-                        <h4>Decor</h4>
+                        <label htmlFor="decor">Decor: </label>
                         <textarea type="text" className="input" value={this.state.room_decor} id="decor"  onChange={e => this.roomDecorChanged(e.target.value)}/>
                     </div>
-                    <input type='submit' className="submit-btn" />
-{!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
-                        Delete Character
-                    </button>}
-                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                        Go Back
-                    </button>
+                    <div className="buttons">
+                        <input type='submit' className="submit-btn" value="Submit"/>
+    {!this.state.hasDeleteForm &&                    <button type="button" onClick={(this.deleteToggled)} className="submit-btn">
+                            Delete Character
+                        </button>}
+                        <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
+                            Go Back
+                        </button>
+                    </div>
                     {this.state.hasDeleteForm && (
-                        <div>
+                        <div className="delete-form">
                             <p>Are you sure you want to delete this character? This action cannot be undone.</p>
-                            <button type='button' onClick={this.handleDelete}>
+                            <button type='button' className="delete-btn" onClick={this.handleDelete}>
                                 Yes, delete {charData.name}
                             </button>
-                            <button type='button' onClick={this.deleteToggled}>
+                            <button type='button' className="delete-btn" onClick={this.deleteToggled}>
                                 No, do not delete {charData.name}
                             </button>
                         </div>

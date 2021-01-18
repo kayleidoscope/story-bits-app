@@ -55,3 +55,14 @@
     width: 40%;
     padding: 10px;
 }
+
+@media all and (min-width: 800px) {
+    .story article {
+        display: flex;
+    }
+
+    .story section {
+        flex: 1;
+        margin: 15px;
+    }
+}

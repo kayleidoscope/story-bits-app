@@ -15,12 +15,40 @@
 
 .new-setting fieldset {
     grid-column: span 2;
+    margin: auto;
+    width: 25%;
+}
+
+.new-setting label {
+    font-weight: bold;
+    text-align: center;
+    margin: auto 15px;
 }
 
 .new-setting fieldset .container {
     display: flex;
     justify-content: space-evenly;
 }
+
+.new-setting .submit-btn {
+    background-color: #561643;
+    border: 0;
+    font-weight: bolder;
+    font-size: 15px;
+    color:  #CFDECE;
+    margin: 15px 2px;
+    border-radius: 200px;
+    padding: 7px;
+    width: 85px;
+}
+
+.new-setting .buttons {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 500px;
+    margin: auto;
+}
+
 
 .new-setting-form {
     padding: 10px;
@@ -31,7 +59,12 @@
     padding: 10px;
 }
 
-/* .submit-btn {
-    background-color:  #EBF5DF;
-    margin: 10px;
-} */
+@media all and (min-width: 550px) {
+    .new-setting .grid {
+        grid-template-columns: 20% 80%;
+    }
+
+    .new-setting label {
+        text-align: right;
+    }
+}

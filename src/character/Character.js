@@ -190,16 +190,20 @@ export default class Character extends Component {
                     </Link>
 
                     <p className="key">Gender:</p>
-                    <p>{charData.gender}</p>
+                    {charData.gender.length > 0 && <p>{charData.gender}</p>}
+                    {charData.gender.length === 0 && <p className="no-data">No data entered.</p>}
 
                     <p className="key">Age:</p>
-                    <p>{charData.age}</p>
+                    {charData.age.length > 0 && <p>{charData.age}</p>}
+                    {charData.age.length === 0 && <p className="no-data">No data entered.</p>}
 
                     <p className="key">Physical appearance:</p>
-                    <p>{charData.appearance}</p>
+                    {charData.appearance.length > 0 && <p>{charData.appearance}</p>}
+                    {charData.appearance.length === 0 && <p className="no-data">No data entered.</p>}
 
                     <p className="key">Fashion style:</p>
-                    <p>{charData.fashion}</p>
+                    {charData.fashion.length > 0 && <p>{charData.fashion}</p>}
+                    {charData.fashion.length === 0 && <p className="no-data">No data entered.</p>}
 
                     {this.state.hasHomeData &&
                         (<div className="conditional">
@@ -220,7 +224,8 @@ export default class Character extends Component {
                     }
 
                     <p className="key">Room decor:</p>
-                    <p>{charData.room_decor}</p>
+                    {charData.room_decor.length > 0 && <p>{charData.room_decor}</p>}
+                    {charData.room_decor.length === 0 && <p className="no-data">No data entered.</p>}
                 </div>
                 <div className="buttons">
                     <button type='button' onClick={() => this.props.history.push(`/edit/character/${this.state.currentChar}`)} className="submit-btn">

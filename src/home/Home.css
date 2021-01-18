@@ -19,15 +19,29 @@
 
 .home h4 {
     color:  #561643;
+    border-bottom: 1px solid #EBF5DF;
 }
 
 .home-story {
-    border: solid 1px #EBF5DF;
+    border: solid 1px #561643;
     padding: 10px;
     margin: 5px;
+}
+
+.home button {
+    margin: 15px auto;
+    display: block;
 }
 
 .home ul {
     list-style-type: none;
     padding: 0;
+}
+
+@media all and (min-width: 800px) {
+    .home .story-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 10px;
+    }
 }

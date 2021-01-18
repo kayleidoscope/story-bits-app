@@ -43,7 +43,7 @@ export default class StoryList extends Component {
         })
 
         return (
-            <div>
+            <div className="story-list grid">
                 {storyComponents}
             </div>
         )

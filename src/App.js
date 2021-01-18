@@ -82,7 +82,7 @@ class App extends Component {
 
   render() {
     const userFromStorage = localStorage.getItem(`currentUser`)
-    
+    console.log(config.API_ENDPOINT)
     const contextValue = {
       currentChar: this.state.currentChar,
       users: this.state.users,

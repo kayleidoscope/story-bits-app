@@ -96,11 +96,13 @@ export default class User extends Component {
         return (
             <div className="user">
                 <h2>{user.username}'s account</h2>
-                <p>Account created: {date}</p>
-                <p>Stories created: {this.state.numOfStories}</p>
-                <p>Characters created: {this.state.numOfCharacters}</p>
-                <p>Settings created: {this.state.numOfSettings}</p>
-                {/* <button className="submit-btn">Delete Account</button> */}
+                <div className="data">
+                    <p>Account created: {date}</p>
+                    <p>Stories created: {this.state.numOfStories}</p>
+                    <p>Characters created: {this.state.numOfCharacters}</p>
+                    <p>Settings created: {this.state.numOfSettings}</p>
+                    {/* <button className="submit-btn">Delete Account</button> */}
+                </div>
                 <button type='button' onClick={() => this.props.history.goBack()} className="submit-btn">
                     Go Back
                 </button>

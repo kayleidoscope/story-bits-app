@@ -12,3 +12,15 @@
     text-align: center;
     padding: 20px 0 15px;
 }
+
+.user .data {
+    border: 1px solid  #561643;
+    padding: 7px;
+}
+
+@media all and (min-width: 800px) {
+    .user {
+        width: 50%;
+        margin: auto;
+    }
+}

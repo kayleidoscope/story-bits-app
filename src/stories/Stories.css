@@ -7,3 +7,8 @@
     padding: 20px;
     color:  #561643;
 }
+
+.stories button {
+    margin: 15px auto;
+    display: block;
+}

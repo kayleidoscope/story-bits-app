@@ -13,19 +13,28 @@
     margin-bottom: 15px;
 }
 
+.character-deets .no-data {
+    color: #515751;
+}
+
 .character-deets .buttons {
     text-align: center;
 }
 
+.character-deets .buttons button {
+    margin: 15px;
+}
+
 .character-deets .grid {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 1fr 1fr;
     row-gap: 10px;
 }
 
 .character-deets .conditional {
     grid-column: span 2;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
 }
 
@@ -37,7 +46,7 @@
 .character-deets .conditional .key {
     font-weight: bold;
     text-align: right;
-    width: 40%;
+    margin-right: 10px;
 }
 
 .character-deets .grid .key {
@@ -49,4 +58,10 @@
 .character-deets ul {
     padding-left: 20px;
     list-style: circle;
+}
+
+@media all and (min-width: 800px) {
+    .character-deets .grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }

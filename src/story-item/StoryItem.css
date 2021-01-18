@@ -1,11 +1,11 @@
 .story-item-li {
     margin-left: 25px;
     list-style: circle;
-    color: black;
+    color:  #561643;
 }
 
 .story-item h3 {
-    color:  black;
+    color:  #561643;
     text-align: center;
     padding-bottom: 15px;
 }
@@ -18,8 +18,13 @@
     text-decoration: underline;
 }
 
+.story-item .no-data {
+    color: #515751;
+    list-style: none;
+}
+
 .story-item {
-    border: solid 1px #EBF5DF;
+    border: solid 1px  #561643;
     padding: 20px;
     margin: 5px;
 }

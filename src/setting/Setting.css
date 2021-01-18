@@ -27,18 +27,19 @@
 
 .setting-traits {
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 1fr 1fr;
     row-gap: 10px;
 }
 
 .setting-traits .conditional {
     grid-column: span 2;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
     width: 100%;
 }
 
 .setting-traits .conditional .setting-trait-title {
-    width: 40%;
     padding-right: 10px;
 
 }
