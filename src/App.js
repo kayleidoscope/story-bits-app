@@ -32,18 +32,21 @@ class App extends Component {
     })
   }
 
+  //adds a new user to state
   addUser = (user) => {
     this.setState({
       users: [...this.state.users, user]
     })
   }
 
+  //sets currentUser to state
   userSelect = user => {
     this.setState({
       currentUser: user,
     })
   }
 
+  //essentially logs a user out
   userDeselect = () => {
     localStorage.removeItem('currentUser')
     this.setState({

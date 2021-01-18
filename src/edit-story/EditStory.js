@@ -17,6 +17,7 @@ export default class EditStory extends Component {
       }
 
     componentDidMount() {
+        //API call to get the data for this story
         fetch(`${config.API_ENDPOINT}api/stories/${this.props.match.params.storyId}`, {
             method: 'GET'
         })
@@ -57,6 +58,7 @@ export default class EditStory extends Component {
 
         const editedStory = {title, description}
 
+        //API call to change the data associated with this story via a PATCH request
         fetch(`${config.API_ENDPOINT}api/stories/${this.props.match.params.storyId}`, {
             method: 'PATCH',
             headers: {

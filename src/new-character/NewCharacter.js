@@ -7,8 +7,11 @@ export default class NewCharacter extends Component {
     static contextType = Context
 
     state = {
-        story: null,
+        storiesData: [],
+        settingsForThisStory: [],
+        //the values below can be input by the user, but only name, description, and story (i.e. storyId) are required
         name: "",
+        story: null,
         description: "",
         gender: "",
         pronouns: "",
@@ -21,18 +24,15 @@ export default class NewCharacter extends Component {
         decor: "",
         pets: "",
         motivation: "",
-        history: "",
-        storiesData: [],
-        settingsForThisStory: []
+        history: ""
     }
 
     storyChange = (story) => {
         this.setState({
-            story,
-            home: 0
+            story
         })
 
-
+        //when a story is selected, this API call gets settings associated with this story
         fetch(`${config.API_ENDPOINT}api/settings/?story_id=${story}`, {
             method: 'GET'
           })
@@ -43,6 +43,7 @@ export default class NewCharacter extends Component {
               return res.json()
             })
             .then(responseJson => {
+                //getting only places marked as is_residence
                 const liveablePlaces = responseJson.filter(place => place.is_residence)
 
                 this.setState({
@@ -176,6 +177,7 @@ export default class NewCharacter extends Component {
         //for PUT request to /residences
         const setting_id = this.state.home
 
+        //API call to create new character
         fetch(`${config.API_ENDPOINT}api/characters`, {
             method: 'POST',
             headers: {
@@ -190,10 +192,13 @@ export default class NewCharacter extends Component {
                 return res.json()
             })
             .then(responseJson => {
+                //putting together data in case of a POST request to /residences
                 const character_id = responseJson.id
                 const newResidence = {setting_id, character_id}
 
+                //If the user has designated a residence for this character,
                 if (this.state.home > 0) {
+                    //API call to POST a new residence
                     fetch(`${config.API_ENDPOINT}api/residences`, {
                         method: 'POST',
                         headers: {
@@ -221,6 +226,7 @@ export default class NewCharacter extends Component {
     }
 
     componentDidMount() {
+        //API call to gather this user's stories
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
           method: 'GET'
         })

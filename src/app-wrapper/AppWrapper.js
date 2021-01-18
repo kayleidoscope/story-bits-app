@@ -15,12 +15,12 @@ import EditCharacter from '../edit-character/EditCharacter';
 import EditStory from '../edit-story/EditStory'
 import EditSetting from '../edit-setting/EditSetting';
 
-
+//This component hides all pages that need authentication behind a conditional statement.
+//If no user is logged in, the user will be kicked back to the landing page.
 export default class AppWrapper extends Component{
   static contextType = Context;
 
   render(){
-
     if(!this.context.currentUser)
     return <Redirect to="/" />
 

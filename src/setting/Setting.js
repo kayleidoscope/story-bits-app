@@ -22,6 +22,7 @@ export default class Setting extends Component {
     componentDidMount() {
         const setId = this.props.match.params.settingId
 
+        //API call to get this setting data
         fetch(`${config.API_ENDPOINT}api/settings/${setId}`, {
             method: 'GET'
         })
@@ -36,6 +37,7 @@ export default class Setting extends Component {
                     settingData: responseJson
                 })
 
+                //API call to get this story's name, ID, and user
                 fetch(`${config.API_ENDPOINT}api/stories/${responseJson.story_id}`, {
                     method: 'GET'
                 })
@@ -57,6 +59,7 @@ export default class Setting extends Component {
                 console.error(error)
             })
 
+        //API call to get any residents that live in this setting
         fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${setId}`, {
             method: 'GET'
         })
@@ -67,9 +70,12 @@ export default class Setting extends Component {
                 return res.json()
             })
             .then(responseJson => {
+                //puts residents' character ids into an array
                 const roommateArray = responseJson.map(item => {
                     return item.character_id
                 })
+
+                //API catch within a map that puts character data into an array (but it's a promise)
                 const roommateDataArray = roommateArray.map((roommateId) => 
                     fetch(`${config.API_ENDPOINT}api/characters/${roommateId}`, {
                         method: 'GET'
@@ -82,7 +88,8 @@ export default class Setting extends Component {
                         })
                         .then(responseJson => responseJson)
                 )
-
+                
+                //resolving roommateDataArray from a promise to an array and then setting that value to state
                 Promise.all(roommateDataArray).then(values => {
                     this.setState({
                         roommateData: values
@@ -98,6 +105,7 @@ export default class Setting extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
+        //will load the page all at once when these values are gathered
         if(!this.state.storysUser || !this.state.roommateData) {
             return null
         } else if (currentUser !== storysUser) {
@@ -108,6 +116,8 @@ export default class Setting extends Component {
 
         const setId = this.props.match.params.settingId
         const settingData = this.state.settingData
+
+        //this boolean will result in the Occupants section rendering if it's set to true
         const isResidence = settingData.is_residence
         let occupantsLIs
         if (this.state.roommateData.length === 0) {

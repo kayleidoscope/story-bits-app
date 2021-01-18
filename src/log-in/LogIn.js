@@ -11,6 +11,7 @@ export default class LogIn extends Component {
         this.state = {
           usernameInput: "",
           userId: 0,
+          //these two booleans allow for validation errors
           inputTouched: false,
           error: false
         }
@@ -50,7 +51,9 @@ export default class LogIn extends Component {
             return
         }
         const currentUserId = currentUser.id
+        //sets current user Id to state
         this.context.userSelectFx(currentUserId)
+        //sets current user id to local storage
         localStorage.setItem(
             `currentUser`, JSON.stringify(currentUser)
         )
@@ -67,12 +70,6 @@ export default class LogIn extends Component {
                  <input type="text" id="username" name="username" onChange={e => this.usernameChange(e.target.value)}/>
                  <br/>
                 <input type="submit" value="Submit" className="submit-btn" />
-                 {/* <button
-                    onClick={this.props.handleLogInToSignUp}
-                    className="submit-btn"
-                    >
-                    Sign up instead
-                </button> */}
                 <button className="submit-btn" onClick={this.props.handleBackToLanding}>
                     Cancel
                 </button>

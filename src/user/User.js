@@ -17,6 +17,7 @@ export default class User extends Component {
       }
 
     componentDidMount() {
+        //API call to get the stories associated with this user
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
             method: 'GET'
         })
@@ -27,16 +28,19 @@ export default class User extends Component {
                 return res.json()
             })
             .then(responseJson => {
-                const storyIdsObject = responseJson.map(story => {
+                //put this user's story ids into an array
+                const storyIdsArray = responseJson.map(story => {
                     return story.id
                 })
 
                 this.setState({
                     numOfStories: responseJson.length,
-                    storyIds: storyIdsObject
+                    storyIds: storyIdsArray
                 })
 
-                const numCharsPromise = storyIdsObject.map(storyId => 
+                //takes storyIdsArray and maps through it with an API call to get the characters in each of those stories
+                //numCharsPromise is an array, wherein the values are the number of characters in each story
+                const numCharsPromise = storyIdsArray.map(storyId => 
                     fetch(`${config.API_ENDPOINT}api/characters/?story_id=${storyId}`, {
                         method: 'GET'
                     })
@@ -52,8 +56,10 @@ export default class User extends Component {
                         })
                 )    
                 
+                //establishing this to use .reduce to add the values in numCharsPromise and numSetsPromise together
                 function sum(acc, val) {return acc + val}
 
+                //resolves the promise in numCharsPromise and adds its values together
                 Promise.all(numCharsPromise).then((values) => {
                     let answer = values.reduce(sum)
                     this.setState({
@@ -61,7 +67,9 @@ export default class User extends Component {
                     })
                 })
 
-                const numSetsPromise = storyIdsObject.map(storyId => 
+                //takes storyIdsArray and maps through it with an API call to get the settings in each of those stories
+                //numSetsPromise is an array, wherein the values are the number of settings in each story
+                const numSetsPromise = storyIdsArray.map(storyId => 
                     fetch(`${config.API_ENDPOINT}api/settings/?story_id=${storyId}`, {
                         method: 'GET'
                     })
@@ -74,6 +82,7 @@ export default class User extends Component {
                     .then(responseJson => responseJson.length)
                 ) 
 
+                //resolves the promise in numSetsPromise and adds its values together
                 Promise.all(numSetsPromise).then((values) => {
                     let answer = values.reduce(sum)
                     this.setState({
@@ -93,9 +102,11 @@ export default class User extends Component {
         const user = JSON.parse(localStorage.getItem('currentUser')) || this.context.currentUser
         const date = new Date((user.acct_created)).toLocaleDateString('en-US')
         
+        //prevents the page from loading until these values have been obtained
         if (!this.state.numOfStories || !this.state.numOfSettings) {
             return null
         }
+        
         return (
             <div className="user">
                 <h2>{user.username}'s account</h2>

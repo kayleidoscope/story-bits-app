@@ -12,6 +12,7 @@ export default class SignUp extends Component {
         this.state = {
           usernameInput: "",
           userId: 0,
+          //boolean to determine if validation error component should show up
           error: false
         }
       }
@@ -32,6 +33,8 @@ export default class SignUp extends Component {
         e.preventDefault()
         const username = this.state.usernameInput
         const newUser = {username}
+
+        //API call to create a new user
         fetch(`${config.API_ENDPOINT}api/users`, {
             method: 'POST',
             headers: {
@@ -49,9 +52,9 @@ export default class SignUp extends Component {
                 return res.json()
             })
             .then(responseJson => {
-                // this.setUserId(responseJson.id)
                 this.context.addUserFx(responseJson)
                 this.context.userSelectFx(responseJson.id)
+                //sets current user Id to local storage
                 localStorage.setItem(
                     `currentUser`, JSON.stringify(responseJson)
                 )

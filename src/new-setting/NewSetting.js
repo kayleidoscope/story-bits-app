@@ -9,6 +9,7 @@ export default class NewSetting extends Component {
     state = {
         story: null,
         storiesData: [],
+        //the following states are changeable by the user
         name: "",
         description: "",
         decor: "",
@@ -16,6 +17,7 @@ export default class NewSetting extends Component {
     }
 
     componentDidMount() {
+        //API call to get this user's stories
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
           method: 'GET'
         })
@@ -60,6 +62,7 @@ export default class NewSetting extends Component {
     }
 
     handleResChange = changeEvent => {
+        //this makes sure isResidence state changes correctly
         this.setState({
             isResidence: changeEvent.target.value === "true" ? true : false
         })
@@ -74,6 +77,8 @@ export default class NewSetting extends Component {
         const is_residence = this.state.isResidence
         const newSetting = {story_id, name, description, decor, is_residence}
 
+
+        //API call to create a new setting
         fetch(`${config.API_ENDPOINT}api/settings`, {
             method: 'POST',
             headers: {

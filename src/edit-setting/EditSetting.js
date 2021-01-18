@@ -12,11 +12,13 @@ export default class EditSetting extends Component {
         this.state = {
             settingData: [],
             storiesData: [],
-            storyId: null,
             storysUser: null,
+            //if hasDeleteForm is true, a box will appear making sure that the user actually wants to delete the page
+            hasDeleteForm: false,
+            //the state values below are all changeable in the form
+            storyId: null,
             name: "",
             isResidence: null,
-            hasDeleteForm: false,
             decor: "",
             description: ""
         }
@@ -25,6 +27,7 @@ export default class EditSetting extends Component {
     componentDidMount() {
         const setId = this.props.match.params.settingId
 
+        //API call to get the data associated with this setting
         fetch(`${config.API_ENDPOINT}api/settings/${setId}`, {
             method: 'GET'
         })
@@ -36,6 +39,7 @@ export default class EditSetting extends Component {
             })
             .then(responseJson => {
                 this.setState({
+                    //setting calues to state so that they will fill in on the form
                     settingData: responseJson,
                     name: responseJson.name,
                     description: responseJson.description,
@@ -44,6 +48,7 @@ export default class EditSetting extends Component {
                     decor: responseJson.decor
                 })
 
+                //API call to get the user of this story
                 fetch(`${config.API_ENDPOINT}api/stories/${responseJson.story_id}`, {
                     method: 'GET'
                 })
@@ -65,6 +70,8 @@ export default class EditSetting extends Component {
             .catch(error => {
                 console.error(error)
             })
+
+        //API call to get other stories by this user
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
             method: 'GET'
         })
@@ -109,6 +116,7 @@ export default class EditSetting extends Component {
     }
 
     handleResChange = (changeEvent) => {
+        //this makes it so the "Can people live here?" send the correct data to state
         this.setState({
           isResidence: changeEvent.target.value === "true" ? true : false
         });
@@ -129,6 +137,7 @@ export default class EditSetting extends Component {
     handleDelete = e => {
         e.preventDefault()
 
+        //API call to delete this setting
         fetch(`${config.API_ENDPOINT}api/settings/${this.props.match.params.settingId}`, {
             method: 'DELETE',
             headers: {
@@ -156,7 +165,7 @@ export default class EditSetting extends Component {
 
         const editedSetting = {name, description, story_id, is_residence, decor}
 
-
+        //API call to edit this setting
         fetch(`${config.API_ENDPOINT}api/settings/${this.props.match.params.settingId}`, {
             method: 'PATCH',
             headers: {

@@ -7,7 +7,9 @@ import './Landing.css'
 
 export default class Landing extends Component {
     state = {
+        //when true, the logIn component will render
         logIn: false,
+        //when true, the signUp component will render
         signUp: false,
     }
 
@@ -48,6 +50,7 @@ export default class Landing extends Component {
         )
     }
 
+    //Set on the "Cancel" buttons of both the signup and login components. Removes both from the page.
     backToLanding = e => {
         this.setState({
             logIn: false,
@@ -56,6 +59,7 @@ export default class Landing extends Component {
     }
 
     render() {
+        //If a user id is set to local storage, the user will be taken immediately to the home page
         if(localStorage.getItem('currentUser')) return <Redirect to='/home' />
 
         if (this.state.logIn) {

@@ -20,6 +20,7 @@ export default class Nav extends Component {
                     <Link 
                         to="/"  
                         className="nav-li"
+                        //removes the user from the context, prompting a log-out
                         onClick={() => this.context.userDeselectFx()}
                     >
                         <li>Log Out</li>

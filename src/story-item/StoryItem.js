@@ -14,15 +14,16 @@ export default class StoryItem extends Component {
       }
 
     componentDidMount() {
+        //API call to get the info for this story
         fetch(`${config.API_ENDPOINT}api/stories/${this.props.story}`, {
             method: 'GET'
         })
-        .then(res => {
-            if (!res.ok) {
-            throw new Error(res.status)
-            }
-            return res.json()
-        })
+            .then(res => {
+                if (!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
             .then(responseJson => {
                 this.setState({
                     storyData: responseJson
@@ -32,15 +33,16 @@ export default class StoryItem extends Component {
                 console.error(error)
             })
         
+        //API call to get the characters in this story
         fetch(`${config.API_ENDPOINT}api/characters/?story_id=${this.props.story}`, {
             method: 'GET'
         })
-        .then(res => {
-            if (!res.ok) {
-            throw new Error(res.status)
-            }
-            return res.json()
-        })
+            .then(res => {
+                if (!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
             .then(responseJson => {
                 this.setState({
                     charactersData: responseJson
@@ -50,23 +52,24 @@ export default class StoryItem extends Component {
                 console.error(error)
             })
 
-            fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.story}`, {
-                method: 'GET'
-            })
+        //API call to get the settings for this story
+        fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.story}`, {
+            method: 'GET'
+        })
             .then(res => {
                 if (!res.ok) {
                 throw new Error(res.status)
                 }
                 return res.json()
             })
-                .then(responseJson => {
-                    this.setState({
-                        settingsData: responseJson
-                    })
+            .then(responseJson => {
+                this.setState({
+                    settingsData: responseJson
                 })
-                .catch(error => {
-                    console.error(error)
-                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
 

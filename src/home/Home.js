@@ -4,8 +4,6 @@ import {Link} from 'react-router-dom';
 import config from '../config'
 import './Home.css';
 
-/* Somewhere down this line, this should probably be broken up into more components. */
-
 export default class Home extends Component {
     static contextType = Context
 
@@ -20,6 +18,7 @@ export default class Home extends Component {
     componentDidMount() {
         const currentUserId = this.context.currentUser
         
+        //API call to grab this user's info
         fetch(`${config.API_ENDPOINT}api/users/${currentUserId}`, {
             method: 'GET'
         })
@@ -33,7 +32,8 @@ export default class Home extends Component {
             .catch(error => {
                 console.error(error)
             })
-
+        
+        //API call to grab stories this user has written
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${currentUserId}`, {
             method: 'GET'
         })
@@ -54,9 +54,7 @@ export default class Home extends Component {
 
 
     render () {
-    
         const username = this.state.userInfo.username
-
         const data = this.state.usersStories;
 
         const simpleStoryLIs = data.map(story => {
@@ -73,7 +71,6 @@ export default class Home extends Component {
         return (
             <div className="home">
                 <h2>Welcome, {username}!</h2>
-                {/* <p>A random quote generator will put a quote here.</p> */}
                 <Link to='/stories/'>
                     <h3>My stories</h3>
                 </Link>

@@ -16,14 +16,17 @@ export default class Character extends Component {
             storyName: "",
             storysUser: null,
             storyId: null,
+            //if hasHomeData is true, the "home" section will appear on this page
             hasHomeData: false,
             homeName: "",
             homeId: null,
+            //if hasRmData is true, the "roommates" section will appear on this page
             hasRmData: false,
             roommateData: []
         }
       }
 
+    //When a user clicks a roommate's name on this page, this tells the page to make new fetches.
     componentDidUpdate(newProps) {
         if (newProps.match.params.charId === this.props.match.params.charId) {
             return
@@ -40,6 +43,7 @@ export default class Character extends Component {
         this.setState({
             currentChar: charId
         })
+        //An API call to get the character's data
         fetch(`${config.API_ENDPOINT}api/characters/${charId}`, {
             method: 'GET'
           })
@@ -53,7 +57,7 @@ export default class Character extends Component {
                 this.setState({
                     charData: responseJson
                 })
-                
+                //An API call to get the data of the story the character belongs to.
                 fetch(`${config.API_ENDPOINT}api/stories/${responseJson.story_id}`, {
                     method: 'GET'
                 })
@@ -74,6 +78,7 @@ export default class Character extends Component {
             .catch(error => {
                 console.error(error)
             })
+        //An API call to find out where the character lives, if a residence has been created.
         fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
             method: 'GET'
         })
@@ -84,11 +89,13 @@ export default class Character extends Component {
                 return res.json()
             })
             .then(responseJson => {
+                //The code will only continue here if the character actually has a residence created.
                 if (responseJson.length > 0) {
                     this.setState({
                         homeId: responseJson[0].setting_id,
                         hasHomeData: true
                     })
+                    //An API call to get the name of the character's home
                     fetch(`${config.API_ENDPOINT}api/settings/${responseJson[0].setting_id}`, {
                         method: 'GET'
                     })
@@ -104,6 +111,7 @@ export default class Character extends Component {
                     .catch(error => {
                         console.error(error)
                     })
+                    //An API call to find everyone who lives at this residence.
                     fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${responseJson[0].setting_id}`, {
                         method: 'GET'
                     })
@@ -114,9 +122,12 @@ export default class Character extends Component {
                             return res.json()
                         })
                         .then(responseJson => {
+                            //roommateArray turns the API response into an array of character ids
                             const roommateArray = responseJson.map(item => {
                                 return item.character_id
                             })
+
+                            //roommateDataArray feeds roommateArray into an API call to get the data of this character's roommates
                             const roommateDataArray = roommateArray.map((roommateId) => 
                                 fetch(`${config.API_ENDPOINT}api/characters/${roommateId}`, {
                                     method: 'GET'
@@ -128,8 +139,12 @@ export default class Character extends Component {
                                         return res.json()
                                     })
                                     .then(responseJson => responseJson)
+                                    .catch(error => {
+                                        console.error(error)
+                                    })
                             )
 
+                            //this resolves roommateDataArray from a promise into an array and sets those values to state
                             Promise.all(roommateDataArray).then(values => {
                                 if (values.length > 1) {
                                     this.setState({
@@ -153,6 +168,7 @@ export default class Character extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
+        //this makes it so the page will load all at once when these values have been obtained
         if (!this.state.charData || !this.state.storyName || !this.state.storyId) {
             return null
         } else if (currentUser !== storysUser) {
@@ -165,6 +181,7 @@ export default class Character extends Component {
         const roommateData = this.state.roommateData
         const housematesLIs = roommateData.map(rm => {
             const selectedCharId = parseInt(this.state.currentChar)
+            //this conditional prevents the current character from being listed as a roommate
             if (rm.id === selectedCharId) {
                 return null
             } else {
@@ -178,7 +195,6 @@ export default class Character extends Component {
                 )
             }
         })
-
 
         return (
             <article className="character-deets">

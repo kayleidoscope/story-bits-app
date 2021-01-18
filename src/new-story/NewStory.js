@@ -6,12 +6,12 @@ import './NewStory.css';
 export default class NewStory extends Component {
     static contextType = Context
 
-
     constructor(props) {
         super(props);
         this.state = {
-          titleInput: "",
-          descriptionInput: ""
+            //these values change to make up the story
+            titleInput: "",
+            descriptionInput: ""
         }
       }
 
@@ -37,6 +37,8 @@ export default class NewStory extends Component {
         const description = this.state.descriptionInput
         const user_id = this.context.currentUser
         const newStory = {title, description, user_id}
+        
+        //API call to create a new story
         fetch(`${config.API_ENDPOINT}api/stories`, {
             method: 'POST',
             headers: {

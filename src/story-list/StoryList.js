@@ -15,15 +15,16 @@ export default class StoryList extends Component {
       }
 
     componentDidMount() {
+        //API call to get this user's stories
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
             method: 'GET'
         })
-        .then(res => {
-            if (!res.ok) {
-            throw new Error(res.status)
-            }
-            return res.json()
-        })
+            .then(res => {
+                if (!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
             .then(responseJson => {
                 const arrayOfStoryIds = responseJson.map(story => story.id)
                 this.setState({

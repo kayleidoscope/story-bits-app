@@ -18,11 +18,10 @@ export default class EditCharacter extends Component {
             hasHomeData: false,
             homeName: "",
             homeId: 0,
-            homeIdTouched: false,
             hasRmData: false,
-            roommateData: [],
             settingsForThisStory: [],
             storyId: 0,
+            //The following (name through motivation) are fields that the user can change. homeId, above, is also a changeable field.
             name: "",
             description: "",
             gender: "",
@@ -34,6 +33,7 @@ export default class EditCharacter extends Component {
             room_decor: "",
             pets: "",
             motivation: "",
+            //if hasDeleteForm is true, a box verifying that the user actually wants to delete the character will appear
             hasDeleteForm: false
         }
       }
@@ -70,6 +70,7 @@ export default class EditCharacter extends Component {
             })
             .then(responseJson => {
                 this.setState({
+                    //setting the state values here allows the inputs on the page to be prefilled with that character's data
                     charData: responseJson,
                     name: responseJson.name,
                     description: responseJson.description,
@@ -99,6 +100,7 @@ export default class EditCharacter extends Component {
                 .then(responseJson => 
                     this.setState({
                         storyName: responseJson.title,
+                        //gathering this data to check that the story this user is trying to access belongs to that user
                         storysUser: responseJson.user_id
                     })
                 )
@@ -117,6 +119,7 @@ export default class EditCharacter extends Component {
                         return res.json()
                     })
                     .then(responseJson => {
+                        //finds only the places that the user has marked is_residence as true
                         const liveablePlaces = responseJson.filter(place => place.is_residence)
 
                         this.setState({
@@ -133,7 +136,7 @@ export default class EditCharacter extends Component {
             })
         
 
-        //API call to get this character's home
+        //API call to get the name of this character's home
         fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
             method: 'GET'
         })
@@ -144,6 +147,7 @@ export default class EditCharacter extends Component {
                 return res.json()
             })
             .then(responseJson => {
+                //the following only runs if the character actually has a home designated
                 if (responseJson.length > 0) {
                     this.setState({
                         homeId: responseJson[0].id,
@@ -167,46 +171,6 @@ export default class EditCharacter extends Component {
                     .catch(error => {
                         console.error(error)
                     })
-                    
-                    //API call to get other residents of this house
-                    fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${responseJson[0].setting_id}`, {
-                        method: 'GET'
-                    })
-                        .then(res => {
-                            if (!res.ok) {
-                                throw new Error(res.status)
-                            }
-                            return res.json()
-                        })
-                        .then(responseJson => {
-                            const roommateArray = responseJson.map(item => {
-                                return item.character_id
-                            })
-                            const roommateDataArray = roommateArray.map((roommateId) => 
-                                fetch(`${config.API_ENDPOINT}api/characters/${roommateId}`, {
-                                    method: 'GET'
-                                })
-                                    .then(res => {
-                                        if (!res.ok) {
-                                            throw new Error(res.status)
-                                        }
-                                        return res.json()
-                                    })
-                                    .then(responseJson => responseJson)
-                            )
-
-                            Promise.all(roommateDataArray).then(values => {
-                                if (values.length > 1) {
-                                    this.setState({
-                                        hasRmData: true,
-                                        roommateData: values
-                                    })
-                                }
-                            })
-                        })
-                        .catch(error => {
-                            console.error(error)
-                        })
                 }
             })
             .catch(error => {
@@ -234,7 +198,7 @@ export default class EditCharacter extends Component {
             storyId
         })
 
-        //API call to get other settings in this character's story
+        //API call to get other settings in the story the user just selected
         fetch(`${config.API_ENDPOINT}api/settings/?story_id=${storyId}`, {
             method: 'GET'
             })
@@ -245,7 +209,7 @@ export default class EditCharacter extends Component {
                 return res.json()
             })
             .then(responseJson => {
-                
+                //once again, narrowing down to just places characters can live
                 const liveablePlaces = responseJson.filter(place => place.is_residence)
 
                 this.setState({
@@ -337,7 +301,7 @@ export default class EditCharacter extends Component {
 
     handleDelete = e => {
         e.preventDefault()
-
+        //deletes the character
         fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
             method: 'DELETE',
             headers: {
@@ -357,6 +321,7 @@ export default class EditCharacter extends Component {
 
     handleSubmit = (e) =>{
         e.preventDefault()
+        //for PATCH request to /characters/:charId
         const storyId = this.state.storyId
         const name = this.state.name
         const description = this.state.description
@@ -387,9 +352,10 @@ export default class EditCharacter extends Component {
             history
         }
 
-        //for PUT request to /residences
+        //for PATCH request to /residences
         const setting_id = this.state.homeId
 
+        //API call to change the character's data on /characters
         fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
             method: 'PATCH',
             headers: {
@@ -405,7 +371,7 @@ export default class EditCharacter extends Component {
             .then(responseJson => {
                 const editedResidence = {setting_id}
 
-
+                //a fetch request to find out if the character has a designated residence...
                 fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
                     method: 'GET'
                 })
@@ -416,11 +382,14 @@ export default class EditCharacter extends Component {
                     return res.json()
                 })
                 .then(responseJson => {
+                        //...if no residence is designated..
                         if(!responseJson.length) {
+                            //...and also the user has seleted an actual residence ("not important" has a value of 0)...
                             if(setting_id > 0) {
 
                                 editedResidence.character_id = this.state.currentChar
-
+                                
+                                //...API call to create that residence by POSTing to /residences.
                                 fetch(`${config.API_ENDPOINT}api/residences/`, {
                                     method: 'POST',
                                     headers: {
@@ -441,6 +410,7 @@ export default class EditCharacter extends Component {
                             this.props.history.push(`/character/${this.state.currentChar}`)
                             return responseJson
                         }
+                        //...if a residence is designated, API call to change /residences/:resId with a PATCH request
                         fetch(`${config.API_ENDPOINT}api/residences/${responseJson[0].id}`, {
                             method: 'PATCH',
                             headers: {
@@ -472,6 +442,7 @@ export default class EditCharacter extends Component {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
         const storysUser = this.state.storysUser
+        //to prevent the page from loading all staggered
         if (!this.state.charData || !this.state.storysUser) {
             return null
         } else if (currentUser !== storysUser) {

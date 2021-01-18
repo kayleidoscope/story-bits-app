@@ -18,6 +18,7 @@ export default class Story extends Component {
       }
 
     componentDidMount() {
+        //API call to get this story's info
         fetch(`${config.API_ENDPOINT}api/stories/${this.props.match.params.storyId}`, {
           method: 'GET'
         })
@@ -35,6 +36,8 @@ export default class Story extends Component {
         .catch(error => {
             console.error(error)
         })
+
+        //API call to get characters in this story
         fetch(`${config.API_ENDPOINT}api/characters/?story_id=${this.props.match.params.storyId}`, {
             method: 'GET'
         })
@@ -53,23 +56,24 @@ export default class Story extends Component {
                 console.error(error)
             })
 
-            fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.match.params.storyId}`, {
-                method: 'GET'
-              })
-                .then(res => {
-                  if(!res.ok) {
-                    throw new Error(res.status)
-                  }
-                  return res.json()
+        //API call to get settings in this story
+        fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.match.params.storyId}`, {
+            method: 'GET'
+            })
+            .then(res => {
+                if(!res.ok) {
+                throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(responseJson => {
+                    this.setState({
+                        settingsData: responseJson
                 })
-                .then(responseJson => {
-                      this.setState({
-                          settingsData: responseJson
-                    })
-                })
-                .catch(error => {
-                    console.error(error)
-                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
       }
 
     render() {

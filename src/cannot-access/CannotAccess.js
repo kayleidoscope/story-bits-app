@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './CannotAccess.css'
 
+//This component will appear when users try to access a character, setting, or story that doesn't belong to them.
 class CannotAccess extends Component {
     render() {
         return (
