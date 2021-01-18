@@ -48,8 +48,10 @@ export default class NewCharacter extends Component {
                 this.setState({
                     settingsForThisStory: liveablePlaces
                 })
-            }
-            )
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     nameChange = (name) => {
@@ -222,17 +224,20 @@ export default class NewCharacter extends Component {
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
           method: 'GET'
         })
-          .then(res => {
+        .then(res => {
             if(!res.ok) {
               throw new Error(res.status)
             }
             return res.json()
           })
-          .then(responseJson => {
-                this.setState({
-                    storiesData: responseJson
-          })}
-          )
+        .then(responseJson => {
+            this.setState({
+                storiesData: responseJson
+            })
+        })
+        .catch(error => {
+            console.error(error)
+        })
       }
 
     render() {

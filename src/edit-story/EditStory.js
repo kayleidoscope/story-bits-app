@@ -33,6 +33,9 @@ export default class EditStory extends Component {
                 description: responseJson.description
             })
         })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
     titleChange = (title) => {
@@ -67,6 +70,9 @@ export default class EditStory extends Component {
                 }
             })
             .then(noData => this.props.history.push(`/story/${this.props.match.params.storyId}`))
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     deleteToggled = e => {

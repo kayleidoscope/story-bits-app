@@ -54,6 +54,9 @@ export default class EditCharacter extends Component {
                     storiesData: responseJson
                 })
             })
+            .catch(error => {
+                console.error(error)
+            })
 
         //API call to get this character's data and autofill the input values
         fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
@@ -99,6 +102,9 @@ export default class EditCharacter extends Component {
                         storysUser: responseJson.user_id
                     })
                 )
+                .catch(error => {
+                    console.error(error)
+                })
 
                 //API call to fill in settings for this story
                 fetch(`${config.API_ENDPOINT}api/settings/?story_id=${responseJson.story_id}`, {
@@ -117,8 +123,14 @@ export default class EditCharacter extends Component {
                             settingsForThisStory: liveablePlaces
                         })
                     })
+                    .catch(error => {
+                        console.error(error)
+                    })
             }
             )
+            .catch(error => {
+                console.error(error)
+            })
         
 
         //API call to get this character's home
@@ -152,6 +164,9 @@ export default class EditCharacter extends Component {
                         homeName: responseJson.name
                     })
                     )
+                    .catch(error => {
+                        console.error(error)
+                    })
                     
                     //API call to get other residents of this house
                     fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${responseJson[0].setting_id}`, {
@@ -189,7 +204,13 @@ export default class EditCharacter extends Component {
                                 }
                             })
                         })
+                        .catch(error => {
+                            console.error(error)
+                        })
                 }
+            })
+            .catch(error => {
+                console.error(error)
             })
             
     }
@@ -230,6 +251,9 @@ export default class EditCharacter extends Component {
                 this.setState({
                     settingsForThisStory: liveablePlaces
                 })
+            })
+            .catch(error => {
+                console.error(error)
             })
     }
 
@@ -430,10 +454,13 @@ export default class EditCharacter extends Component {
                                 }
                             })
                             .then(noData => this.props.history.push(`/character/${this.state.currentChar}`))
-                    })
-                    .catch(error => {
-                        console.error(error)
-                    })
+                            .catch(error => {
+                                console.error(error)
+                            })
+                })
+                .catch(error => {
+                    console.error(error)
+                })
             })
             .catch(error => {
                 console.error(error)

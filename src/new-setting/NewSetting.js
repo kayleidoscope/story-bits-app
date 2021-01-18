@@ -25,11 +25,14 @@ export default class NewSetting extends Component {
             }
             return res.json()
           })
-          .then(responseJson => {
-                this.setState({
-                    storiesData: responseJson
-          })}
-          )
+        .then(responseJson => {
+            this.setState({
+                storiesData: responseJson
+          })
+        })
+        .catch(error => {
+            console.error(error)
+        })
       }
 
     storyChange = (story) => {
@@ -97,15 +100,6 @@ export default class NewSetting extends Component {
             )
         })
 
-        // const charData = data.characters.filter(char => char.story.id === this.state.story)
-        // const charChecks = charData.map(char => {
-        //     return (
-        //         <li key={char.id}>
-        //             <input type="checkbox" id={char.id} name={char.id} />
-        //             <label for={char.id}> {char.name}</label>
-        //         </li>
-        //     )
-        // })
         return (
             <section className="new-setting">
                 <h2>New setting</h2>
@@ -122,10 +116,6 @@ export default class NewSetting extends Component {
                         <input type="text" id="name" name="name" required   onChange={e => this.nameChange(e.target.value)}/>
                         <label htmlFor="description">*Short description:</label>
                         <textarea id="description" name="description" required   onChange={e => this.descriptionChange(e.target.value)}/>
-                        {/* <label htmlFor="occupants">Occupants:</label>
-                        <ul>
-                            {charChecks}
-                        </ul> */}
                         <fieldset>
                             <legend htmlFor="isResidence">Can people live here?</legend>
                             <div className="container">

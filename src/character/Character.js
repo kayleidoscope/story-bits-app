@@ -24,14 +24,6 @@ export default class Character extends Component {
         }
       }
 
-    // componentWillReceiveProps(newProps) {
-    //     if (newProps.match.params.charId === this.props.match.params.charId) {
-    //         return
-    //     }
-    //     this.fetchCharacter(newProps.match.params.charId)
-            
-    // }
-
     componentDidUpdate(newProps) {
         if (newProps.match.params.charId === this.props.match.params.charId) {
             return
@@ -78,8 +70,10 @@ export default class Character extends Component {
                         storysUser: responseJson.user_id
                     })
                 })
-            }
-            )
+            })
+            .catch(error => {
+                console.error(error)
+            })
         fetch(`${config.API_ENDPOINT}api/residences/?character_id=${this.state.currentChar}`, {
             method: 'GET'
         })
@@ -106,8 +100,10 @@ export default class Character extends Component {
                     })
                     .then(responseJson => this.setState({
                         homeName: responseJson.name
+                    }))
+                    .catch(error => {
+                        console.error(error)
                     })
-                    )
                     fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${responseJson[0].setting_id}`, {
                         method: 'GET'
                     })
@@ -143,7 +139,13 @@ export default class Character extends Component {
                                 }
                             })
                         })
+                        .catch(error => {
+                            console.error(error)
+                        })
                 }
+            })
+            .catch(error => {
+                console.error(error)
             })
     }
 

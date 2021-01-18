@@ -58,7 +58,12 @@ export default class EditSetting extends Component {
                             storysUser: responseJson.user_id
                         })
                     })
-
+                    .catch(error => {
+                        console.error(error)
+                    })
+            })
+            .catch(error => {
+                console.error(error)
             })
         fetch(`${config.API_ENDPOINT}api/stories/?user_id=${this.context.currentUser}`, {
             method: 'GET'
@@ -73,6 +78,9 @@ export default class EditSetting extends Component {
                 this.setState({
                     storiesData: responseJson
                 })
+            })
+            .catch(error => {
+                console.error(error)
             })
     }
 
@@ -162,6 +170,9 @@ export default class EditSetting extends Component {
                 }
             })
             .then(noData => this.props.history.push(`/setting/${this.props.match.params.settingId}`))
+            .catch(error => {
+                console.error(error)
+            })
     }
 
     render() {

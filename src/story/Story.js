@@ -27,14 +27,17 @@ export default class Story extends Component {
             }
             return res.json()
           })
-          .then(responseJson => {
+        .then(responseJson => {
                 this.setState({
                     storyData: responseJson
-          })}
-          )
-          fetch(`${config.API_ENDPOINT}api/characters/?story_id=${this.props.match.params.storyId}`, {
-            method: 'GET'
           })
+        })
+        .catch(error => {
+            console.error(error)
+        })
+        fetch(`${config.API_ENDPOINT}api/characters/?story_id=${this.props.match.params.storyId}`, {
+            method: 'GET'
+        })
             .then(res => {
               if(!res.ok) {
                 throw new Error(res.status)
@@ -44,8 +47,12 @@ export default class Story extends Component {
             .then(responseJson => {
                   this.setState({
                       charactersData: responseJson
-            })}
-            )
+                })
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
             fetch(`${config.API_ENDPOINT}api/settings/?story_id=${this.props.match.params.storyId}`, {
                 method: 'GET'
               })
@@ -58,8 +65,11 @@ export default class Story extends Component {
                 .then(responseJson => {
                       this.setState({
                           settingsData: responseJson
-                })}
-                )
+                    })
+                })
+                .catch(error => {
+                    console.error(error)
+                })
       }
 
     render() {

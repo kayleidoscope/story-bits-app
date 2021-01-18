@@ -47,6 +47,9 @@ export default class User extends Component {
                                 return res.json()
                         })
                         .then(responseJson => responseJson.length)
+                        .catch(error => {
+                            console.error(error)
+                        })
                 )    
                 
                 function sum(acc, val) {return acc + val}
@@ -79,9 +82,9 @@ export default class User extends Component {
                 })
 
             })
-                .catch(error => {
-                    console.error(error)
-                })
+            .catch(error => {
+                console.error(error)
+            })
 
     }
 
@@ -101,7 +104,6 @@ export default class User extends Component {
                     <p>Stories created: {this.state.numOfStories}</p>
                     <p>Characters created: {this.state.numOfCharacters}</p>
                     <p>Settings created: {this.state.numOfSettings}</p>
-                    {/* <button className="submit-btn">Delete Account</button> */}
                 </div>
             </div>
         )

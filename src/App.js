@@ -75,6 +75,9 @@ class App extends Component {
         return res.json()
       })
       .then(responseJson => this.apiUsersSet(responseJson))
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   render() {

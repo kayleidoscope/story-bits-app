@@ -53,6 +53,9 @@ export default class Setting extends Component {
                         })
                     })
             })
+            .catch(error => {
+                console.error(error)
+            })
 
         fetch(`${config.API_ENDPOINT}api/residences/?setting_id=${setId}`, {
             method: 'GET'
@@ -85,6 +88,9 @@ export default class Setting extends Component {
                         roommateData: values
                     })
                 })
+            })
+            .catch(error => {
+                console.error(error)
             })
     }
 
