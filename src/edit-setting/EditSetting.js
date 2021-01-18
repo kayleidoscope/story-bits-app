@@ -235,7 +235,7 @@ export default class EditSetting extends Component {
                             Delete Setting
                         </button>}
                         <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                            Go Back
+                            Cancel
                         </button>
                     </div>
                     {this.state.hasDeleteForm && (

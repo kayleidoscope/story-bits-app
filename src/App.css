@@ -7,16 +7,27 @@ body {
     background-color: #CFDECE;
 }
 
-button:hover {
-    cursor: pointer;
+p, li {
+    transition: 0.3s;
+}
+
+a p:hover, a li:hover{
+    opacity: 0.65;
 }
 
 button {
     font-size: 15px;
     background-color: #561643;
-    border: 0;
+    border: 2px solid  #561643;
     font-weight: bolder;
     color:#EBF5DF;
     border-radius: 200px;
     padding: 7px;
+    transition: 0.3s;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #CFDECE;
+    color: #561643;
 }

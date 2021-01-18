@@ -465,7 +465,7 @@ export default class EditCharacter extends Component {
                             Delete Character
                         </button>}
                         <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                            Go Back
+                            Cancel
                         </button>
                     </div>
                     {this.state.hasDeleteForm && (

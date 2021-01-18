@@ -5,10 +5,13 @@
 .stories h2 {
     text-align: center;
     padding: 20px;
-    color:  #561643;
 }
 
 .stories button {
     margin: 15px auto;
     display: block;
+}
+
+.stories a{
+    text-decoration: none;
 }

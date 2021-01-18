@@ -111,7 +111,7 @@ export default class EditStory extends Component {
                     <div className="buttons">
                         <input type='submit' value="Submit" className="submit-btn" />
                         <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                            Go Back
+                            Cancel
                         </button>
                     </div>
                 </form>

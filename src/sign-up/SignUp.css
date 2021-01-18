@@ -4,8 +4,10 @@ text-align: center;}
 .sign-up-section .submit-btn {
     background-color: #561643;
     font-size: 15px;
-    border: 0;
+    border: 2px solid  #561643;
+    transition: 0.3s;
     font-weight: bolder;
+    margin: 15px;
     color: #c8ddbb;
     border-radius: 200px;
     padding: 7px;

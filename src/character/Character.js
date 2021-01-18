@@ -231,10 +231,6 @@ export default class Character extends Component {
                     <button type='button' onClick={() => this.props.history.push(`/edit/character/${this.state.currentChar}`)} className="submit-btn">
                         Edit Character
                     </button>
-
-                    <button type='button' onClick={() => this.props.history.goBack()}  className="submit-btn">
-                        Go Back
-                    </button>
                 </div>
             </article>
         )

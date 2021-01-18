@@ -44,7 +44,7 @@
 
 .edit-setting .submit-btn {
     background-color: #561643;
-    border: 0;
+    border: 2px solid  #561643;
     font-weight: bolder;
     font-size: 15px;
     color:  #CFDECE;
@@ -52,6 +52,12 @@
     border-radius: 200px;
     padding: 7px;
     width: 85px;
+    transition: 0.3s;
+}
+
+.edit-setting .submit-btn:hover{
+    background-color: #CFDECE;
+    color: #561643;
 }
 
 .edit-setting .buttons {

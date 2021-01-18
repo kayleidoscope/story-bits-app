@@ -25,7 +25,7 @@
 
 .edit-story .submit-btn {
     background-color: #561643;
-    border: 0;
+    border: 2px solid  #561643;
     font-weight: bolder;
     font-size: 15px;
     color:  #CFDECE;
@@ -33,8 +33,14 @@
     border-radius: 200px;
     padding: 7px;
     width: 85px;
+    transition: 0.3s;
 }
 
+.edit-story .submit-btn:hover{
+    cursor: pointer;
+    background-color: #CFDECE;
+    color: #561643;
+}
 
 .edit-story h2 {
     margin: 15px;

@@ -103,9 +103,6 @@ export default class User extends Component {
                     <p>Settings created: {this.state.numOfSettings}</p>
                     {/* <button className="submit-btn">Delete Account</button> */}
                 </div>
-                <button type='button' onClick={() => this.props.history.goBack()} className="submit-btn">
-                    Go Back
-                </button>
             </div>
         )
     }
