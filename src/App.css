@@ -32,8 +32,7 @@ button:hover{
     color: #561643;
 }
 
-input {
+input[type=submit] {
     -webkit-appearance:none;
     opacity: 1
-
 }
