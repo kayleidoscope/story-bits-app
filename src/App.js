@@ -33,14 +33,12 @@ class App extends Component {
   }
 
   addUser = (user) => {
-    console.log('addUser ran')
     this.setState({
       users: [...this.state.users, user]
     })
   }
 
   userSelect = user => {
-    console.log('userSelect ran', user)
     this.setState({
       currentUser: user,
     })
@@ -61,7 +59,6 @@ class App extends Component {
   }
 
   addStory = (story) => {
-    console.log('addStory ran')
     this.setState({
       stories: [...this.state.stories, story]
     })
@@ -82,7 +79,6 @@ class App extends Component {
 
   render() {
     const userFromStorage = localStorage.getItem(`currentUser`)
-    console.log(config.API_ENDPOINT)
     const contextValue = {
       currentChar: this.state.currentChar,
       users: this.state.users,

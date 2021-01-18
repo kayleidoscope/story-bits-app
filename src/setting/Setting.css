@@ -9,7 +9,7 @@
 }
 
 .setting a {
-    color: black;
+    color:#561643;
     text-decoration: none;
 }
 
@@ -23,6 +23,16 @@
     text-align: center;
     margin-bottom: 15px;
 
+}
+
+.setting .no-data {
+    color:  #515751;
+}
+
+.setting .no-data-li {
+    margin-left: -20px;
+    color:  #515751;
+    list-style: none;
 }
 
 .setting-traits {

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import config from '../config'
+import ValidationError from '../validation-error/ValidationError'
 import Context from '../Context'
 import './SignUp.css';
 
@@ -10,7 +11,8 @@ export default class SignUp extends Component {
         super(props);
         this.state = {
           usernameInput: "",
-          userId: 0
+          userId: 0,
+          error: false
         }
       }
 
@@ -21,7 +23,6 @@ export default class SignUp extends Component {
     }
 
     setUserId = userId => {
-        console.log('setUserId ran')
         this.setState({
             userId: userId,
         })
@@ -40,6 +41,9 @@ export default class SignUp extends Component {
         })
             .then(res => {
                 if(!res.ok) {
+                    this.setState({
+                        error: true
+                    })
                     throw new Error(res.status)
                 }
                 return res.json()
@@ -69,6 +73,7 @@ export default class SignUp extends Component {
             <form className="sign-up-form"  onSubmit={this.handleSubmit}>
                  <label htmlFor="username">Username:</label>
                  <input type="text" id="username" name="username" onChange = {e => this.usernameChanged(e.target.value)} />
+                 {this.state.error && <ValidationError message="That username is taken." />}
                  <br/>
                  {/* <label htmlFor="admin">Administrator</label>
                  <input type="checkbox" id="admin" name="admin" /> */}

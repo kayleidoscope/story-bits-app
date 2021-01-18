@@ -26,10 +26,14 @@ export default class EditCharacter extends Component {
             name: "",
             description: "",
             gender: "",
+            pronouns: "",
             age: "",
             appearance: "",
             fashion: "",
+            mannerisms: "",
             room_decor: "",
+            pets: "",
+            motivation: "",
             hasDeleteForm: false
         }
       }
@@ -68,10 +72,15 @@ export default class EditCharacter extends Component {
                     description: responseJson.description,
                     storyId: responseJson.story_id,
                     gender: responseJson.gender,
+                    pronouns: responseJson.pronouns,
                     age: responseJson.age,
                     appearance: responseJson.appearance,
                     fashion: responseJson.fashion,
+                    mannerisms: responseJson.mannerisms,
                     room_decor: responseJson.room_decor,
+                    pets: responseJson.pets,
+                    motivation: responseJson.motivation,
+                    history: responseJson.history
                 })
                 
                 //API call to get the name of this character's story
@@ -186,7 +195,6 @@ export default class EditCharacter extends Component {
     }
 
     nameChanged = (name) => {
-        console.log('nameChanged ran')
         this.setState({
             name
         })
@@ -231,6 +239,12 @@ export default class EditCharacter extends Component {
         })
     }
 
+    pronounsChange = (pronouns) => {
+        this.setState({
+            pronouns
+        })
+    }
+
     ageChanged = (age) => {
         this.setState({
             age
@@ -249,6 +263,12 @@ export default class EditCharacter extends Component {
         })
     }
 
+    mannerismsChange = (mannerisms) => {
+        this.setState({
+            mannerisms
+        })
+    }
+
     homeIdChanged = (homeId) => {
         this.setState({
             homeId
@@ -258,6 +278,24 @@ export default class EditCharacter extends Component {
     roomDecorChanged = (room_decor) => {
         this.setState({
             room_decor
+        })
+    }
+
+    petsChanged = (pets) => {
+        this.setState({
+            pets
+        })
+    }
+
+    motivationChange = (motivation) => {
+        this.setState({
+            motivation
+        })
+    }
+
+    historyChange = (history) => {
+        this.setState({
+            history
         })
     }
 
@@ -275,7 +313,6 @@ export default class EditCharacter extends Component {
 
     handleDelete = e => {
         e.preventDefault()
-        console.log('handleDelete ran')
 
         fetch(`${config.API_ENDPOINT}api/characters/${this.state.currentChar}`, {
             method: 'DELETE',
@@ -300,20 +337,30 @@ export default class EditCharacter extends Component {
         const name = this.state.name
         const description = this.state.description
         const gender = this.state.gender
+        const pronouns = this.state.pronouns
         const age = this.state.age
         const appearance = this.state.appearance
         const fashion = this.state.fashion
+        const mannerisms = this.state.mannerisms
         const room_decor = this.state.room_decor
+        const pets = this.state.pets
+        const motivation = this.state.motivation
+        const history = this.state.history
 
         const editedCharacter = {
             storyId, 
             name, 
             description, 
             gender, 
+            pronouns,
             age,
             appearance, 
             fashion, 
-            room_decor
+            mannerisms,
+            room_decor,
+            pets,
+            motivation,
+            history
         }
 
         //for PUT request to /residences
@@ -444,12 +491,16 @@ export default class EditCharacter extends Component {
                             </select>
                         <label htmlFor="gender">Gender: </label>
                         <input type="text" value={this.state.gender} className="input" id="gender" onChange={e => this.genderChanged(e.target.value)}/>
+                        <label htmlFor="pronouns">Pronouns:</label>
+                        <input type="text" id="pronouns" name="pronouns" value={this.state.pronouns} className="input" onChange={e => this.pronounsChange(e.target.value)}/>
                         <label htmlFor="age">Age: </label>
                         <input type="text" value={this.state.age} className="input" id="age" onChange={e => this.ageChanged(e.target.value)}/>
                         <label htmlFor="appearance">Physical appearance:</label>
                         <textarea value={this.state.appearance} className="input" id="appearance" onChange={e => this.appearanceChanged(e.target.value)}/>
                         <label htmlFor="fashion">Fashion style: </label>
                         <textarea value={this.state.fashion} className="input" id="fashion" onChange={e => this.fashionChanged(e.target.value)}/>
+                        <label htmlFor="mannerisms">Mannerisms:</label>
+                        <textarea id="mannerisms" name="mannerisms" value={this.state.mannerisms} className="input" onChange={e => this.mannerismsChange(e.target.value)}/>
                         <label htmlFor="home">Home: </label>
                             <select name="home" id="home" value={this.state.homeId} onChange={e => this.homeIdChanged(e.target.value)}>
                                 <option value="0">Not important</option>
@@ -458,6 +509,12 @@ export default class EditCharacter extends Component {
                             <p className="housemates-aside">If you have created settings that people can live in, they will appear in the drop-down menu above.</p>
                         <label htmlFor="decor">Decor: </label>
                         <textarea type="text" className="input" value={this.state.room_decor} id="decor"  onChange={e => this.roomDecorChanged(e.target.value)}/>
+                        <label htmlFor="pets">Pets:</label>
+                        <textarea id="pets" name="pets" value={this.state.pets} className="input" onChange={e => this.petsChanged(e.target.value)}/>
+                        <label htmlFor="motivation">Motivation:</label>
+                        <textarea id="motivation" name="motivation" value={this.state.motivation} className="input" onChange={e => this.motivationChange(e.target.value)}/>
+                        <label htmlFor="history">Life history:</label>
+                        <textarea id="history" name="history" value={this.state.history} className="input" onChange={e => this.historyChange(e.target.value)}/>
                     </div>
                     <div className="buttons">
                         <input type='submit' className="submit-btn" value="Submit"/>

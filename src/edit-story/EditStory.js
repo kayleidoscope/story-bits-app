@@ -49,7 +49,6 @@ export default class EditStory extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log('handleSubmit - edit story ran')
         const title = this.state.title
         const description = this.state.description
 

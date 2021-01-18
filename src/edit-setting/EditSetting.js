@@ -120,7 +120,6 @@ export default class EditSetting extends Component {
 
     handleDelete = e => {
         e.preventDefault()
-        console.log('handleDelete ran')
 
         fetch(`${config.API_ENDPOINT}api/settings/${this.props.match.params.settingId}`, {
             method: 'DELETE',
@@ -141,7 +140,6 @@ export default class EditSetting extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log('handleSubmit - edit setting ran')
         const name = this.state.name
         const description = this.state.description
         const story_id = this.state.storyId

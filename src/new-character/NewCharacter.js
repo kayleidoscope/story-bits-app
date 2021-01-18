@@ -11,12 +11,17 @@ export default class NewCharacter extends Component {
         name: "",
         description: "",
         gender: "",
+        pronouns: "",
         age: "",
         appearance: "",
         fashion: "",
+        mannerisms: "",
         home: 0,
         housemates: "",
         decor: "",
+        pets: "",
+        motivation: "",
+        history: "",
         storiesData: [],
         settingsForThisStory: []
     }
@@ -65,6 +70,12 @@ export default class NewCharacter extends Component {
         })
     }
 
+    pronounsChange = (pronouns) => {
+        this.setState({
+            pronouns
+        })
+    }
+
     ageChanged = (age) => {
         this.setState({
             age
@@ -83,6 +94,12 @@ export default class NewCharacter extends Component {
         })
     }
 
+    mannerismsChange = (mannerisms) => {
+        this.setState({
+            mannerisms
+        })
+    }
+
     homeChange = (home) => {
         this.setState({
             home
@@ -95,11 +112,30 @@ export default class NewCharacter extends Component {
         })
     }
 
-    decorChange = (decor) => {
+    decorChange = (pets) => {
+        this.setState({
+            pets
+        })
+    }
+
+    petsChange = (decor) => {
         this.setState({
             decor
         })
     }
+
+    motivationChange = (motivation) => {
+        this.setState({
+            motivation
+        })
+    }
+
+    historyChange = (history) => {
+        this.setState({
+            history
+        })
+    }
+
 
     handleSubmit = (e) => {
         e.preventDefault()
@@ -108,21 +144,31 @@ export default class NewCharacter extends Component {
         const name = this.state.name
         const description = this.state.description
         const gender = this.state.gender
+        const pronouns = this.state.pronouns
         const age = this.state.age
         const appearance = this.state.appearance
         const fashion = this.state.fashion
+        const mannerisms = this.state.mannerisms
         const housemates = this.state.housemates
         const room_decor = this.state.decor
+        const pets = this.state.pets
+        const motivation = this.state.motivation
+        const history = this.state.history
         const newCharacter = {
             story_id, 
             name, 
             description, 
             gender, 
+            pronouns,
             age,
             appearance, 
             fashion, 
+            mannerisms,
             housemates,
-            room_decor
+            room_decor,
+            pets,
+            motivation,
+            history
         }
 
         //for PUT request to /residences
@@ -219,12 +265,16 @@ export default class NewCharacter extends Component {
                         <textarea id="description" name="description" required  className="input" onChange={e => this.descriptionChange(e.target.value)}/>
                         <label htmlFor="gender">Gender:</label>
                         <input type="text" id="gender" name="gender"  className="input" onChange={e => this.genderChange(e.target.value)}/>
+                        <label htmlFor="pronouns">Pronouns:</label>
+                        <input type="text" id="pronouns" name="pronouns"  className="input" onChange={e => this.pronounsChange(e.target.value)}/>
                         <label htmlFor="age">Age: </label>
                         <input type="text" value={this.state.age} id="age"  className="input" onChange={e => this.ageChanged(e.target.value)}/>
                         <label htmlFor="appearance">Physical appearance:</label>
                         <textarea id="appearance" name="appearance"  className="input" onChange={e => this.appearanceChange(e.target.value)}/>
                         <label htmlFor="style">Fashion style:</label>
                         <textarea id="style" name="style"  className="input" onChange={e => this.fashionChange(e.target.value)}/>
+                        <label htmlFor="mannerisms">Mannerisms:</label>
+                        <textarea id="mannerisms" name="mannerisms"  className="input" onChange={e => this.mannerismsChange(e.target.value)}/>
                         <label htmlFor="home">Home:</label>
                         <select name="home" id="home" onChange={e => this.homeChange(e.target.value)}>
                             <option value="0">Not important</option>
@@ -235,6 +285,12 @@ export default class NewCharacter extends Component {
                         <textarea id="housemates" name="housemates"  className="input" onChange={e => this.housematesChange(e.target.value)}/>
                         <label htmlFor="decor">Decor:</label>
                         <textarea id="decor" name="decor"  className="input" onChange={e => this.decorChange(e.target.value)}/>
+                        <label htmlFor="pets">Pets:</label>
+                        <textarea id="pets" name="pets"  className="input" onChange={e => this.petsChange(e.target.value)}/>
+                        <label htmlFor="motivation">Motivation:</label>
+                        <textarea id="motivation" name="motivation"  className="input" onChange={e => this.motivationChange(e.target.value)}/>
+                        <label htmlFor="history">Life history:</label>
+                        <textarea id="history" name="history"  className="input" onChange={e => this.historyChange(e.target.value)}/>
                     </div>
                     <div className="buttons">
                         <input type="submit" value="Submit" className="submit-btn"/>

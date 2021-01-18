@@ -24,13 +24,19 @@ export default class Character extends Component {
         }
       }
 
-    componentWillReceiveProps(newProps) {
-        console.log('componentDidUpdate ran')
+    // componentWillReceiveProps(newProps) {
+    //     if (newProps.match.params.charId === this.props.match.params.charId) {
+    //         return
+    //     }
+    //     this.fetchCharacter(newProps.match.params.charId)
+            
+    // }
+
+    componentDidUpdate(newProps) {
         if (newProps.match.params.charId === this.props.match.params.charId) {
-            console.log(this.state)
             return
         }
-        this.fetchCharacter(newProps.match.params.charId)
+        this.fetchCharacter(this.props.match.params.charId)
             
     }
 
@@ -39,7 +45,6 @@ export default class Character extends Component {
     }
 
     fetchCharacter(charId) {
-        console.log('fetchCharacter ran')
         this.setState({
             currentChar: charId
         })
@@ -53,7 +58,6 @@ export default class Character extends Component {
               return res.json()
             })
             .then(responseJson => {
-                console.log('charData state set')
                 this.setState({
                     charData: responseJson
                 })
@@ -143,10 +147,6 @@ export default class Character extends Component {
             })
     }
 
-    roommateSwitch() {
-        console.log("woohoo!")
-    }
-
     render() {
         //to prevent users from accessing stories that do not belong to them
         const currentUser = this.context.currentUser
@@ -158,7 +158,6 @@ export default class Character extends Component {
                 <CannotAccess item="character"/>
             )
         }
-
 
         const charData = this.state.charData
         const roommateData = this.state.roommateData
@@ -193,6 +192,10 @@ export default class Character extends Component {
                     {charData.gender.length > 0 && <p>{charData.gender}</p>}
                     {charData.gender.length === 0 && <p className="no-data">No data entered.</p>}
 
+                    <p className="key">Pronouns:</p>
+                    {charData.pronouns.length > 0 && <p>{charData.pronouns}</p>}
+                    {charData.pronouns.length === 0 && <p className="no-data">No data entered.</p>}
+
                     <p className="key">Age:</p>
                     {charData.age.length > 0 && <p>{charData.age}</p>}
                     {charData.age.length === 0 && <p className="no-data">No data entered.</p>}
@@ -205,6 +208,10 @@ export default class Character extends Component {
                     {charData.fashion.length > 0 && <p>{charData.fashion}</p>}
                     {charData.fashion.length === 0 && <p className="no-data">No data entered.</p>}
 
+                    <p className="key">Mannerisms:</p>
+                    {charData.mannerisms.length > 0 && <p>{charData.mannerisms}</p>}
+                    {charData.mannerisms.length === 0 && <p className="no-data">No data entered.</p>}
+
                     {this.state.hasHomeData &&
                         (<div className="conditional">
                             <p className="key">Home:</p>
@@ -215,17 +222,29 @@ export default class Character extends Component {
                     }
                     
                     {this.state.hasRmData && 
-                        <div className="conditional">
-                            <p div  className="key">Housemates:</p>
+                        (<div className="conditional">
+                            <p className="key">Housemates:</p>
                             <ul className="housemates-value">
                                 {housematesLIs}
                             </ul>
-                        </div>
+                        </div>)
                     }
 
                     <p className="key">Room decor:</p>
                     {charData.room_decor.length > 0 && <p>{charData.room_decor}</p>}
                     {charData.room_decor.length === 0 && <p className="no-data">No data entered.</p>}
+
+                    <p className="key">Pets:</p>
+                    {charData.pets.length > 0 && <p>{charData.pets}</p>}
+                    {charData.pets.length === 0 && <p className="no-data">No data entered.</p>}
+
+                    <p className="key">Motivation:</p>
+                    {charData.motivation.length > 0 && <p>{charData.motivation}</p>}
+                    {charData.motivation.length === 0 && <p className="no-data">No data entered.</p>}
+
+                    <p className="key">Life history:</p>
+                    {charData.history.length > 0 && <p>{charData.history}</p>}
+                    {charData.history.length === 0 && <p className="no-data">No data entered.</p>}
                 </div>
                 <div className="buttons">
                     <button type='button' onClick={() => this.props.history.push(`/edit/character/${this.state.currentChar}`)} className="submit-btn">

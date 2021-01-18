@@ -6,7 +6,6 @@ export default class DemoLogIn extends Component {
     static contextType = Context
 
     handleSubmit = (e) => {
-        console.log('handleSubmit - login ran')
         e.preventDefault()
         const users = this.context.users
         const currentUser = users.find(user => user.username === "Demo User")

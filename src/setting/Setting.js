@@ -105,7 +105,7 @@ export default class Setting extends Component {
         const isResidence = settingData.is_residence
         let occupantsLIs
         if (this.state.roommateData.length === 0) {
-            occupantsLIs = <li>No occupants listed. To add occupants, edit a character's Home to {settingData.name}.</li>
+            occupantsLIs = <li className="no-data-li">No occupants listed. To add occupants, edit a character's Home to {settingData.name}.</li>
         } else {
             occupantsLIs = this.state.roommateData.map(person => {
                 return (
@@ -147,7 +147,8 @@ export default class Setting extends Component {
                         </div>)
                     }
                     <p className="setting-trait-title">What it looks like:</p>
-                    <p>{settingData.decor}</p>
+                    {settingData.decor.length > 0 && <p>{settingData.decor}</p>}
+                    {settingData.decor.length === 0 && <p className="no-data">No data entered.</p>}
                 </div>
                 <button className="setting-btn" onClick={() => this.props.history.push(`/edit/setting/${setId}`)}>
                     Edit Setting

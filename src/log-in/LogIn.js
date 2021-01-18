@@ -39,7 +39,6 @@ export default class LogIn extends Component {
     }
 
     handleSubmit = (e) => {
-        console.log('handleSubmit - login ran')
         e.preventDefault()
         // this.validateUsername(this.state.usernameInput)
         const users = this.context.users
