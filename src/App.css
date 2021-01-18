@@ -31,3 +31,9 @@ button:hover{
     background-color: #CFDECE;
     color: #561643;
 }
+
+input {
+    -webkit-appearance:none;
+    opacity: 1
+
+}
