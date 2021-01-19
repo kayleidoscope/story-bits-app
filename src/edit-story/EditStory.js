@@ -103,7 +103,7 @@ export default class EditStory extends Component {
 
         return (
             <div className="edit-story">
-                <h2>Edit {this.state.storyData.title}</h2>
+                <h2>Editing {this.state.storyData.title}</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div className="grid">
                         <label htmlFor="title">Story title: </label>

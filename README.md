@@ -10,28 +10,27 @@ Check out the [live site](https://story-bits-app.vercel.app/).
 
 The [API documentation](https://github.com/kayleidoscope/story-bits-api/blob/main/README.md) is available on the story-bits-api repository's README.md.
 
-### `yarn start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Organize
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+View stories, characters, and settings in an organized manner, giving you a place to store all of those details!
 
-### `yarn test`
+<img src="./screenshots/story.png">
+<img src="./screenshots/character.png">
+<img src="./screenshots/setting.png">
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Create
 
-### `yarn build`
+Add new stories, characters, and settings. Fill in the required fields, and as much or as little else as you want to.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="./screenshots/new-story.png">
+<img src="./screenshots/new-character.png">
+<img src="./screenshots/new-setting.png">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Edit
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
 
 ### `yarn eject`
 

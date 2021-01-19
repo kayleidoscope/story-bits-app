@@ -205,7 +205,7 @@ export default class EditSetting extends Component {
 
         return (
             <div className="edit-setting">
-                <h2>{settingData.name}</h2>
+                <h2>Editing {settingData.name}</h2>
                 <form onSubmit={this.handleSubmit}>
                     <div className="grid">
                         <label htmlFor="name">Setting name:</label>
