@@ -99,7 +99,7 @@ export default class User extends Component {
 
     render() {
         
-        const user = JSON.parse(localStorage.getItem('currentUser' + config.CURRENT_VERSION)) || this.context.currentUser
+        const user = JSON.parse(localStorage.getItem(`currentUser${config.CURRENT_VERSION}`)) || this.context.currentUser
         const date = new Date((user.acct_created)).toLocaleDateString('en-US')
         
         //prevents the page from loading until these values have been obtained

@@ -61,7 +61,7 @@ export default class Landing extends Component {
 
     render() {
         //If a user id is set to local storage, the user will be taken immediately to the home page
-        if(localStorage.getItem('currentUser' + config.CURRENT_VERSION)) return <Redirect to='/home' />
+        if(localStorage.getItem(`currentUser${config.CURRENT_VERSION}`)) return <Redirect to='/home' />
 
         return (
             <section className="landing">

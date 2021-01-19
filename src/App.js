@@ -48,7 +48,7 @@ class App extends Component {
 
   //essentially logs a user out
   userDeselect = () => {
-    localStorage.removeItem('currentUser' + config.CURRENT_VERSION)
+    localStorage.removeItem(`currentUser${config.CURRENT_VERSION}`)
     this.setState({
       currentUser: null
     })
@@ -84,7 +84,7 @@ class App extends Component {
   }
 
   render() {
-    const userFromStorage = localStorage.getItem(`currentUser`)
+    const userFromStorage = localStorage.getItem(`currentUser${config.CURRENT_VERSION}`)
     const contextValue = {
       currentChar: this.state.currentChar,
       users: this.state.users,

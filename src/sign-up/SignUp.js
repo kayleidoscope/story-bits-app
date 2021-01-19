@@ -56,7 +56,7 @@ export default class SignUp extends Component {
                 this.context.userSelectFx(responseJson.id)
                 //sets current user Id to local storage
                 localStorage.setItem(
-                    `currentUser` + config.CURRENT_VERSION, JSON.stringify(responseJson)
+                    `currentUser${config.CURRENT_VERSION}`, JSON.stringify(responseJson)
                 )
                 this.props.history.push("/home")
             })

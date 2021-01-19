@@ -56,7 +56,7 @@ export default class LogIn extends Component {
         this.context.userSelectFx(currentUserId)
         //sets current user id to local storage
         localStorage.setItem(
-            `currentUser` + config.CURRENT_VERSION, JSON.stringify(currentUser)
+            `currentUser${config.CURRENT_VERSION}`, JSON.stringify(currentUser)
         )
         this.props.history.push("/home")
     }
