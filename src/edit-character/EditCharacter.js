@@ -150,7 +150,7 @@ export default class EditCharacter extends Component {
                 //the following only runs if the character actually has a home designated
                 if (responseJson.length > 0) {
                     this.setState({
-                        homeId: responseJson[0].id,
+                        homeId: responseJson[0].setting_id,
                         hasHomeData: true
                     })
 
