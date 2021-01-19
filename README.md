@@ -1,10 +1,14 @@
-# Getting Started with Create React App
+# Story Bits
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Story Bits is a story- and world-building tool meant to help writers of all shapes and scopes flesh out and keep track of characters and settings.
 
-## Available Scripts
+Check out the [live site](https://story-bits-app.vercel.app/).
 
-In the project directory, you can run:
+<img src="./screenshots/landing.png">
+
+## API documentation
+
+The [API documentation](https://github.com/kayleidoscope/story-bits-api/blob/main/README.md) is available on the story-bits-api repository's README.md.
 
 ### `yarn start`
 
