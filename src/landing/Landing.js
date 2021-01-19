@@ -4,6 +4,7 @@ import LogIn from '../log-in/LogIn';
 import SignUp from '../sign-up/SignUp';
 import DemoLogIn from '../demo-log-in/DemoLogIn'
 import './Landing.css'
+import config from '../config';
 
 export default class Landing extends Component {
     state = {
@@ -60,60 +61,47 @@ export default class Landing extends Component {
 
     render() {
         //If a user id is set to local storage, the user will be taken immediately to the home page
-        if(localStorage.getItem('currentUser')) return <Redirect to='/home' />
+        if(localStorage.getItem('currentUser' + config.CURRENT_VERSION)) return <Redirect to='/home' />
 
-        if (this.state.logIn) {
-            return (
-                <section className="landing">
+        return (
+            <section className="landing">
                 <h2>Welcome!</h2>
                 <p>Do your characters need to be more fully developed?</p>
                 <p>Are you having trouble remembering what settings you've established?</p>
                 <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
-                <LogIn
-                    handleLogInToSignUp={this.logInToSignUp}
-                    handleBackToLanding={this.backToLanding}
-                    history={this.props.history}
-                />
-            </section>
-            )
-        } else if (this.state.signUp) {
-                return (
-                    <section className="landing">
-                        <h2>Welcome!</h2>
-                        <p>Do your characters need to be more fully developed?</p>
-                        <p>Are you having trouble remembering what settings you've established?</p>
-                        <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
-                        <SignUp 
-                            handleSignUpToLogIn={this.signUpToLogIn}
-                            handleBackToLanding={this.backToLanding}
-                            history={this.props.history}
-                        />
-                    </section>
-                )
-            } else {
-            return (
-                <section className="landing">
-                    <h2>Welcome!</h2>
-                    <p>Do your characters need to be more fully developed?</p>
-                    <p>Are you having trouble remembering what settings you've established?</p>
-                    <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
-                    <div className="landing-container">
+                {this.state.logIn &&                 
+                    <LogIn
+                        handleLogInToSignUp={this.logInToSignUp}
+                        handleBackToLanding={this.backToLanding}
+                        history={this.props.history}
+                    />
+                }
+                {this.state.signUp &&
+                    <SignUp 
+                        handleSignUpToLogIn={this.signUpToLogIn}
+                        handleBackToLanding={this.backToLanding}
+                        history={this.props.history}
+                    />
+                }
+                {(!this.state.signUp && !this.state.logIn) && (
+                    <>
+                        <div className="landing-container">
+                            <button
+                                onClick={this.logInTrue}
+                            >
+                                Log in
+                            </button>
+                            <button className="landing-right-btn"
+                                onClick={this.signUpTrue}
+                            >
+                                Sign up
+                            </button>
+                        </div>
                 
-                        <button
-                            onClick={this.logInTrue}
-                        >
-                            Log in
-                        </button>
-                        <button className="landing-right-btn"
-                            onClick={this.signUpTrue}
-                        >
-                            Sign up
-                        </button>
-                    </div>
-
-                    <DemoLogIn history={this.props.history} />
-                </section>
-            )
-        }
+                        <DemoLogIn history={this.props.history} />
+                    </>
+                )}
+            </section>
+        )
     }
 }

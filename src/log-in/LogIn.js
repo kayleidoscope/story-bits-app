@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Context from '../Context';
 import './LogIn.css';
+import config from '../config'
 import ValidationError from '../validation-error/ValidationError'
 
 export default class LogIn extends Component {
@@ -55,7 +56,7 @@ export default class LogIn extends Component {
         this.context.userSelectFx(currentUserId)
         //sets current user id to local storage
         localStorage.setItem(
-            `currentUser`, JSON.stringify(currentUser)
+            `currentUser` + config.CURRENT_VERSION, JSON.stringify(currentUser)
         )
         this.props.history.push("/home")
     }

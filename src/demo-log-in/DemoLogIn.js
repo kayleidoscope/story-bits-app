@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Context from '../Context';
+import config from '../config'
 import './DemoLogIn.css';
 
 export default class DemoLogIn extends Component {
@@ -14,7 +15,7 @@ export default class DemoLogIn extends Component {
         this.context.userSelectFx(currentUserId)
         //this sets the user's ID to local storage so that the user should remain logged in when returning to the page
         localStorage.setItem(
-            `currentUser`, JSON.stringify(currentUser)
+            `currentUser` + config.CURRENT_VERSION, JSON.stringify(currentUser)
         )
         this.props.history.push("/home")
     }

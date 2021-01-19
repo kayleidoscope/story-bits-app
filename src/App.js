@@ -48,7 +48,7 @@ class App extends Component {
 
   //essentially logs a user out
   userDeselect = () => {
-    localStorage.removeItem('currentUser')
+    localStorage.removeItem('currentUser' + config.CURRENT_VERSION)
     this.setState({
       currentUser: null
     })
