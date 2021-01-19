@@ -65,10 +65,11 @@ export default class Landing extends Component {
 
         return (
             <section className="landing">
-                <h2>Welcome!</h2>
-                <p>Do your characters need to be more fully developed?</p>
-                <p>Are you having trouble remembering what settings you've established?</p>
+                <h2>Welcome, writers!</h2>
+                <p>Story Bits is a story-building tool designed with you in mind.</p>
+                <p>Do your characters need to be more fully developed? Are you having trouble remembering what settings you've established?</p>
                 <p>Whether you're working on a novel, short story, fanfiction, or DnD campaign, Story Bits is here to help you flesh out those pesky little details.</p>
+                <p>Log in or sign up for a free account to get started.</p>
                 {this.state.logIn &&                 
                     <LogIn
                         handleLogInToSignUp={this.logInToSignUp}
